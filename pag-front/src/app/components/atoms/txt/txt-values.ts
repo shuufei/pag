@@ -14,9 +14,11 @@ export const color = {
   primary: 'primary',
   black: 'black',
   gray01: 'gray-01',
+  primaryGray: 'primary-gray',
   white: 'white'
 };
 
 export const options = {
-  inlineBlock: 'inline-block'
+  inlineBlock: 'inline-block',
+  ellipsis: 'ellipsis'
 };

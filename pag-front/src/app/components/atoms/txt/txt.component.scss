@@ -2,6 +2,7 @@
 
 .base-txt {
   font-family: $font-family;
+  line-height: 1.4;
 }
 
 // font size
@@ -18,7 +19,13 @@
 .primary { color: $primary; }
 .black { color: $black; }
 .gray-01 { color: $gray-01; }
+.primary-gray { color: $primary-gray; }
 .white { color: $white; }
 
 // options
 .inline-block { display: inline-block; }
+.ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
