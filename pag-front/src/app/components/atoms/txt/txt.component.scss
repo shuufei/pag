@@ -1,0 +1,24 @@
+@import 'src/styles.scss';
+
+.base-txt {
+  font-family: $font-family;
+}
+
+// font size
+.xl { font-size: 18px; }
+.l { font-size: 16px; }
+.m { font-size: 14px; }
+.s { font-size: 12px; }
+
+// font weight
+.medium { font-weight: 400; }
+.regular { font-weight: 300; }
+
+// color
+.primary { color: $primary; }
+.black { color: $black; }
+.gray-01 { color: $gray-01; }
+.white { color: $white; }
+
+// options
+.inline-block { display: inline-block; }

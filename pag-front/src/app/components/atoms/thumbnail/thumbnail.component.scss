@@ -1,0 +1,10 @@
+@import 'src/styles/colors.scss';
+
+.thumbnail {
+  height: 100%;
+  width: 100%;
+  border-radius: 5px;
+  border: solid 1px $primary-lite;
+  background-size: cover;
+  background-position: center center;
+}
