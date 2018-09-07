@@ -1,12 +1,9 @@
 <div class="nav-tag" [ngClass]="status">
-  <div class="txt-container">
-    <pag-txt
-      class="tag"
-      [text]="tag ? tag : ''"
-      size="m" weight="medium" [color]="txtColor"
-      [options]="[options.ellipsis]"
-    ></pag-txt>
-  </div>
+  <pag-ellipsis-txt
+    [text]="tag ? tag : ''"
+    size="m" weight="medium" [color]="txtColor"
+    min="30px"
+  ></pag-ellipsis-txt>
   <pag-txt
     class="count"
     [text]="count ? count : 0"

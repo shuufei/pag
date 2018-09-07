@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { AtomsModule } from 'src/app/components/atoms/atoms.module';
 import { NavTagComponent } from 'src/app/components/molecules/nav-tag/nav-tag.component';
+import { EllipsisTxtComponent } from './ellipsis-txt/ellipsis-txt.component';
 
 @NgModule({
   imports: [
@@ -10,10 +11,12 @@ import { NavTagComponent } from 'src/app/components/molecules/nav-tag/nav-tag.co
     AtomsModule
   ],
   declarations: [
-    NavTagComponent
+    NavTagComponent,
+    EllipsisTxtComponent
   ],
   exports: [
-    NavTagComponent
+    NavTagComponent,
+    EllipsisTxtComponent
   ]
 })
 export class MoleculesModule { }

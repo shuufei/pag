@@ -14,6 +14,25 @@ const metadata = {
 };
 const storyCategory = 'Molecules';
 
+const ellipsisTxtStories = storiesOf(`${storyCategory}/Ellipsis Txt`, module);
+ellipsisTxtStories.addDecorator(withKnobs);
+ellipsisTxtStories.addDecorator(moduleMetadata(metadata));
+ellipsisTxtStories.add('max', () => {
+  const widthOptions = {
+    range: true,
+    min: 10,
+    max: 300,
+    step: 1
+  };
+  return {
+    template: `<pag-ellipsis-txt [text]="text" [max]="width + 'px'"></pag-ellipsis-txt>`,
+    props: {
+      text: text('Text', 'ellipsis text.'),
+      width: number('Width', 50, widthOptions)
+    }
+  };
+});
+
 const navTagStories = storiesOf(`${storyCategory}/Navigation Tag`, module);
 navTagStories.addDecorator(withKnobs);
 navTagStories.addDecorator(moduleMetadata(metadata));
@@ -22,7 +41,7 @@ const template = `
   <pag-nav-tag [tag]="tag" [count]="count" [status]="status"></pag-nav-tag>
 </div>
 `;
-const widthOptions = {
+const navTagWidthOptions = {
   range: true,
   min: 100,
   max: 500,
@@ -34,7 +53,7 @@ navTagStories.add('default', () => ({
     tag: text('Tag', 'design'),
     count: number('Count', 0),
     status: undefined,
-    width: number('Tag Width', 270, widthOptions)
+    width: number('Tag Width', 270, navTagWidthOptions)
   }
 }));
 navTagStories.add('selectable', () => ({
@@ -43,7 +62,7 @@ navTagStories.add('selectable', () => ({
     tag: text('Tag', 'design'),
     count: number('Count', 0),
     status: SelectStatuses.selectable,
-    width: number('Tag Width', 270, widthOptions)
+    width: number('Tag Width', 270, navTagWidthOptions)
   }
 }));
 navTagStories.add('selected', () => ({
@@ -52,7 +71,7 @@ navTagStories.add('selected', () => ({
     tag: text('Tag', 'design'),
     count: number('Count', 0),
     status: SelectStatuses.selected,
-    width: number('Tag Width', 270, widthOptions)
+    width: number('Tag Width', 270, navTagWidthOptions)
   }
 }));
 navTagStories.add('disable', () => ({
@@ -61,7 +80,6 @@ navTagStories.add('disable', () => ({
     tag: text('Tag', 'design'),
     count: number('Count', 0),
     status: SelectStatuses.disable,
-    width: number('Tag Width', 270, widthOptions)
+    width: number('Tag Width', 270, navTagWidthOptions)
   }
 }));
-
