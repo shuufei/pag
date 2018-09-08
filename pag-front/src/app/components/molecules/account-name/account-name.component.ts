@@ -15,3 +15,8 @@ export class AccountNameComponent implements OnInit {
   }
 
 }
+
+export interface Account {
+  name: string;
+  imgUrl?: string;
+}

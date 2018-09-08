@@ -1,0 +1,42 @@
+@import 'src/styles.scss';
+
+@mixin get-card-height($account-count) {
+  $btn-height: 40px;
+  $account-height: 64px;
+  height: calc(#{$account-height} + (#{$account-height} * #{$account-count}));
+}
+
+.account-list-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 72px;
+  width: 223px;
+  padding: 0 20px;
+  box-shadow: $shadow-level2;
+  border-radius: 36px;
+  cursor: pointer;
+  overflow: hidden;
+  transition: all 0.25s ease-out;
+  &.open-1 {
+    @include get-card-height(1);
+  }
+  &.open-2 {
+    @include get-card-height(2);
+  }
+  &.open-3 {
+    @include get-card-height(3);
+  }
+  &.open-4 {
+    @include get-card-height(4);
+  }
+  &.open-5 {
+    @include get-card-height(5);
+  }
+}
+.account-name-wrapper {
+  margin-bottom: 16px;
+}
+pag-button {
+  width: 100%;
+}

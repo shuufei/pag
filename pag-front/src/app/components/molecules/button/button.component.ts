@@ -16,7 +16,7 @@ export class ButtonComponent implements OnInit {
   }
 
   isActive(): boolean {
-    return this.active ? this.active : false;
+    return this.active ? this.active : true;
   }
 
   onClick(event): void {

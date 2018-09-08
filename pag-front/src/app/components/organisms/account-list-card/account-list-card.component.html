@@ -1,0 +1,18 @@
+<div class="account-list-card" [ngClass]="openHeightClass" (click)="toggleOpen()">
+  <ng-container *ngIf="!open; else openBlack">
+    <pag-account-name
+      [name]="currentAccount.name"
+      [imgUrl]="currentAccount.imgUrl"
+    ></pag-account-name>
+  </ng-container>
+
+  <ng-template #openBlack>
+    <div *ngFor="let account of accounts" class="account-name-wrapper" [@cardState]="cardState">
+      <pag-account-name
+        [name]="account.name"
+        [imgUrl]="account.imgUrl"
+      ></pag-account-name>
+    </div>
+    <pag-button label="追加"></pag-button>
+  </ng-template>
+</div>
