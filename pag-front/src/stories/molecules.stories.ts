@@ -1,5 +1,7 @@
 import { storiesOf, moduleMetadata } from '@storybook/angular';
 import { text, number, select, withKnobs } from '@storybook/addon-knobs/angular';
+import { action } from '@storybook/addon-actions';
+
 
 import { AtomsModule } from 'src/app/components/atoms/atoms.module';
 import { MoleculesModule } from 'src/app/components/molecules/molecules.module';
@@ -81,5 +83,21 @@ navTagStories.add('disable', () => ({
     count: number('Count', 0),
     status: SelectStatuses.disable,
     width: number('Tag Width', 270, navTagWidthOptions)
+  }
+}));
+
+const inputTxtStories = storiesOf(`${storyCategory}/Input Text`, module);
+inputTxtStories.addDecorator(withKnobs);
+inputTxtStories.addDecorator(moduleMetadata(metadata));
+inputTxtStories.add('default', () => ({
+  template: `
+    <div style="padding:12px; background:#fff; width:300px;">
+      <pag-input-txt
+        (input)="onChangeInput($event)"
+      ></pag-input-txt>
+    <div>
+  `,
+  props: {
+    onChangeInput: action('Change Input')
   }
 }));

@@ -1,0 +1,32 @@
+@import 'src/styles.scss';
+
+.input-txt {
+  width: 100%;
+  padding: 8px 12px;
+  box-sizing: border-box;
+  background: $primary-lite;
+  border: none;
+  border-radius: 5px;
+  color: $black;
+  font-size: 14px;
+  font-family: $font-family;
+  &:focus {
+    outline: 0;
+    border: none;
+    box-shadow: 0 3px 3px rgba(0,0,0,0.10);
+  }
+}
+
+@mixin placholder-style() {
+  color: $gray-01;
+  font-size: 14px;
+  font-family: $font-family;
+}
+
+:placeholder-shown { @include placholder-style(); }
+/* Google Chrome, Safari, Opera 15+, Android, iOS */
+::-webkit-input-placeholder { @include placholder-style(); }
+/* Firefox 18- */
+:-moz-placeholder { @include placholder-style(); }
+/* Firefox 19+ */
+::-moz-placeholder { @include placholder-style(); }

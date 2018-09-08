@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { AtomsModule } from 'src/app/components/atoms/atoms.module';
 import { NavTagComponent } from 'src/app/components/molecules/nav-tag/nav-tag.component';
 import { EllipsisTxtComponent } from './ellipsis-txt/ellipsis-txt.component';
+import { InputTxtComponent } from './input-txt/input-txt.component';
 
 @NgModule({
   imports: [
@@ -12,11 +13,13 @@ import { EllipsisTxtComponent } from './ellipsis-txt/ellipsis-txt.component';
   ],
   declarations: [
     NavTagComponent,
-    EllipsisTxtComponent
+    EllipsisTxtComponent,
+    InputTxtComponent
   ],
   exports: [
     NavTagComponent,
-    EllipsisTxtComponent
+    EllipsisTxtComponent,
+    InputTxtComponent
   ]
 })
 export class MoleculesModule { }
