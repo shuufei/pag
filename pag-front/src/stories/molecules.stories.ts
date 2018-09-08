@@ -101,3 +101,50 @@ inputTxtStories.add('default', () => ({
     onChangeInput: action('Change Input')
   }
 }));
+
+const accountNameStories = storiesOf(`${storyCategory}/Account Name`, module);
+accountNameStories.addDecorator(withKnobs);
+accountNameStories.addDecorator(moduleMetadata(metadata));
+const accountNameTemplate = `
+<pag-account-name [name]="name" [imgUrl]="imgUrl">
+</pag-account-name>
+`;
+accountNameStories.add('default', () => ({
+  template: accountNameTemplate,
+  props: {
+    name: text('Name', '@digitalfei'),
+    imgUrl: undefined
+  }
+}));
+accountNameStories.add('specify img url', () => ({
+  template: accountNameTemplate,
+  props: {
+    name: text('Name', '@digitalfei'),
+    imgUrl: 'https://pbs.twimg.com/profile_images/821745021753823233/L_dTDu3C_normal.jpg'
+  }
+}));
+
+const buttonStories = storiesOf(`${storyCategory}/Button`, module);
+buttonStories.addDecorator(withKnobs);
+buttonStories.addDecorator(moduleMetadata(metadata));
+const buttonTemplate = `
+<div style="width:200px;">
+  <pag-button [label]="label" [active]="active" [clickEvent]="clickEvent">
+  </pag-button>
+</div>
+`;
+buttonStories.add('active', () => ({
+  template: buttonTemplate,
+  props: {
+    label: text('Label', 'Button'),
+    active: true,
+    clickEvent: action('Click Button')
+  }
+}));
+buttonStories.add('deactive', () => ({
+  template: buttonTemplate,
+  props: {
+    label: text('Label', 'Button'),
+    active: false
+  }
+}));

@@ -5,6 +5,8 @@ import { AtomsModule } from 'src/app/components/atoms/atoms.module';
 import { NavTagComponent } from 'src/app/components/molecules/nav-tag/nav-tag.component';
 import { EllipsisTxtComponent } from './ellipsis-txt/ellipsis-txt.component';
 import { InputTxtComponent } from './input-txt/input-txt.component';
+import { AccountNameComponent } from './account-name/account-name.component';
+import { ButtonComponent } from './button/button.component';
 
 @NgModule({
   imports: [
@@ -14,12 +16,16 @@ import { InputTxtComponent } from './input-txt/input-txt.component';
   declarations: [
     NavTagComponent,
     EllipsisTxtComponent,
-    InputTxtComponent
+    InputTxtComponent,
+    AccountNameComponent,
+    ButtonComponent
   ],
   exports: [
     NavTagComponent,
     EllipsisTxtComponent,
-    InputTxtComponent
+    InputTxtComponent,
+    AccountNameComponent,
+    ButtonComponent
   ]
 })
 export class MoleculesModule { }
