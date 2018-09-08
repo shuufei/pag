@@ -1,5 +1,5 @@
 <button
   class="button"
   [ngClass]="{deactive: !isActive()}"
-  (click)="isActive() && clickEvent ? clickEvent($event) : onClick($event)"
+  (click)="isActive() && clickEvent ? clickEvent($event) : undefined"
 >{{label}}</button>

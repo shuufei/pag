@@ -106,21 +106,25 @@ const accountNameStories = storiesOf(`${storyCategory}/Account Name`, module);
 accountNameStories.addDecorator(withKnobs);
 accountNameStories.addDecorator(moduleMetadata(metadata));
 const accountNameTemplate = `
-<pag-account-name [name]="name" [imgUrl]="imgUrl">
+<pag-account-name [id]="id" [name]="name" [imgUrl]="imgUrl" [clickEvent]="clickEvent">
 </pag-account-name>
 `;
 accountNameStories.add('default', () => ({
   template: accountNameTemplate,
   props: {
+    id: 'id-1',
     name: text('Name', '@digitalfei'),
-    imgUrl: undefined
+    imgUrl: undefined,
+    clickEvent: action('Clicked account')
   }
 }));
 accountNameStories.add('specify img url', () => ({
   template: accountNameTemplate,
   props: {
+    id: 'id-2',
     name: text('Name', '@digitalfei'),
-    imgUrl: 'https://pbs.twimg.com/profile_images/821745021753823233/L_dTDu3C_normal.jpg'
+    imgUrl: 'https://pbs.twimg.com/profile_images/821745021753823233/L_dTDu3C_normal.jpg',
+    clickEvent: action('Clicked account')
   }
 }));
 

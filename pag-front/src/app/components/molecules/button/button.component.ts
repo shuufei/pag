@@ -19,8 +19,4 @@ export class ButtonComponent implements OnInit {
     return this.active ? this.active : true;
   }
 
-  onClick(event): void {
-    console.log('click button: ', event);
-  }
-
 }

@@ -17,7 +17,7 @@
   border-radius: 36px;
   cursor: pointer;
   overflow: hidden;
-  transition: all 0.25s ease-out;
+  transition: all 250ms ease-out;
   &.open-1 {
     @include get-card-height(1);
   }
@@ -34,9 +34,17 @@
     @include get-card-height(5);
   }
 }
+
 .account-name-wrapper {
+  opacity: 0;
   margin-bottom: 16px;
+  animation: fadeIn 300ms ease-out 200ms forwards;
 }
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
 pag-button {
   width: 100%;
 }

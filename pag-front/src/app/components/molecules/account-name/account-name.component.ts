@@ -6,17 +6,28 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./account-name.component.scss']
 })
 export class AccountNameComponent implements OnInit {
+  @Input() id: string;
   @Input() name: string;
   @Input() imgUrl: string;
+  @Input() clickEvent: Function;
 
-  constructor() { }
+  constructor() {
+    this.onClick = this.onClick.bind(this);
+  }
 
   ngOnInit() {
+  }
+
+  onClick() {
+    if (this.clickEvent) {
+      this.clickEvent({id: this.id, name: this.name, imgUrl: this.imgUrl});
+    }
   }
 
 }
 
 export interface Account {
+  id: string;
   name: string;
   imgUrl?: string;
 }

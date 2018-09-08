@@ -21,25 +21,31 @@ const storyCategory = 'Organisms';
 const accountListCardStories = storiesOf(`${storyCategory}/Account List Card`, module);
 accountListCardStories.addDecorator(withKnobs);
 accountListCardStories.addDecorator(moduleMetadata(metadata));
+const accountListCardTemplate = `
+<pag-account-list-card
+  [accounts]="accounts"
+  [currentAccount]="currentAccount"
+  [accountClickEvent]="accountClickEvent"
+  [addClickEvent]="addClickEvent"
+></pag-account-list-card>
+`;
 const currentAccount: Account = {
+  id: 'id-1',
   name: '@digitalfei',
   imgUrl: 'https://pbs.twimg.com/profile_images/821745021753823233/L_dTDu3C_normal.jpg'
 };
 const accountData: Account[] = [
   currentAccount,
-  { name: '@alphabet', imgUrl: undefined },
-  { name: '@poletman', imgUrl: undefined }
+  { id: 'id-1', name: '@alphabet', imgUrl: undefined },
+  { id: 'id-2', name: '@poletman', imgUrl: undefined }
 ];
 accountListCardStories.add('default', () => ({
-  template: `
-    <pag-account-list-card
-      [accounts]="accounts"
-      [currentAccount]="currentAccount"
-    ></pag-account-list-card>
-  `,
+  template: accountListCardTemplate,
   props: {
     accounts: accountData,
-    currentAccount
+    currentAccount,
+    accountClickEvent: action('Click Account'),
+    addClickEvent: action('Click Add')
   }
 }));
 accountListCardStories.add('max over', () => {
@@ -48,15 +54,13 @@ accountListCardStories.add('max over', () => {
     maxOverAccountData.push(currentAccount);
   }
   return {
-    template: `
-      <pag-account-list-card
-        [accounts]="accounts"
-        [currentAccount]="currentAccount"
-      ></pag-account-list-card>
-    `,
+    template: accountListCardTemplate,
     props: {
       accounts: maxOverAccountData,
-      currentAccount
+      currentAccount,
+      accountClickEvent: action('Click Account'),
+      addClickEvent: action('Click Add')
     }
   };
 });
+
