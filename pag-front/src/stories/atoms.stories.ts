@@ -76,3 +76,24 @@ iconStories.add('default', () => ({
     icon: select('Icon Name', iconValues.iconNames, iconValues.iconNames.starActive)
   }
 }));
+
+const accountImgStories = storiesOf(`${storyCategory}/Account Img`, module);
+accountImgStories.addDecorator(withKnobs);
+accountImgStories.addDecorator(moduleMetadata(metadata));
+const accountImgTemplate = `
+<div style="height:50px; width:50px;">
+  <pag-account-img [url]="url"></pag-account-img>
+</div>
+`;
+accountImgStories.add('default', () => ({
+  template: accountImgTemplate,
+  props: {
+    url: text('URL', undefined)
+  }
+}));
+accountImgStories.add('specify image url', () => ({
+  template: accountImgTemplate,
+  props: {
+    url: 'https://pbs.twimg.com/profile_images/821745021753823233/L_dTDu3C_normal.jpg'
+  }
+}));
