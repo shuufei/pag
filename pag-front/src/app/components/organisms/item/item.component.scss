@@ -1,0 +1,53 @@
+@import 'src/styles.scss';
+
+.item {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 16px 32px 24px 24px;
+  background: $white;
+  box-sizing: border-box;
+  border-radius: 5px;
+  box-shadow: $shadow-level1;
+  cursor: pointer;
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: $shadow-level3;
+  } 
+}
+
+.thumb-body-wrapper {
+  display: flex;
+}
+
+.item-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  margin-left: 16px;
+  .comment {
+    margin-top: 2px;
+  }
+  pag-ellipsis-txt {
+    display: inline-grid;
+  }
+}
+
+.thumbnail-wrapper {
+  height: 70px;
+  width: 70px;
+}
+
+.labels-wrapper {
+  margin-top: 4px;
+  .label-wrapper {
+    display: inline-block;
+    margin-top: 6px;
+    margin-right: 6px;
+  }
+}
+
+.star-wrapper {
+  margin-left: 8px;
+}
+

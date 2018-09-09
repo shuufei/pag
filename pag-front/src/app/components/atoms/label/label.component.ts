@@ -15,3 +15,8 @@ export class LabelComponent implements OnInit {
   }
 
 }
+
+export interface Label {
+  label: string;
+  active: boolean;
+}

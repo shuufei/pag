@@ -8,11 +8,15 @@ import { Component, OnInit, Input } from '@angular/core';
 export class ThumbnailComponent implements OnInit {
   @Input() url: string;
 
+  private readonly DEFAULT = 'assets/image/thumbnail.svg';
+
   constructor() { }
 
   ngOnInit() {
   }
 
-  getUrl() { return `url(${this.url})`; }
+  getUrl() {
+    return this.url ? `url(${this.url})` : `url(${this.DEFAULT})`;
+  }
 
 }

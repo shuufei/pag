@@ -1,0 +1,29 @@
+<div class="item" (click)="onClick()">
+  <div class="thumb-body-wrapper">
+    <div class="thumbnail-wrapper">
+      <pag-thumbnail [url]="thumbUrl"></pag-thumbnail>
+    </div>
+    <div class="item-body">
+      <pag-ellipsis-txt
+        class="title"
+        [text]="title ? title : ''"
+        size="xl" weight="medium" color="black"
+        min="30px"
+      ></pag-ellipsis-txt>
+      <pag-ellipsis-txt
+        class="comment"
+        [text]="comment ? comment : ''"
+        size="s" weight="regular" color="gray-01"
+        min="30px"
+      ></pag-ellipsis-txt>
+      <div class="labels-wrapper">
+        <div *ngFor="let label of labels" class="label-wrapper">
+          <pag-label [label]="label.label" [active]="label.active"></pag-label>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="star-wrapper">
+    <pag-icon [icon]="starIcon" (click)="onClickStar($event)"></pag-icon>
+  </div>
+</div>
