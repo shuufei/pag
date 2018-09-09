@@ -66,6 +66,16 @@ thumbStories.add('default', () => ({
     url: text('URL', 'https://cdn.qiita.com/assets/qiita-fb-2887e7b4aad86fd8c25cea84846f2236.png')
   }
 }));
+thumbStories.add('url is undefined', () => ({
+  template: `
+    <div style="height:200px; width:200px;">
+      <pag-thumbnail [url]="url"></pag-thumbnail>
+    </div>
+  `,
+  props: {
+    url: undefined
+  }
+}));
 
 const iconStories = storiesOf(`${storyCategory}/Icon`, module);
 iconStories.addDecorator(withKnobs);
