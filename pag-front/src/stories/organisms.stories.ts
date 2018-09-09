@@ -209,3 +209,36 @@ itemListStories.add('default', () => {
     }
   };
 });
+
+const navStories = storiesOf(`${storyCategory}/Navigation`, module);
+navStories.addDecorator(withKnobs);
+navStories.addDecorator(moduleMetadata(metadata));
+navStories.add('default', () => ({
+  template: `
+    <pag-nav
+      [accountListCard]="accountListCard"
+      [navTags]="navTags"
+      [navTagClickEvent]="navTagClickEvent"
+    >
+    </pag-nav>
+  `,
+  props: {
+    accountListCard: {
+      accounts: accountData,
+      currentAccount: currentAccount,
+      accountClickEvent: action('Click Account'),
+      addClickEvent: action('Click Add')
+    },
+    navTags: [
+      { tag: 'Development', count: 42 },
+      { tag: 'Design', count: 40 },
+      { tag: 'Angular', count: 28 },
+      { tag: 'UI', count: 27 },
+      { tag: 'Design System', count: 20 },
+      { tag: 'Service Worker', count: 11 },
+      { tag: 'Typogpraphy', count: 5 },
+      { tag: 'Long long to long tag name super long', count: 1 }
+    ],
+    navTagClickEvent: action('Clicked Nav Tag')
+  }
+}));

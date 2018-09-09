@@ -6,6 +6,7 @@ import { MoleculesModule } from 'src/app/components/molecules/molecules.module';
 import { AccountListCardComponent } from './account-list-card/account-list-card.component';
 import { ItemComponent } from './item/item.component';
 import { ItemListComponent } from './item-list/item-list.component';
+import { NavComponent } from './nav/nav.component';
 
 @NgModule({
   imports: [
@@ -16,12 +17,14 @@ import { ItemListComponent } from './item-list/item-list.component';
   declarations: [
     AccountListCardComponent,
     ItemComponent,
-    ItemListComponent
+    ItemListComponent,
+    NavComponent
   ],
   exports: [
     AccountListCardComponent,
     ItemComponent,
-    ItemListComponent
+    ItemListComponent,
+    NavComponent
   ]
 })
 export class OrganismsModule { }

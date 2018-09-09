@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
 
 import { size, weight, color } from './txt-values';
 
@@ -7,7 +7,7 @@ import { size, weight, color } from './txt-values';
   templateUrl: './txt.component.html',
   styleUrls: ['./txt.component.scss']
 })
-export class TxtComponent implements OnInit {
+export class TxtComponent implements OnInit, OnChanges {
   @Input() text: string;
   @Input() size: string;
   @Input() weight: string;
@@ -25,6 +25,14 @@ export class TxtComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    this.setProperty();
+  }
+
+  ngOnChanges(): void {
+    this.setProperty();
+  }
+
+  private setProperty(): void {
     const _size = this.size ? this.size : this.DEFAULT.size;
     const _weight = this.weight ? this.weight : this.DEFAULT.weight;
     const _color = this.color ? this.color : this.DEFAULT.color;

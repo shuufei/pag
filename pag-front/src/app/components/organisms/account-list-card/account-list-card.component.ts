@@ -38,3 +38,9 @@ export class AccountListCardComponent implements OnInit {
 }
 
 export const MAX_ACCOUNT_LENGTH = 5;
+export interface AccountListCard {
+  accounts: Account[];
+  currentAccount: Account;
+  accountClickEvent?: Function;
+  addClickEvent?: Function;
+}
