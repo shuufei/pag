@@ -9,6 +9,7 @@
   padding: 12px 16px;
   border-radius: 5px;
   box-sizing: border-box;
+  cursor: pointer;
   pag-ellipsis-txt {
     // TODO: why?
     display: inline-grid;
@@ -18,3 +19,4 @@
   }
 }
 .nav-tag.selected { background: $primary; }
+.nav-tag.disable { cursor: default; }

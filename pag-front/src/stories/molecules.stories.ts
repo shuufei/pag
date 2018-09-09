@@ -40,7 +40,7 @@ navTagStories.addDecorator(withKnobs);
 navTagStories.addDecorator(moduleMetadata(metadata));
 const template = `
 <div style="padding:12px; background:#f0f0f0;" [style.width]="width + 'px'">
-  <pag-nav-tag [tag]="tag" [count]="count" [status]="status"></pag-nav-tag>
+  <pag-nav-tag [tag]="tag" [count]="count" [status]="status" [clickEvent]="clickEvent"></pag-nav-tag>
 </div>
 `;
 const navTagWidthOptions = {
@@ -55,6 +55,7 @@ navTagStories.add('default', () => ({
     tag: text('Tag', 'design'),
     count: number('Count', 0),
     status: undefined,
+    clickEvent: action('Clicked Nav Tag'),
     width: number('Tag Width', 270, navTagWidthOptions)
   }
 }));
@@ -64,6 +65,7 @@ navTagStories.add('selectable', () => ({
     tag: text('Tag', 'design'),
     count: number('Count', 0),
     status: SelectStatuses.selectable,
+    clickEvent: action('Clicked Nav Tag'),
     width: number('Tag Width', 270, navTagWidthOptions)
   }
 }));
@@ -73,6 +75,7 @@ navTagStories.add('selected', () => ({
     tag: text('Tag', 'design'),
     count: number('Count', 0),
     status: SelectStatuses.selected,
+    clickEvent: action('Clicked Nav Tag'),
     width: number('Tag Width', 270, navTagWidthOptions)
   }
 }));
@@ -82,6 +85,7 @@ navTagStories.add('disable', () => ({
     tag: text('Tag', 'design'),
     count: number('Count', 0),
     status: SelectStatuses.disable,
+    clickEvent: action('Clicked Nav Tag'),
     width: number('Tag Width', 270, navTagWidthOptions)
   }
 }));

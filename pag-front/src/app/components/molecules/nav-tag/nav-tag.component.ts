@@ -11,11 +11,14 @@ export class NavTagComponent implements OnInit {
   @Input() tag: string;
   @Input() count: number;
   @Input() status: SelectStatus;
+  @Input() clickEvent: Function;
 
   options = options;
   txtColor: string;
 
-  constructor() { }
+  constructor() {
+    this.onClick = this.onClick.bind(this);
+  }
 
   ngOnInit() {
     switch (this.status) {
@@ -31,6 +34,18 @@ export class NavTagComponent implements OnInit {
     }
   }
 
+  onClick(event: Event): void {
+    event.stopPropagation();
+    if (this.clickEvent && this.status !== SelectStatuses.disable) {
+      const navTag: NavTag = {
+        tag: this.tag,
+        count: this.count,
+        status: this.status
+      };
+      this.clickEvent(navTag);
+    }
+  }
+
 }
 
 export type SelectStatus = 'selected' | 'selectable' | 'disable';
@@ -39,3 +54,9 @@ export const SelectStatuses = {
   selected: 'selected',
   disable: 'disable'
 };
+export interface NavTag {
+  tag: string;
+  count: number;
+  status: SelectStatus;
+}
+
