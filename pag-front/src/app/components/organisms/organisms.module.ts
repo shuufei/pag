@@ -5,6 +5,7 @@ import { AtomsModule } from 'src/app/components/atoms/atoms.module';
 import { MoleculesModule } from 'src/app/components/molecules/molecules.module';
 import { AccountListCardComponent } from './account-list-card/account-list-card.component';
 import { ItemComponent } from './item/item.component';
+import { ItemListComponent } from './item-list/item-list.component';
 
 @NgModule({
   imports: [
@@ -14,11 +15,13 @@ import { ItemComponent } from './item/item.component';
   ],
   declarations: [
     AccountListCardComponent,
-    ItemComponent
+    ItemComponent,
+    ItemListComponent
   ],
   exports: [
     AccountListCardComponent,
-    ItemComponent
+    ItemComponent,
+    ItemListComponent
   ]
 })
 export class OrganismsModule { }

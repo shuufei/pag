@@ -28,7 +28,7 @@ export class ItemComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.starIcon = this.star ? iconNames.starActive : iconNames.starDeactive;
+    this.setStarIcon();
   }
 
   onClick() {
@@ -40,10 +40,16 @@ export class ItemComponent implements OnInit {
 
   onClickStar(event: Event) {
     event.stopPropagation();
+    this.star = !this.star;
+    this.setStarIcon();
     if (this.starClickEvent) {
       const item: Item = this.getItemObj();
       this.starClickEvent(item);
     }
+  }
+
+  private setStarIcon(): void {
+    this.starIcon = this.star ? iconNames.starActive : iconNames.starDeactive;
   }
 
   private getItemObj(): Item {

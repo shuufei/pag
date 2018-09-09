@@ -1,0 +1,15 @@
+<div>
+  <div *ngFor="let item of items" class="item-wrapper">
+    <pag-item
+      [id]="item.id"
+      [title]="item.title"
+      [comment]="item.comment"
+      [thumbUrl]="item.thumbUrl"
+      [url]="item.url"
+      [labels]="item.labels"
+      [star]="item.star"
+      [clickEvent]="itemClickEvent"
+      [starClickEvent]="starClickEvent"
+    ></pag-item>
+  </div>
+</div>
