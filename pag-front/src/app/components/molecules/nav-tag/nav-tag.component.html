@@ -1,4 +1,4 @@
-<div class="nav-tag" [ngClass]="status" (click)="onClick($event)">
+<div class="nav-tag" [ngClass]="{'selected': selected, 'disable': disable }" (click)="onClick($event)">
   <pag-ellipsis-txt
     [text]="tag ? tag : ''"
     size="m" weight="medium" [color]="txtColor"

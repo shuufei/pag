@@ -5,7 +5,6 @@ import { action } from '@storybook/addon-actions';
 
 import { AtomsModule } from 'src/app/components/atoms/atoms.module';
 import { MoleculesModule } from 'src/app/components/molecules/molecules.module';
-import { SelectStatuses } from 'src/app/components/molecules/nav-tag/nav-tag.component';
 
 const metadata = {
   declarations: [],
@@ -40,7 +39,7 @@ navTagStories.addDecorator(withKnobs);
 navTagStories.addDecorator(moduleMetadata(metadata));
 const template = `
 <div style="padding:12px; background:#f0f0f0;" [style.width]="width + 'px'">
-  <pag-nav-tag [tag]="tag" [count]="count" [status]="status" [clickEvent]="clickEvent"></pag-nav-tag>
+  <pag-nav-tag [tag]="tag" [count]="count" [selected]="selected" [disable]="disable" [clickEvent]="clickEvent"></pag-nav-tag>
 </div>
 `;
 const navTagWidthOptions = {
@@ -54,7 +53,6 @@ navTagStories.add('default', () => ({
   props: {
     tag: text('Tag', 'design'),
     count: number('Count', 0),
-    status: undefined,
     clickEvent: action('Clicked Nav Tag'),
     width: number('Tag Width', 270, navTagWidthOptions)
   }
@@ -64,7 +62,8 @@ navTagStories.add('selectable', () => ({
   props: {
     tag: text('Tag', 'design'),
     count: number('Count', 0),
-    status: SelectStatuses.selectable,
+    selected: false,
+    disable: false,
     clickEvent: action('Clicked Nav Tag'),
     width: number('Tag Width', 270, navTagWidthOptions)
   }
@@ -74,7 +73,8 @@ navTagStories.add('selected', () => ({
   props: {
     tag: text('Tag', 'design'),
     count: number('Count', 0),
-    status: SelectStatuses.selected,
+    selected: true,
+    disable: false,
     clickEvent: action('Clicked Nav Tag'),
     width: number('Tag Width', 270, navTagWidthOptions)
   }
@@ -84,7 +84,7 @@ navTagStories.add('disable', () => ({
   props: {
     tag: text('Tag', 'design'),
     count: number('Count', 0),
-    status: SelectStatuses.disable,
+    disable: true,
     clickEvent: action('Clicked Nav Tag'),
     width: number('Tag Width', 270, navTagWidthOptions)
   }

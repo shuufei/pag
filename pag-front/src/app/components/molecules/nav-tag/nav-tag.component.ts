@@ -10,7 +10,8 @@ import { color, options } from 'src/app/components/atoms/txt/txt-values';
 export class NavTagComponent implements OnInit {
   @Input() tag: string;
   @Input() count: number;
-  @Input() status: SelectStatus;
+  @Input() selected: boolean;
+  @Input() disable: boolean;
   @Input() clickEvent: Function;
 
   options = options;
@@ -21,42 +22,44 @@ export class NavTagComponent implements OnInit {
   }
 
   ngOnInit() {
-    switch (this.status) {
-      case SelectStatuses.selected:
-        this.txtColor = color.white;
-        break;
-      case SelectStatuses.disable:
-        this.txtColor = color.primaryGray;
-        break;
-      default:
-        this.txtColor = color.black;
-        break;
-    }
+    this.setTxtColor();
   }
 
   onClick(event: Event): void {
     event.stopPropagation();
-    if (this.clickEvent && this.status !== SelectStatuses.disable) {
-      const navTag: NavTag = {
-        tag: this.tag,
-        count: this.count,
-        status: this.status
-      };
-      this.clickEvent(navTag);
+    if (!this.disable) {
+      this.selected = this.selected ? false : true;
+      this.setTxtColor();
+      if (this.clickEvent) {
+        const navTag: NavTag = {
+          tag: this.tag,
+          count: this.count,
+          selected: this.selected,
+          disable: this.disable
+        };
+        this.clickEvent(navTag);
+      }
+    }
+  }
+
+  private setTxtColor(): void {
+    if (this.disable) {
+      this.txtColor = color.primaryGray;
+    } else {
+      if (this.selected) {
+        this.txtColor = color.white;
+      } else {
+        this.txtColor = color.black;
+      }
     }
   }
 
 }
 
-export type SelectStatus = 'selected' | 'selectable' | 'disable';
-export const SelectStatuses = {
-  selectable: 'selectable',
-  selected: 'selected',
-  disable: 'disable'
-};
 export interface NavTag {
   tag: string;
   count: number;
-  status: SelectStatus;
+  selected?: boolean;
+  disable?: boolean;
 }
 
