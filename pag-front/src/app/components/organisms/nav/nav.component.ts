@@ -12,6 +12,8 @@ export class NavComponent implements OnInit {
   @Input() accountListCard: AccountListCard;
   @Input() navTags: NavTag[];
   @Input() navTagClickEvent: Function;
+  @Input() accountClickEvent: Function;
+  @Input() addAccountClickEvent: Function;
 
   constructor() { }
 

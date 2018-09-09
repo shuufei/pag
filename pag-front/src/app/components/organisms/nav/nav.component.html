@@ -2,8 +2,8 @@
   <pag-account-list-card
     [accounts]="accountListCard.accounts"
     [currentAccount]="accountListCard.currentAccount"
-    [accountClickEvent]="accountListCard.accountClickEvent"
-    [addClickEvent]="accountListCard.addClickEvent"
+    [accountClickEvent]="accountClickEvent"
+    [addClickEvent]="addAccountClickEvent"
   ></pag-account-list-card>
   <div class="tag-block">
     <pag-input-txt (input)="onChangeInput($event)"></pag-input-txt>

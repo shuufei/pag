@@ -219,15 +219,15 @@ navStories.add('default', () => ({
       [accountListCard]="accountListCard"
       [navTags]="navTags"
       [navTagClickEvent]="navTagClickEvent"
+      [accountClickEvent]="accountClickEvent"
+      [addAccountClickEvent]="addAccountClickEvent"
     >
     </pag-nav>
   `,
   props: {
     accountListCard: {
       accounts: accountData,
-      currentAccount: currentAccount,
-      accountClickEvent: action('Click Account'),
-      addClickEvent: action('Click Add')
+      currentAccount: currentAccount
     },
     navTags: [
       { tag: 'Development', count: 42 },
@@ -239,6 +239,8 @@ navStories.add('default', () => ({
       { tag: 'Typogpraphy', count: 5 },
       { tag: 'Long long to long tag name super long', count: 1 }
     ],
-    navTagClickEvent: action('Clicked Nav Tag')
+    navTagClickEvent: action('Clicked Nav Tag'),
+    accountClickEvent: action('Click Account'),
+    addAccountClickEvent: action('Click Add')
   }
 }));
