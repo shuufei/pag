@@ -244,3 +244,13 @@ navStories.add('default', () => ({
     addAccountClickEvent: action('Click Add')
   }
 }));
+
+const headerStories = storiesOf(`${storyCategory}/Header`, module);
+headerStories.addDecorator(withKnobs);
+headerStories.addDecorator(moduleMetadata(metadata));
+headerStories.add('default', () => ({
+  template: `
+    <pag-header></pag-header>
+  `,
+  props: {}
+}));

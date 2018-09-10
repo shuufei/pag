@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="27px" height="14px" viewBox="0 0 27 14" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 51.1 (57501) - http://www.bohemiancoding.com/sketch -->
+    <title>Pag</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" font-family="Futura-Bold, Futura" font-size="12" font-weight="bold" letter-spacing="1.5">
+        <g id="header" transform="translate(-24.000000, -18.000000)" fill="#333333">
+            <g id="Pag">
+                <text>
+                    <tspan x="24" y="28">Pa</tspan>
+                    <tspan x="43.404" y="28">g</tspan>
+                </text>
+            </g>
+        </g>
+    </g>
+</svg>

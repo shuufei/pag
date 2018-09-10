@@ -7,6 +7,7 @@ import { AccountListCardComponent } from './account-list-card/account-list-card.
 import { ItemComponent } from './item/item.component';
 import { ItemListComponent } from './item-list/item-list.component';
 import { NavComponent } from './nav/nav.component';
+import { HeaderComponent } from './header/header.component';
 
 @NgModule({
   imports: [
@@ -18,13 +19,15 @@ import { NavComponent } from './nav/nav.component';
     AccountListCardComponent,
     ItemComponent,
     ItemListComponent,
-    NavComponent
+    NavComponent,
+    HeaderComponent
   ],
   exports: [
     AccountListCardComponent,
     ItemComponent,
     ItemListComponent,
-    NavComponent
+    NavComponent,
+    HeaderComponent
   ]
 })
 export class OrganismsModule { }

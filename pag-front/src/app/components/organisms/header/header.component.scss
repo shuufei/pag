@@ -1,0 +1,11 @@
+@import 'src/styles.scss';
+
+.header {
+  display: flex;
+  align-items: center;
+  padding-left: 24px;
+  height: 45px;
+  width: 100vw;
+  box-shadow: $shadow-center;
+  box-sizing: border-box;
+}
