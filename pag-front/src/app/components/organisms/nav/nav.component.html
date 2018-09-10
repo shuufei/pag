@@ -6,9 +6,9 @@
     [addClickEvent]="addAccountClickEvent"
   ></pag-account-list-card>
   <div class="tag-block">
-    <pag-input-txt (input)="onChangeInput($event)"></pag-input-txt>
+    <pag-input-txt placeholder="tagを検索" [defaultValue]="inputValue" (input)="onChangeInput($event)"></pag-input-txt>
     <div class="tag-list">
-      <div *ngFor="let navTag of navTags" class="nav-tag">
+      <div *ngFor="let navTag of filteredNavTags" class="nav-tag">
         <pag-nav-tag
           [tag]="navTag.tag"
           [count]="navTag.count"

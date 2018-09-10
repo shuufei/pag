@@ -97,11 +97,13 @@ inputTxtStories.add('default', () => ({
   template: `
     <div style="padding:12px; background:#fff; width:300px;">
       <pag-input-txt
+        [defaultValue]="defaultValue"
         (input)="onChangeInput($event)"
       ></pag-input-txt>
     <div>
   `,
   props: {
+    defaultValue: text('Default Value', undefined),
     onChangeInput: action('Change Input')
   }
 }));

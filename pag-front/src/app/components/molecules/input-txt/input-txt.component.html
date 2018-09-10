@@ -2,5 +2,6 @@
   type='text'
   class="input-txt"
   [placeholder]="placeholder ? placeholder : '入力してください'"
+  [value]="text"
   (input)="onChangeInput($event.target.value)"
 >
