@@ -37,6 +37,7 @@ export class NavComponent implements OnInit, OnChanges {
   }
 
   private filterNavTags(key: string): void {
+    if (!this.navTags) { return; }
     this.filteredNavTags = this.navTags.filter((navTag: NavTag) => {
       const re = new RegExp(key, 'i');
       return re.test(navTag.tag);

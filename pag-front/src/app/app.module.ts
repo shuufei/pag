@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { AtomsModule } from 'src/app/components/atoms/atoms.module';
+import { ComponentsModule } from './components/components.module';
 
 @NgModule({
   declarations: [
@@ -12,7 +12,7 @@ import { AtomsModule } from 'src/app/components/atoms/atoms.module';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    AtomsModule
+    ComponentsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
