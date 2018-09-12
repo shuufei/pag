@@ -1,0 +1,35 @@
+@import 'src/styles.scss';
+
+$header-height: 45px;
+$nav-width: 271px;
+
+$z-index-header: 50;
+$z-index-nav: 40;
+
+#root-container {
+  background: $primary-lite;
+  height: 100vh;
+  width: 100vw;
+  box-sizing: border-box;
+  padding-top: $header-height;
+  padding-left: $nav-width;
+}
+.items-wrapper { 
+  padding: 32px 40px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+pag-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: $z-index-header;
+}
+
+pag-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: $z-index-nav;
+}
