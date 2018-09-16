@@ -9,7 +9,7 @@ import { iconNames } from 'src/app/components/atoms/icon/icon-values';
   styleUrls: ['./item.component.scss']
 })
 export class ItemComponent implements OnInit {
-  @Input() id: number;
+  @Input() id: string;
   @Input() title: string;
   @Input() comment: string;
   @Input() url: string;
@@ -67,7 +67,7 @@ export class ItemComponent implements OnInit {
 }
 
 export interface Item {
-  id: number;
+  id: string;
   title: string;
   comment: string;
   url: string;

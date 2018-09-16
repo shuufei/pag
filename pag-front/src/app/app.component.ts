@@ -59,7 +59,7 @@ export class AppComponent implements OnInit {
   private getItems(): Item[] {
     return [
       {
-        id: 1,
+        id: '1',
         title: 'Angularの状態管理設計',
         comment: 'RxJSやAkitaなどの活用法',
         thumbUrl: 'https://cdn.qiita.com/assets/qiita-fb-2887e7b4aad86fd8c25cea84846f2236.png',
@@ -71,7 +71,7 @@ export class AppComponent implements OnInit {
         star: false
       },
       {
-        id: 2,
+        id: '2',
         title: 'Design Sysmte Management',
         comment: 'Design System管理法',
         thumbUrl: 'https://cdn-static-1.medium.com/_/fp/icons/monogram-mask.KPLCSFEZviQN0jQ7veN2RQ.svg',
@@ -82,7 +82,7 @@ export class AppComponent implements OnInit {
         star: false
       },
       {
-        id: 3,
+        id: '3',
         title: 'Design Ecosystem In Lagos',
         comment: 'Design Ecosystem by Phase',
         thumbUrl: 'https://phase.com/wp-content/uploads/2018/08/lagos_featured-1.png',

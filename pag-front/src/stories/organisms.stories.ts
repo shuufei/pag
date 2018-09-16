@@ -159,7 +159,7 @@ itemListStories.addDecorator(moduleMetadata(metadata));
 itemListStories.add('default', () => {
   const items: Item[] = [
     {
-      id: 1,
+      id: '1',
       title: text('Title', 'Angularの状態管理設計'),
       comment: text('Comment', 'RxJSやAkitaなどの活用法'),
       thumbUrl: text('thumb URL', 'https://cdn.qiita.com/assets/qiita-fb-2887e7b4aad86fd8c25cea84846f2236.png'),
@@ -171,7 +171,7 @@ itemListStories.add('default', () => {
       star: boolean('Star', false)
     },
     {
-      id: 2,
+      id: '2',
       title: text('Title', 'Design Sysmte Management'),
       comment: text('Comment', 'Design System管理法'),
       thumbUrl: text('thumb URL', 'https://cdn-static-1.medium.com/_/fp/icons/monogram-mask.KPLCSFEZviQN0jQ7veN2RQ.svg'),
@@ -182,7 +182,7 @@ itemListStories.add('default', () => {
       star: boolean('Star', false)
     },
     {
-      id: 3,
+      id: '3',
       title: text('Title', 'Design Ecosystem In Lagos'),
       comment: text('Comment', 'Design Ecosystem by Phase'),
       thumbUrl: text('thumb URL', 'https://phase.com/wp-content/uploads/2018/08/lagos_featured-1.png'),
