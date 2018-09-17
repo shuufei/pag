@@ -56,22 +56,22 @@ export class AppComponent implements OnInit {
   }
 
   private setInitalData() {
-    const accounts: TwitterAccount[] = this.getAccounts();
-    accounts.forEach(({ twitterId, name, imgUrl }: TwitterAccount) => {
-      this.accountsService.add(twitterId, name, imgUrl);
+    const accounts: Account[] = this.getAccounts();
+    accounts.forEach(({ id, name, imgUrl }: Account) => {
+      this.accountsService.add(id, name, imgUrl);
     });
   }
 
   // mock
-  private getAccounts(): TwitterAccount[] {
+  private getAccounts(): Account[] {
     return [
       {
-        twitterId: 'id-1',
+        id: 'id-1',
         name: '@digitalfei',
         imgUrl: 'https://pbs.twimg.com/profile_images/821745021753823233/L_dTDu3C_normal.jpg'
       },
       {
-        twitterId: 'id-2',
+        id: 'id-2',
         name: '@alphabet'
       }
     ];

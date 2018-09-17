@@ -17,10 +17,10 @@ export class AccountsService {
     // });
   }
 
-  add(twitterId: string, name: string, imgUrl: string) {
+  add(id: string | number, name: string, imgUrl: string) {
     const account: Account = createAccount({
-      id: guid(),
-      twitterId, name, imgUrl
+      // id: guid(),
+      id, name, imgUrl
     });
     this.accountsStore.add(account);
   }
