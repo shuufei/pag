@@ -1,16 +1,26 @@
 import { Injectable } from '@angular/core';
-import { EntityState, EntityStore, StoreConfig } from '@datorama/akita';
-import { Account } from './account.model';
+import { Store, StoreConfig } from '@datorama/akita';
 
-export interface AccountsState extends EntityState<Account> {}
+import { Account } from 'src/app/components/molecules/account-name/account-name.component';
+
+export interface AccountsState {
+  accounts: Account[];
+  currentAccount: Account;
+}
+
+export function createInitialState(): AccountsState {
+  return {
+    accounts: [],
+    currentAccount: null
+  };
+}
 
 @Injectable({ providedIn: 'root' })
 @StoreConfig({ name: 'accounts' })
-export class AccountsStore extends EntityStore<AccountsState, Account> {
+export class AccountsStore extends Store<AccountsState> {
 
   constructor() {
-    super();
+    super(createInitialState());
   }
 
 }
-

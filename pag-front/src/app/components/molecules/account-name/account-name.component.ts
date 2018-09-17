@@ -26,8 +26,8 @@ export class AccountNameComponent implements OnInit {
 
 }
 
-export interface TwitterAccount {
-  twitterId: string;
+export interface Account {
+  id: string;
   name: string;
   imgUrl?: string;
 }

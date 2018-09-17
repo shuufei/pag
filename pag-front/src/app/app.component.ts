@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 
-import { TwitterAccount } from 'src/app/components/molecules/account-name/account-name.component'
+import { Account } from 'src/app/components/molecules/account-name/account-name.component'
 import { AccountListCard } from 'src/app/components/organisms/account-list-card/account-list-card.component';
 import { NavTag } from 'src/app/components/molecules/nav-tag/nav-tag.component';
 import { Item } from 'src/app/components/organisms/item/item.component';
 
-import { Account, AccountsService, AccountsQuery } from 'src/app/accounts/state';
+import { AccountsService, AccountsQuery } from 'src/app/accounts/state';
 
 @Component({
   selector: 'pag-root',
@@ -29,53 +29,41 @@ export class AppComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.accounts$ = this.accountsQuery.selectAll();
+    this.accounts$ = this.accountsQuery.select(state => state.accounts);
     this.accounts$.subscribe(accounts => {
-      this.currentAccount = accounts[0];
+      const currentAccount = accounts[0];
+      this.accountsService.changeCurrentAccount(currentAccount);
       this.accountListCard = {
-        accounts,
-        currentAccount: this.currentAccount
+        ...this.accountListCard,
+        accounts
       };
     });
-    // this.setInitalData(); // for debug.
-    this.setCurrentAccountItems();
-    // const accounts: Account[] = this.getAccounts();
-    // this.currentAccount = accounts[0];
-    // this.accountListCard = {
-    //   accounts,
-    //   currentAccount: this.currentAccount
-    // };
+    this.currentAccount$ = this.accountsQuery.select(state => state.currentAccount);
+    this.currentAccount$.subscribe(account => {
+      this.accountListCard = {
+        ...this.accountListCard,
+        currentAccount: account
+      };
+    });
+    this.accountsService.setInitialAccounts(); // for debug.
     this.tags = this.getTags();
     this.items = this.getItems();
   }
 
-  private setCurrentAccountItems() {
-    // get current account.
-    // show empty state if accounts is none.
-    // get current account items from firestore.
-  }
+  // private setCurrentAccountItems() {
+  //   // get current account.
+  //   // show empty state if accounts is none.
+  //   // get current account items from firestore.
+  // }
 
-  private setInitalData() {
-    const accounts: Account[] = this.getAccounts();
-    accounts.forEach(({ id, name, imgUrl }: Account) => {
-      this.accountsService.add(id, name, imgUrl);
-    });
-  }
+  // private setInitalData() {
+  //   const accounts: Account[] = this.getAccounts();
+  //   accounts.forEach(({ id, name, imgUrl }: Account) => {
+  //     this.accountsService.add(id, name, imgUrl);
+  //   });
+  // }
 
   // mock
-  private getAccounts(): Account[] {
-    return [
-      {
-        id: 'id-1',
-        name: '@digitalfei',
-        imgUrl: 'https://pbs.twimg.com/profile_images/821745021753823233/L_dTDu3C_normal.jpg'
-      },
-      {
-        id: 'id-2',
-        name: '@alphabet'
-      }
-    ];
-  }
   private getTags(): NavTag[] {
     return [
       { tag: 'Development', count: 42 },
