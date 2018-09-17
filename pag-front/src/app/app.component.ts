@@ -15,7 +15,6 @@ import { AccountsService, AccountsQuery } from 'src/app/accounts/state';
 })
 export class AppComponent implements OnInit {
 
-  currentAccount: Account;
   accountListCard: AccountListCard;
   items: Item[];
   tags: NavTag[];
@@ -26,13 +25,17 @@ export class AppComponent implements OnInit {
   constructor(
     private accountsService: AccountsService,
     private accountsQuery: AccountsQuery
-  ) {}
+  ) {
+    this.onClickedAccount = this.onClickedAccount.bind(this);
+  }
 
   ngOnInit(): void {
     this.accounts$ = this.accountsQuery.select(state => state.accounts);
     this.accounts$.subscribe(accounts => {
-      const currentAccount = accounts[0];
-      this.accountsService.changeCurrentAccount(currentAccount);
+      if (!this.accountsQuery.getSnapshot().currentAccount) {
+        const currentAccount = accounts[0];
+        this.accountsService.changeCurrentAccount(currentAccount);
+      }
       this.accountListCard = {
         ...this.accountListCard,
         accounts
@@ -45,9 +48,15 @@ export class AppComponent implements OnInit {
         currentAccount: account
       };
     });
-    this.accountsService.setInitialAccounts(); // for debug.
+    // this.accountsService.setInitialAccounts(); // for debug.
     this.tags = this.getTags();
     this.items = this.getItems();
+  }
+
+  onClickedAccount(...args: any[]): void {
+    const ACCOUNT_INDEX = 0;
+    const account = args[ACCOUNT_INDEX];
+    this.accountsService.changeCurrentAccount(account);
   }
 
   // private setCurrentAccountItems() {
