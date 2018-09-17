@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 
-import { Account } from 'src/app/components/molecules/account-name/account-name.component';
+// import { Account } from 'src/app/components/molecules/account-name/account-name.component';
+import { Account } from 'src/app/accounts/state/account.model';
 
 @Component({
   selector: 'pag-account-list-card',

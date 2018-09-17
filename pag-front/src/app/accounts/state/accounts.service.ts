@@ -1,14 +1,15 @@
 import { Injectable } from '@angular/core';
-import { ID } from '@datorama/akita';
+import { ID, guid } from '@datorama/akita';
+
 import { AccountsStore } from './accounts.store';
-import { HttpClient } from '@angular/common/http';
+import { Account, createAccount } from './account.model';
 
 @Injectable({ providedIn: 'root' })
 export class AccountsService {
 
-  constructor(private accountsStore: AccountsStore,
-              private http: HttpClient) {
-  }
+  constructor(
+    private accountsStore: AccountsStore,
+  ) {}
 
   get() {
     // this.http.get().subscribe((entities: ServerResponse) => {
@@ -16,10 +17,12 @@ export class AccountsService {
     // });
   }
 
-  add() {
-    // this.http.post().subscribe((entity: ServerResponse) => {
-      // this.accountsStore.add(entity);
-    // });
+  add(twitterId: string, name: string, imgUrl: string) {
+    const account: Account = createAccount({
+      id: guid(),
+      twitterId, name, imgUrl
+    });
+    this.accountsStore.add(account);
   }
 
 }

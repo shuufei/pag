@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 
-import { Account } from 'src/app/components/molecules/account-name/account-name.component';
+import { TwitterAccount } from 'src/app/components/molecules/account-name/account-name.component'
 import { AccountListCard } from 'src/app/components/organisms/account-list-card/account-list-card.component';
 import { NavTag } from 'src/app/components/molecules/nav-tag/nav-tag.component';
 import { Item } from 'src/app/components/organisms/item/item.component';
+
+import { Account, AccountsService, AccountsQuery } from 'src/app/accounts/state';
 
 @Component({
   selector: 'pag-root',
@@ -17,29 +20,58 @@ export class AppComponent implements OnInit {
   items: Item[];
   tags: NavTag[];
 
-  constructor() {}
+  private accounts$: Observable<Account[]>;
+  private currentAccount$: Observable<Account>;
+
+  constructor(
+    private accountsService: AccountsService,
+    private accountsQuery: AccountsQuery
+  ) {}
 
   ngOnInit(): void {
-    const accounts: Account[] = this.getAccounts();
-    this.currentAccount = accounts[0];
-    this.accountListCard = {
-      accounts,
-      currentAccount: this.currentAccount
-    };
+    this.accounts$ = this.accountsQuery.selectAll();
+    this.accounts$.subscribe(accounts => {
+      this.currentAccount = accounts[0];
+      this.accountListCard = {
+        accounts,
+        currentAccount: this.currentAccount
+      };
+    });
+    // this.setInitalData(); // for debug.
+    this.setCurrentAccountItems();
+    // const accounts: Account[] = this.getAccounts();
+    // this.currentAccount = accounts[0];
+    // this.accountListCard = {
+    //   accounts,
+    //   currentAccount: this.currentAccount
+    // };
     this.tags = this.getTags();
     this.items = this.getItems();
   }
 
+  private setCurrentAccountItems() {
+    // get current account.
+    // show empty state if accounts is none.
+    // get current account items from firestore.
+  }
+
+  private setInitalData() {
+    const accounts: TwitterAccount[] = this.getAccounts();
+    accounts.forEach(({ twitterId, name, imgUrl }: TwitterAccount) => {
+      this.accountsService.add(twitterId, name, imgUrl);
+    });
+  }
+
   // mock
-  private getAccounts(): Account[] {
+  private getAccounts(): TwitterAccount[] {
     return [
       {
-        id: 'id-1',
+        twitterId: 'id-1',
         name: '@digitalfei',
         imgUrl: 'https://pbs.twimg.com/profile_images/821745021753823233/L_dTDu3C_normal.jpg'
       },
       {
-        id: 'id-2',
+        twitterId: 'id-2',
         name: '@alphabet'
       }
     ];
