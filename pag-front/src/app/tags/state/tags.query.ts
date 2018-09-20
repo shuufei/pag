@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Query } from '@datorama/akita';
-import { TagsStore, TagState } from './tags.store';
+import { TagsStore, TagsState } from './tags.store';
 
 @Injectable({ providedIn: 'root' })
-export class TagsQuery extends Query<TagState> {
+export class TagsQuery extends Query<TagsState> {
 
   constructor(protected store: TagsStore) {
     super(store);

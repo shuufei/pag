@@ -12,15 +12,9 @@ export class AccountsService {
   ) { }
 
   get() {
-    // this.http.get().subscribe((entities: ServerResponse) => {
-      // this.accountsStore.set(entities);
-    // });
   }
 
   add() {
-    // this.http.post().subscribe((entity: ServerResponse) => {
-      // this.accountsStore.add(entity);
-    // });
   }
 
   changeCurrentAccount(account: Account): void {

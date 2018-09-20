@@ -5,8 +5,9 @@ import { Account } from 'src/app/components/molecules/account-name/account-name.
 import { AccountListCard } from 'src/app/components/organisms/account-list-card/account-list-card.component';
 import { NavTag } from 'src/app/components/molecules/nav-tag/nav-tag.component';
 import { Item } from 'src/app/components/organisms/item/item.component';
-
 import { AccountsService, AccountsQuery } from 'src/app/accounts/state';
+import { TagsService, TagsQuery, TagsState } from 'src/app/tags/state';
+import { TagsUtliService } from 'src/app/tags/tags-utli.service';
 
 @Component({
   selector: 'pag-root',
@@ -17,20 +18,27 @@ export class AppComponent implements OnInit {
 
   accountListCard: AccountListCard;
   items: Item[];
-  tags: NavTag[];
+  tags$: Observable<NavTag[]>;
 
   private accounts$: Observable<Account[]>;
   private currentAccount$: Observable<Account>;
 
   constructor(
     private accountsService: AccountsService,
-    private accountsQuery: AccountsQuery
+    private accountsQuery: AccountsQuery,
+    private tagsService: TagsService,
+    private tagsQuery: TagsQuery,
+    private tagsUtil: TagsUtliService
   ) {
     this.onClickedAccount = this.onClickedAccount.bind(this);
+    this.onClickedTag = this.onClickedTag.bind(this);
+    this.setObserver();
+
+    // for debug
+    this.tagsQuery.select(state => state).subscribe(state => console.log('### check selected tags: ', state.selectedTags));
   }
 
   ngOnInit(): void {
-    this.accounts$ = this.accountsQuery.select(state => state.accounts);
     this.accounts$.subscribe(accounts => {
       if (!this.accountsQuery.getSnapshot().currentAccount) {
         const currentAccount = accounts[0];
@@ -41,15 +49,14 @@ export class AppComponent implements OnInit {
         accounts
       };
     });
-    this.currentAccount$ = this.accountsQuery.select(state => state.currentAccount);
     this.currentAccount$.subscribe(account => {
       this.accountListCard = {
         ...this.accountListCard,
         currentAccount: account
       };
     });
+    this.tagsService.setTags([]);
     // this.accountsService.setInitialAccounts(); // for debug.
-    this.tags = this.getTags();
     this.items = this.getItems();
   }
 
@@ -57,6 +64,22 @@ export class AppComponent implements OnInit {
     const ACCOUNT_INDEX = 0;
     const account = args[ACCOUNT_INDEX];
     this.accountsService.changeCurrentAccount(account);
+  }
+
+  onClickedTag(...args: any[]): void {
+    const NAV_TAG_INDEX = 0;
+    const navTag: NavTag = args[NAV_TAG_INDEX];
+    if (navTag.selected) {
+      this.tagsUtil.addSelectedTag(navTag.tag);
+    } else {
+      this.tagsUtil.removeSelectedTag(navTag.tag);
+    }
+  }
+
+  private setObserver(): void {
+    this.accounts$ = this.accountsQuery.select(state => state.accounts);
+    this.currentAccount$ = this.accountsQuery.select(state => state.currentAccount);
+    this.tags$ = this.tagsQuery.select(state => state.navTags);
   }
 
   // private setCurrentAccountItems() {
@@ -73,18 +96,6 @@ export class AppComponent implements OnInit {
   // }
 
   // mock
-  private getTags(): NavTag[] {
-    return [
-      { tag: 'Development', count: 42 },
-      { tag: 'Design', count: 40 },
-      { tag: 'Angular', count: 28 },
-      { tag: 'UI', count: 27 },
-      { tag: 'Design System', count: 20 },
-      { tag: 'Service Worker', count: 11 },
-      { tag: 'Typogpraphy', count: 5 },
-      { tag: 'Long long to long tag name super long', count: 1 }
-    ];
-  }
   private getItems(): Item[] {
     return [
       {
