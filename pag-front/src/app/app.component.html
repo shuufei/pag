@@ -1,14 +1,14 @@
 <pag-header></pag-header>
 <pag-nav
   [accountListCard]="accountListCard"
-  [navTags]="tags$ | async"
+  [navTags]="sortedTags"
   [accountClickEvent]="onClickedAccount"
   [navTagClickEvent]="onClickedTag"
 ></pag-nav>
 <div id="root-container">
   <div class="items-wrapper">
     <pag-item-list
-      [items]="items"
+      [items]="items$ | async"
     ></pag-item-list>
   </div>
 </div>

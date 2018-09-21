@@ -19,8 +19,7 @@ export class TagsService {
   }
 
   setTags(navTags: NavTag[]): void {
-    const tmpNavTags: NavTag[] = this.getTags();
-    this.tagsStore.setState(state => ({ ...state, tmpNavTags }));
+    this.tagsStore.setState(state => ({ ...state, navTags }));
   }
 
   setSelectedTags(tags: string[]): void {
@@ -30,14 +29,14 @@ export class TagsService {
   // mock
   private getTags(): NavTag[] {
     return [
-      { tag: 'Development', count: 42 },
-      { tag: 'Design', count: 40 },
-      { tag: 'Angular', count: 28 },
-      { tag: 'UI', count: 27 },
-      { tag: 'Design System', count: 20 },
-      { tag: 'Service Worker', count: 11 },
-      { tag: 'Typogpraphy', count: 5 },
-      { tag: 'Long long to long tag name super long', count: 1 }
+      { tag: 'Development', count: 42, selected: false, disable: false },
+      { tag: 'Design', count: 40, selected: false, disable: false },
+      { tag: 'Angular', count: 28, selected: false, disable: false },
+      { tag: 'UI', count: 27, selected: false, disable: false },
+      { tag: 'Design System', count: 20, selected: false, disable: false },
+      { tag: 'Service Worker', count: 11, selected: false, disable: false },
+      { tag: 'Typogpraphy', count: 5, selected: false, disable: false },
+      { tag: 'Long long to long tag name super long', count: 1, selected: false, disable: false }
     ];
   }
 
