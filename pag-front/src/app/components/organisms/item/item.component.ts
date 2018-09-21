@@ -14,7 +14,7 @@ export class ItemComponent implements OnInit {
   @Input() comment: string;
   @Input() url: string;
   @Input() thumbUrl: string;
-  @Input() labels: Label[];
+  @Input() tags: Label[];
   @Input() star: boolean;
   @Input() clickEvent: Function;
   @Input() starClickEvent: Function;
@@ -59,7 +59,7 @@ export class ItemComponent implements OnInit {
       comment: this.comment,
       url: this.url,
       thumbUrl: this.thumbUrl,
-      labels: this.labels,
+      tags: this.tags,
       star: this.star
     };
   }
@@ -72,6 +72,6 @@ export interface Item {
   comment: string;
   url: string;
   thumbUrl: string;
-  labels: Label[];
+  tags: Label[];
   star: boolean;
 }

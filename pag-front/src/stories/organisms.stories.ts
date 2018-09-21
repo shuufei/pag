@@ -72,7 +72,7 @@ itemStories.addDecorator(moduleMetadata(metadata));
 const itemTemplate = `
 <div style="padding:20px; background:#f0f0f0; width:700px;">
   <pag-item
-    [id]="id" [title]="title" [comment]="comment" [thumbUrl]="thumbUrl" [url]="url" [labels]="labels" [star]="star"
+    [id]="id" [title]="title" [comment]="comment" [thumbUrl]="thumbUrl" [url]="url" [tags]="tags" [star]="star"
     [clickEvent]="clickEvent" [starClickEvent]="starClickEvent"
   >
   </pag-item>
@@ -86,7 +86,7 @@ itemStories.add('default', () => ({
     comment: text('Comment', 'RxJSやAkitaなどの活用法'),
     thumbUrl: text('thumb URL', 'https://cdn.qiita.com/assets/qiita-fb-2887e7b4aad86fd8c25cea84846f2236.png'),
     url: text('URL', 'https://cdn.qiita.com/assets/qiita-fb-2887e7b4aad86fd8c25cea84846f2236.png'),
-    labels: [
+    tags: [
       { label: 'Development', active: false },
       { label: 'Angular', active: false }
     ],
@@ -103,7 +103,7 @@ itemStories.add('long body', () => ({
     comment: text('Comment', 'RxJSやAkitaなどの活用法RxJSやAkitaなどの活用法RxJSやAkitaなどの活用法RxJSやAkitaなどの活用法'),
     thumbUrl: text('thumb URL', 'https://cdn.qiita.com/assets/qiita-fb-2887e7b4aad86fd8c25cea84846f2236.png'),
     url: text('URL', 'https://cdn.qiita.com/assets/qiita-fb-2887e7b4aad86fd8c25cea84846f2236.png'),
-    labels: [
+    tags: [
       { label: 'Development', active: false },
       { label: 'Angular', active: false },
       { label: 'Development', active: false },
@@ -126,7 +126,7 @@ itemStories.add('include active tag', () => ({
     comment: text('Comment', 'RxJSやAkitaなどの活用法'),
     thumbUrl: text('Thumb URL', 'https://cdn.qiita.com/assets/qiita-fb-2887e7b4aad86fd8c25cea84846f2236.png'),
     url: text('URL', 'https://cdn.qiita.com/assets/qiita-fb-2887e7b4aad86fd8c25cea84846f2236.png'),
-    labels: [
+    tags: [
       { label: 'Development', active: true },
       { label: 'Angular', active: false }
     ],
@@ -143,7 +143,7 @@ itemStories.add('star item', () => ({
     comment: text('Comment', 'RxJSやAkitaなどの活用法'),
     thumbUrl: text('thumb URL', 'https://cdn.qiita.com/assets/qiita-fb-2887e7b4aad86fd8c25cea84846f2236.png'),
     url: text('URL', 'https://cdn.qiita.com/assets/qiita-fb-2887e7b4aad86fd8c25cea84846f2236.png'),
-    labels: [
+    tags: [
       { label: 'Development', active: false },
       { label: 'Angular', active: false }
     ],
@@ -164,7 +164,7 @@ itemListStories.add('default', () => {
       comment: text('Comment', 'RxJSやAkitaなどの活用法'),
       thumbUrl: text('thumb URL', 'https://cdn.qiita.com/assets/qiita-fb-2887e7b4aad86fd8c25cea84846f2236.png'),
       url: text('URL', 'https://cdn.qiita.com/assets/qiita-fb-2887e7b4aad86fd8c25cea84846f2236.png'),
-      labels: [
+      tags: [
         { label: 'Development', active: false },
         { label: 'Angular', active: false }
       ],
@@ -176,7 +176,7 @@ itemListStories.add('default', () => {
       comment: text('Comment', 'Design System管理法'),
       thumbUrl: text('thumb URL', 'https://cdn-static-1.medium.com/_/fp/icons/monogram-mask.KPLCSFEZviQN0jQ7veN2RQ.svg'),
       url: text('URL', 'https://cdn.qiita.com/assets/qiita-fb-2887e7b4aad86fd8c25cea84846f2236.png'),
-      labels: [
+      tags: [
         { label: 'Design System', active: false }
       ],
       star: boolean('Star', false)
@@ -187,7 +187,7 @@ itemListStories.add('default', () => {
       comment: text('Comment', 'Design Ecosystem by Phase'),
       thumbUrl: text('thumb URL', 'https://phase.com/wp-content/uploads/2018/08/lagos_featured-1.png'),
       url: text('URL', 'https://cdn.qiita.com/assets/qiita-fb-2887e7b4aad86fd8c25cea84846f2236.png'),
-      labels: [
+      tags: [
         { label: 'Design', active: false },
         { label: 'Design Tool', active: false },
         { label: 'Phase', active: false }
