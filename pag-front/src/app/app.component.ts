@@ -28,6 +28,7 @@ export class AppComponent implements OnInit {
 
   accountListCard: AccountListCard;
   sortedTags: NavTag[];
+  initializedNavTags: boolean;
 
   private accounts$: Observable<Account[]>;
   private currentAccount$: Observable<Account>;
@@ -44,6 +45,7 @@ export class AppComponent implements OnInit {
     private itemsUtil: ItemsUtilService
   ) {
     this.sortedTags = [];
+    this.initializedNavTags = false;
     this.onClickedAccount = this.onClickedAccount.bind(this);
     this.onClickedTag = this.onClickedTag.bind(this);
     this.setObserver();
@@ -61,6 +63,7 @@ export class AppComponent implements OnInit {
       };
     });
     this.currentAccount$.subscribe(account => {
+      this.initializedNavTags = false;
       this.itemsUtil.setItems(account);
       this.accountListCard = {
         ...this.accountListCard,
@@ -68,10 +71,15 @@ export class AppComponent implements OnInit {
       };
     });
     this.items$.subscribe(items => {
-      const existNavTags: NavTag[] = this.appUtil.generateNavTagsFromItems(items);
-      // const navTags: NavTag[] = this.appUtil.mergeMasterNavTag(existNavTags);
-      // this.tagsService.update(navTags);
-      this.tagsService.setTags(existNavTags);
+      if (this.initializedNavTags) {
+        const existNavTags: NavTag[] = this.appUtil.generateNavTagsFromItems(items);
+        const navTags: NavTag[] = this.appUtil.mergeMasterNavTag(existNavTags);
+        this.tagsService.setTags(navTags);
+      } else {
+        const navTags: NavTag[] = this.appUtil.generateNavTagsFromItems(items);
+        this.tagsService.setTags(navTags);
+        if (0 < items.length) { this.initializedNavTags = true; }
+      }
     });
     this.tags$.subscribe(navTags => {
       this.sortedTags = this.appUtil.sortNavTags(navTags);

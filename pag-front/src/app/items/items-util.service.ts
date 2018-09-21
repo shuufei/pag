@@ -29,7 +29,7 @@ export class ItemsUtilService {
   }
 
   filterItemsByTags(tags: string[]): void {
-    const current: Item[] = [ ...this.itemsQuery.getSnapshot().filtered ];
+    const current: Item[] = [ ...this.itemsQuery.getSnapshot().master ];
     const filtered: Item[] = [];
     current.forEach(item => {
       const itemTags: string[] = item.tags.map((t: Label) => t.label);
