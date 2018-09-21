@@ -38,13 +38,17 @@ export class AppUtilService {
   }
 
   sortNavTags(navTags: NavTag[]): NavTag[] {
-    const sorted = [ ...navTags ];
-    sorted.sort((navtag1, navtag2) => {
+    const arr = [ ...navTags ];
+    const selected = arr.filter(navtag => navtag.selected);
+    const notSelected = arr.filter(navtag => !navtag.selected);
+    const orderByCountDesc = (navtag1: NavTag, navtag2: NavTag) => {
       if (navtag1.count > navtag2.count) { return -1; }
       if (navtag1.count < navtag2.count) { return 1; }
       return 0;
-    });
-    return sorted;
+    };
+    selected.sort(orderByCountDesc);
+    notSelected.sort(orderByCountDesc);
+    return [ ...selected, ...notSelected ];
   }
 
   mergeMasterNavTag(existNavTags: NavTag[]): NavTag[] {
@@ -81,5 +85,13 @@ export class AppUtilService {
       }
     });
     return newNavTags;
+  }
+
+  sleepByPromise(ms: number): Promise<void> {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve();
+      }, ms);
+    });
   }
 }

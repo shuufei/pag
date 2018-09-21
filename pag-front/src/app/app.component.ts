@@ -81,7 +81,10 @@ export class AppComponent implements OnInit {
         if (0 < items.length) { this.initializedNavTags = true; }
       }
     });
-    this.tags$.subscribe(navTags => {
+    this.tags$.subscribe(async(navTags) => {
+      if (this.initializedNavTags) {
+        await this.appUtil.sleepByPromise(450);
+      }
       this.sortedTags = this.appUtil.sortNavTags(navTags);
     });
     this.selectedTags$.subscribe(tags => {
