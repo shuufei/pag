@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { ItemsQuery, ItemsService, ItemsState } from './state';
 import { Account } from 'src/app/components/molecules/account-name/account-name.component'
 import { Item } from 'src/app/components/organisms/item/item.component';
+import { Label } from 'src/app/components/atoms/label/label.component';
 
 @Injectable({
   providedIn: 'root'
@@ -25,6 +26,31 @@ export class ItemsUtilService {
         // TODO: filter process
         this.itemsService.setFilteredItems(items);
       });
+  }
+
+  filterItemsByTags(tags: string[]): void {
+    const current: Item[] = [ ...this.itemsQuery.getSnapshot().filtered ];
+    const filtered: Item[] = [];
+    current.forEach(item => {
+      const itemTags: string[] = item.tags.map((t: Label) => t.label);
+      let match = true;
+      tags.forEach(tag => {
+        if (!itemTags.includes(tag)) {
+          match = false;
+        }
+      });
+      if (match) {
+        const matchedItem: Item = item;
+        const newTags: Label[] = [];
+        matchedItem.tags.forEach((t: Label) => {
+          const _tag: Label = { label: t.label, active: false };
+          if (tags.includes(t.label)) { _tag.active = true; }
+          newTags.push(_tag);
+        });
+        filtered.push({ ...matchedItem, tags: newTags });
+      }
+    });
+    this.itemsService.setFilteredItems(filtered);
   }
 
   // mock

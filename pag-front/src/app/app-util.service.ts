@@ -2,13 +2,17 @@ import { Injectable } from '@angular/core';
 
 import { Item } from 'src/app/components/organisms/item/item.component';
 import { NavTag } from 'src/app/components/molecules/nav-tag/nav-tag.component';
+import { TagsQuery, TagsService } from 'src/app/tags/state';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AppUtilService {
 
-  constructor() { }
+  constructor(
+    private tagsService: TagsService,
+    private tagsQuery: TagsQuery
+  ) { }
 
   generateNavTagsFromItems(items: Item[]): NavTag[] {
     const navTags: NavTag[] = [];
@@ -41,5 +45,11 @@ export class AppUtilService {
       return 0;
     });
     return sorted;
+  }
+
+  mergeMasterNavTag(existNavTags: NavTag[]): NavTag[] {
+    const master: NavTag[] = [ ...this.tagsQuery.getSnapshot().navTags ];
+    // merge process
+    return master;
   }
 }

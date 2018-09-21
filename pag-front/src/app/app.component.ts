@@ -24,6 +24,7 @@ export class AppComponent implements OnInit {
 
   items$: Observable<Item[]>;
   tags$: Observable<NavTag[]>;
+  selectedTags$: Observable<string[]>;
 
   accountListCard: AccountListCard;
   sortedTags: NavTag[];
@@ -67,11 +68,16 @@ export class AppComponent implements OnInit {
       };
     });
     this.items$.subscribe(items => {
-      const navTags: NavTag[] = this.appUtil.generateNavTagsFromItems(items);
-      this.tagsService.setTags(navTags);
+      const existNavTags: NavTag[] = this.appUtil.generateNavTagsFromItems(items);
+      // const navTags: NavTag[] = this.appUtil.mergeMasterNavTag(existNavTags);
+      // this.tagsService.update(navTags);
+      this.tagsService.setTags(existNavTags);
     });
     this.tags$.subscribe(navTags => {
       this.sortedTags = this.appUtil.sortNavTags(navTags);
+    });
+    this.selectedTags$.subscribe(tags => {
+      this.itemsUtil.filterItemsByTags(tags);
     });
   }
 
@@ -95,6 +101,7 @@ export class AppComponent implements OnInit {
     this.accounts$ = this.accountsQuery.select(state => state.accounts);
     this.currentAccount$ = this.accountsQuery.select(state => state.currentAccount);
     this.tags$ = this.tagsQuery.select(state => state.navTags);
+    this.selectedTags$ = this.tagsQuery.select(state => state.selectedTags);
     this.items$ = this.itemsQuery.select(state => state.filtered);
     this.itemsUtil.setFilterObserver();
   }
