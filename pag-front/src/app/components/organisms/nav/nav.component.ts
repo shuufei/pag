@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
+import * as uuidv4 from 'uuid/v4';
 
 import { AccountListCard } from 'src/app/components/organisms/account-list-card/account-list-card.component';
 import { NavTag } from 'src/app/components/molecules/nav-tag/nav-tag.component';
@@ -15,17 +16,18 @@ export class NavComponent implements OnInit, OnChanges {
   @Input() accountClickEvent: Function;
   @Input() addAccountClickEvent: Function;
 
-  inputValue: string;
+  inputResetToken: string;
   filteredNavTags: NavTag[];
 
   constructor() { }
 
   ngOnInit() {
+    this.inputResetToken = uuidv4();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.navTags) {
-      this.inputValue = '';
+      this.inputResetToken = uuidv4();
       this.filteredNavTags = changes.navTags.currentValue;
     }
   }

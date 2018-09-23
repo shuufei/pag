@@ -1,19 +1,34 @@
 @import 'src/styles.scss';
 
+$account-list-card-height: 72px;
+$input-text-height: 33px;
+
 .navigation {
   height: 100vh;
   width: 271px;
-  padding: 69px 24px;
+  padding: 69px 0;
   box-shadow: $shadow-center;
   box-sizing: border-box;
-  overflow: auto;
+  overflow: hidden;
   background: $white;
+  pag-account-list-card {
+    position: fixed;
+    z-index: 100;
+  }
 }
 .tag-block {
-  margin-top: 32px;
+  margin-top: 96px;
+}
+.nav-contents-wrapper {
+  width: 100%;
+  box-sizing: border-box;
+  padding-left: 24px;
+  padding-right: 24px;
 }
 .tag-list {
   margin-top: 16px;
+  overflow: scroll;
+  height: calc(100vh - #{$account-list-card-height} - #{$input-text-height} - 130px);
 }
 .nav-tag {
   margin-bottom: 4px;

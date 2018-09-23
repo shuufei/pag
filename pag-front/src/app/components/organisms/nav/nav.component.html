@@ -1,13 +1,17 @@
 <div class="navigation">
-  <pag-account-list-card
-    [accounts]="accountListCard.accounts"
-    [currentAccount]="accountListCard.currentAccount"
-    [accountClickEvent]="accountClickEvent"
-    [addClickEvent]="addAccountClickEvent"
-  ></pag-account-list-card>
+  <div class="nav-contents-wrapper">
+    <pag-account-list-card
+      [accounts]="accountListCard.accounts"
+      [currentAccount]="accountListCard.currentAccount"
+      [accountClickEvent]="accountClickEvent"
+      [addClickEvent]="addAccountClickEvent"
+    ></pag-account-list-card>
+  </div>
   <div class="tag-block">
-    <pag-input-txt placeholder="tagを検索" [defaultValue]="inputValue" (input)="onChangeInput($event)"></pag-input-txt>
-    <div class="tag-list">
+    <div class="nav-contents-wrapper">
+      <pag-input-txt placeholder="tagを検索" defaultValue="" [resetToken]="inputResetToken" (input)="onChangeInput($event)"></pag-input-txt>
+    </div>
+    <div class="tag-list nav-contents-wrapper">
       <div *ngFor="let navTag of filteredNavTags" class="nav-tag">
         <pag-nav-tag
           [tag]="navTag.tag"
