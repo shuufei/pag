@@ -8,6 +8,7 @@ import { Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChange
 export class InputTxtComponent implements OnInit, OnChanges {
   @Input() placeholder: string;
   @Input() defaultValue: string;
+  @Input() resetToken: string;
   @Output() input: EventEmitter<string> = new EventEmitter();
 
   text: string;
@@ -19,7 +20,7 @@ export class InputTxtComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes.defaultValue) {
+    if (changes.resetToken) {
       this.setDefaultValue();
     }
   }
