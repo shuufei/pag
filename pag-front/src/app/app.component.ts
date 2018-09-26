@@ -22,10 +22,13 @@ import { Item } from 'src/app/components/organisms/item/item.component';
 })
 export class AppComponent implements OnInit {
 
+  private readonly DEFAULT_TITLE = 'All';
+
   items$: Observable<Item[]>;
   tags$: Observable<NavTag[]>;
   selectedTags$: Observable<string[]>;
 
+  itemsTitle: string;
   accountListCard: AccountListCard;
   sortedTags: NavTag[];
   initializedNavTags: boolean;
@@ -46,6 +49,7 @@ export class AppComponent implements OnInit {
   ) {
     this.sortedTags = [];
     this.initializedNavTags = false;
+    this.itemsTitle = this.DEFAULT_TITLE;
     this.onClickedAccount = this.onClickedAccount.bind(this);
     this.onClickedTag = this.onClickedTag.bind(this);
     this.setObserver();
@@ -83,11 +87,12 @@ export class AppComponent implements OnInit {
     });
     this.tags$.subscribe(async(navTags) => {
       if (this.initializedNavTags) {
-        await this.appUtil.sleepByPromise(450);
+        await this.appUtil.sleepByPromise(200);
       }
       this.sortedTags = this.appUtil.sortNavTags(navTags);
     });
     this.selectedTags$.subscribe(tags => {
+      this.itemsTitle = tags && 0 < tags.length ? tags.join(' / ') : this.DEFAULT_TITLE;
       this.itemsUtil.filterItemsByTags(tags);
     });
   }

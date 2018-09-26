@@ -15,9 +15,18 @@ $z-index-nav: 40;
   padding-left: $nav-width;
 }
 .items-wrapper { 
-  padding: 32px 40px;
+  padding: 24px 40px;
   width: 100%;
   box-sizing: border-box;
+}
+.items-title {
+  font-family: $font-family;
+  line-height: 1.4;
+  letter-spacing: 0.8px;
+  font-size: 28px;
+  font-weight: 700;
+  padding-left: 8px;
+  margin-bottom: 16px;
 }
 
 pag-header {
