@@ -8,7 +8,7 @@ $z-index-nav: 40;
 
 #root-container {
   background: $primary-lite;
-  height: 100vh;
+  min-height: 100vh;
   width: 100vw;
   box-sizing: border-box;
   padding-top: $header-height;
