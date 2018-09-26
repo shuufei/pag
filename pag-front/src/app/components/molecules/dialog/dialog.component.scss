@@ -1,0 +1,26 @@
+@import 'src/styles.scss';
+
+.dialog {
+  position: fixed;
+  top: 16%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: $white;
+  min-height: 100px;
+  min-width: 40vw;
+  padding: 32px 88px 80px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+  border-radius: 10px;
+  box-sizing: border-box;
+  z-index: 100;
+}
+
+.dialog-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  min-height: 100vh;
+  min-width: 100vw;
+  background: rgba(255,255,255,0.8);
+  z-index: 90;
+}

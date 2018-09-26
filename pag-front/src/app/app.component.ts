@@ -32,6 +32,7 @@ export class AppComponent implements OnInit {
   accountListCard: AccountListCard;
   sortedTags: NavTag[];
   initializedNavTags: boolean;
+  accountsIsNotRegisted: boolean;
 
   private accounts$: Observable<Account[]>;
   private currentAccount$: Observable<Account>;
@@ -50,13 +51,16 @@ export class AppComponent implements OnInit {
     this.sortedTags = [];
     this.initializedNavTags = false;
     this.itemsTitle = this.DEFAULT_TITLE;
+    this.accountsIsNotRegisted = false;
     this.onClickedAccount = this.onClickedAccount.bind(this);
     this.onClickedTag = this.onClickedTag.bind(this);
     this.setObserver();
   }
 
   ngOnInit(): void {
+    // this.accountsService.setInitialAccounts(); // for debug
     this.accounts$.subscribe(accounts => {
+      if (!(accounts && 0 < accounts.length)) { this.accountsIsNotRegisted = true; }
       if (!this.accountsQuery.getSnapshot().currentAccount) {
         const currentAccount = accounts[0];
         this.accountsService.changeCurrentAccount(currentAccount);

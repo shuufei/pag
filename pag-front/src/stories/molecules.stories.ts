@@ -158,3 +158,27 @@ buttonStories.add('deactive', () => ({
     active: false
   }
 }));
+
+const dialogStories = storiesOf(`${storyCategory}/Dialog`, module);
+dialogStories.addDecorator(withKnobs);
+dialogStories.addDecorator(moduleMetadata(metadata));
+dialogStories.add('default', () => ({
+  template: `
+    <pag-dialog [open]="open">
+      <p style="text-align:center;">dialog</p>
+      <div style="width:100px; margin:8px auto;">
+        <pag-button label="close" [active]="true" (click)="closeEvent()">
+        </pag-button>
+      </div>
+    </pag-dialog>
+    <div style="width:100px;">
+      <pag-button label="open" [active]="true" (click)="openEvent()">
+      </pag-button>
+    </div>
+  `,
+  props: {
+    open: false,
+    openEvent: function() { this.open = true; },
+    closeEvent: function() { this.open = false; }
+  }
+}));

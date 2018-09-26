@@ -16,6 +16,7 @@ export class ItemsUtilService {
   ) {}
 
   setItems(account: Account): void {
+    if (!account) { return; }
     const items: Item[] = this.getItems();
     this.itemsService.setMasterItems(items);
   }
