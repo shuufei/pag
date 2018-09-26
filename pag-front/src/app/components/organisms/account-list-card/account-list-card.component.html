@@ -1,9 +1,9 @@
 <div class="account-list-card" [ngClass]="openHeightClass" (click)="toggleOpen()">
   <ng-container *ngIf="!open; else openBlack">
     <pag-account-name
-      [id]="currentAccount.id"
-      [name]="currentAccount.name"
-      [imgUrl]="currentAccount.imgUrl"
+      [id]="currentAccount?.id"
+      [name]="currentAccount?.name"
+      [imgUrl]="currentAccount?.imgUrl"
     ></pag-account-name>
   </ng-container>
 

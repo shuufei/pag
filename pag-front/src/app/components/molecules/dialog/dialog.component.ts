@@ -11,7 +11,7 @@ import { trigger, state, style, animate, transition } from '@angular/animations'
         opacity: 1
       })),
       state('void', style({
-        top: '12%',
+        top: '8%',
         opacity: 0
       })),
       transition('void => *', [
