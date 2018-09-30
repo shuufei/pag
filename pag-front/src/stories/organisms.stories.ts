@@ -254,3 +254,32 @@ headerStories.add('default', () => ({
   `,
   props: {}
 }));
+
+const loadingDialogStories = storiesOf(`${storyCategory}/Loading Dialog`, module);
+loadingDialogStories.addDecorator(withKnobs);
+loadingDialogStories.addDecorator(moduleMetadata(metadata));
+loadingDialogStories.add('default', () => ({
+  template: `
+    <pag-loading-dialog
+      [open]="open"
+    >
+    </pag-loading-dialog>
+  `,
+  props: {
+    open: true
+  }
+}));
+loadingDialogStories.add('input message', () => ({
+  template: `
+    <pag-loading-dialog
+      [open]="open"
+      [message]="message"
+    >
+    </pag-loading-dialog>
+  `,
+  props: {
+    open: true,
+    message: text('Message', '[message指定] 読み込み中...')
+  }
+}));
+

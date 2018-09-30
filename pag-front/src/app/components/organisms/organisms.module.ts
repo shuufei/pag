@@ -8,6 +8,7 @@ import { ItemComponent } from './item/item.component';
 import { ItemListComponent } from './item-list/item-list.component';
 import { NavComponent } from './nav/nav.component';
 import { HeaderComponent } from './header/header.component';
+import { LoadingDialogComponent } from './loading-dialog/loading-dialog.component';
 
 @NgModule({
   imports: [
@@ -20,14 +21,16 @@ import { HeaderComponent } from './header/header.component';
     ItemComponent,
     ItemListComponent,
     NavComponent,
-    HeaderComponent
+    HeaderComponent,
+    LoadingDialogComponent
   ],
   exports: [
     AccountListCardComponent,
     ItemComponent,
     ItemListComponent,
     NavComponent,
-    HeaderComponent
+    HeaderComponent,
+    LoadingDialogComponent
   ]
 })
 export class OrganismsModule { }
