@@ -1,0 +1,18 @@
+@import 'src/styles/colors.scss';
+
+.loading {
+  height: 100%;
+  width: 100%;
+  border: 5px solid $primary-lite;
+  border-top: 5px solid $primary;
+  border-radius: 50%;
+  animation: spin 0.8s ease-out infinite;
+  &.light { border-width: 3px; }
+  &.regular { border-width: 5px; }
+  &.bold { border-width: 8px; }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}

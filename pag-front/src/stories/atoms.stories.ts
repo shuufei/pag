@@ -107,3 +107,31 @@ accountImgStories.add('specify image url', () => ({
     url: 'https://pbs.twimg.com/profile_images/821745021753823233/L_dTDu3C_normal.jpg'
   }
 }));
+
+const loadingStories = storiesOf(`${storyCategory}/Loading`, module);
+loadingStories.addDecorator(withKnobs);
+loadingStories.addDecorator(moduleMetadata(metadata));
+loadingStories.add('default', () => ({
+  template: `
+    <div style="height:100px; width:100px;">
+      <pag-loading></pag-loading>
+    </div>
+  `,
+  props: {}
+}));
+loadingStories.add('border width', () => ({
+  template: `
+    <div style="height:100px; width:100px;">
+      <pag-loading
+        [borderWidth]="borderWidth"
+      ></pag-loading>
+    </div>
+  `,
+  props: {
+    borderWidth: select(
+      'Weight',
+      { light: 'light', regular: 'regular', bold: 'bold' },
+      'regular'
+    )
+  }
+}));

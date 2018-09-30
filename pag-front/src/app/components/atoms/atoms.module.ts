@@ -6,6 +6,7 @@ import { LabelComponent } from './label/label.component';
 import { ThumbnailComponent } from './thumbnail/thumbnail.component';
 import { IconComponent } from './icon/icon.component';
 import { AccountImgComponent } from './account-img/account-img.component';
+import { LoadingComponent } from './loading/loading.component';
 
 @NgModule({
   imports: [
@@ -16,14 +17,16 @@ import { AccountImgComponent } from './account-img/account-img.component';
     LabelComponent,
     ThumbnailComponent,
     IconComponent,
-    AccountImgComponent
+    AccountImgComponent,
+    LoadingComponent
   ],
   exports: [
     TxtComponent,
     LabelComponent,
     ThumbnailComponent,
     IconComponent,
-    AccountImgComponent
+    AccountImgComponent,
+    LoadingComponent
   ]
 })
 export class AtomsModule { }
