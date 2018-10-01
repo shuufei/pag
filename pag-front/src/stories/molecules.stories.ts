@@ -1,5 +1,5 @@
 import { storiesOf, moduleMetadata } from '@storybook/angular';
-import { text, number, select, withKnobs } from '@storybook/addon-knobs/angular';
+import { text, number, boolean, select, withKnobs } from '@storybook/addon-knobs/angular';
 import { action } from '@storybook/addon-actions';
 
 
@@ -156,6 +156,20 @@ buttonStories.add('deactive', () => ({
   props: {
     label: text('Label', 'Button'),
     active: false
+  }
+}));
+buttonStories.add('custom', () => ({
+  template: `
+    <div style="width:200px;">
+      <pag-button [label]="label" [active]="active" [size]="size" [type]="type">
+      </pag-button>
+    </div>
+  `,
+  props: {
+    label: text('Label', 'Button'),
+    active: boolean('Active', true),
+    size: select('Size', { s: 's', m: 'm', l: 'l' }, 'm'),
+    type: select('Type', { block: 'block', inline: 'inline' }, 'block')
   }
 }));
 

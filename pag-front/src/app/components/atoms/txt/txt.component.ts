@@ -1,5 +1,7 @@
 import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
 
+// TODO: valuesを定義するよりかはtypeで文字列を縛ったほうがいい
+//       e.g) type Size = 's' | 'm' | 'l';
 import { size, weight, color } from './txt-values';
 
 @Component({

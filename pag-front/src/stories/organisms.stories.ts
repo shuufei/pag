@@ -283,3 +283,16 @@ loadingDialogStories.add('input message', () => ({
   }
 }));
 
+const accountInitializeDialog = storiesOf(`${storyCategory}/Account Initialize Dialog`, module);
+accountInitializeDialog.addDecorator(withKnobs);
+accountInitializeDialog.addDecorator(moduleMetadata(metadata));
+accountInitializeDialog.add('default', () => ({
+  template: `
+    <pag-account-initialize-dialog
+      [open]="open"
+    ></pag-account-initialize-dialog>
+  `,
+  props: {
+    open: true
+  }
+}));

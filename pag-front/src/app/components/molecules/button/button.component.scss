@@ -3,22 +3,44 @@
 .button {
   border: none;
   background: $primary;
-  padding: 8px 24px;
-  border-radius: 15px;
-  width: 100%;
   cursor: pointer;
 
-  // typography
-  font-size: 16px;
-  font-weight: 400;
   font-family: $font-family;
   color: $white;
   text-align: center;
+  letter-spacing: 0.8px;
   &:focus {
     outline: 0;
   }
   &:hover {
     filter: brightness(110%);
+  }
+
+  &.s {
+    font-size: 14px;
+    font-weight: 300;
+    padding: 6px 16px 5px;
+  }
+  &.m {
+    font-size: 16px;
+    font-weight: 400;
+    padding: 8px 24px 7px;
+  }
+  &.l {
+    font-size: 18px;
+    font-weight: 600;
+    padding: 8px 24px 7px;
+    
+  }
+
+  &.inline {
+    display: inline-block;
+    border-radius: 5px;
+  }
+  &.block {
+    display: block;
+    width: 100%;
+    border-radius: 15px;
   }
 
   &.deactive {

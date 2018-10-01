@@ -1,0 +1,18 @@
+.dialog-content {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+}
+
+.step-content {
+  margin-top: 12px;
+}
+
+.account-id-form {
+  display: flex;
+  margin-top: 16px;
+  pag-input-txt {
+    flex: 1;
+    margin-right: 16px;
+  }
+}
