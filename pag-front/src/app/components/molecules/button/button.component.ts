@@ -36,6 +36,10 @@ export class ButtonComponent implements OnInit, OnChanges {
     this.styleClasses = [ ...classes, type, size ];
   }
 
+  isActive(): boolean {
+    return this.active !== undefined ? this.active : true;
+  }
+
 }
 
 type ButtonSize = 's' | 'm' | 'l';
