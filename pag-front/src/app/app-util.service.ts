@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 
 import { Item } from 'src/app/components/organisms/item/item.component';
 import { NavTag } from 'src/app/components/molecules/nav-tag/nav-tag.component';
-import { TagsQuery, TagsService, TagsState } from 'src/app/tags/state';
+import { TagsQuery, TagsService, TagsState } from 'src/app/store/tags/state';
 
 @Injectable({
   providedIn: 'root'

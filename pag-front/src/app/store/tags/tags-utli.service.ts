@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { TagsService, TagsQuery, TagsState } from 'src/app/tags/state';
+import { TagsService, TagsQuery, TagsState } from 'src/app/store/tags/state';
 
 @Injectable({
   providedIn: 'root'
