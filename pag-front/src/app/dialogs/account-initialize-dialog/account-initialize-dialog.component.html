@@ -1,0 +1,56 @@
+<pag-dialog [open]="open">
+  <div class="dialog-content center-position">
+    <img src='assets/image/logo.svg' alt='logo' height="32px">
+
+    <div class="step-content" *ngIf="step === STEP.accountInput">
+      <pag-txt
+        text="TwitterのアカウントIDを入力して、Pagをはじめよう。"
+        size="m"
+        weight="regular"
+        color="black"
+      ></pag-txt>
+      <div style="margin-top:2px;">
+        <pag-txt
+          text="サンプル用のアカウントでPagを使ってみたい方は、"
+          size="s" weight="regular" color="black" [options]="['inline-block']"
+        ></pag-txt>
+        <pag-txt
+          text="こちら"
+          size="s" weight="regular" color="primary" [options]="['inline-block']"
+          style="cursor:pointer;"
+          (click)="startTestAccountEvent()"
+        ></pag-txt>
+        <pag-txt
+          text="をクリック"
+          size="s" weight="regular" color="black" [options]="['inline-block']"
+        ></pag-txt>
+      </div>
+      <div class="account-id-form">
+        <pag-input-txt
+          placeholder="@account_id"
+          (input)="onChangeAccountId($event)"
+        ></pag-input-txt>
+        <pag-button label="確認" size="s" type="inline" (click)="searchAccount()"></pag-button>
+      </div>
+    </div>
+
+    <div class="step-content center-position" *ngIf="step === STEP.accountSearching">
+      <pag-txt
+        text="Twitterアカウント検索中..."
+        size="m" weight="regular" color="black"
+      ></pag-txt>
+      <div class="loading-wrapper">
+        <pag-loading borderWidth="regular"></pag-loading>
+      </div>
+    </div>
+
+    <div class="step-content" *ngIf="step === STEP.accountConfirm">
+      Confirm
+    </div>
+
+    <div class="step-content" *ngIf="step === STEP.accountError">
+      Error
+    </div>
+
+  </div>
+</pag-dialog>

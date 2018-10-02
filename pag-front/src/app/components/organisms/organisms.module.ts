@@ -9,7 +9,6 @@ import { ItemListComponent } from './item-list/item-list.component';
 import { NavComponent } from './nav/nav.component';
 import { HeaderComponent } from './header/header.component';
 import { LoadingDialogComponent } from './loading-dialog/loading-dialog.component';
-import { AccountInitializeDialogComponent } from './account-initialize-dialog/account-initialize-dialog.component';
 
 @NgModule({
   imports: [
@@ -23,8 +22,7 @@ import { AccountInitializeDialogComponent } from './account-initialize-dialog/ac
     ItemListComponent,
     NavComponent,
     HeaderComponent,
-    LoadingDialogComponent,
-    AccountInitializeDialogComponent
+    LoadingDialogComponent
   ],
   exports: [
     AccountListCardComponent,
@@ -32,8 +30,7 @@ import { AccountInitializeDialogComponent } from './account-initialize-dialog/ac
     ItemListComponent,
     NavComponent,
     HeaderComponent,
-    LoadingDialogComponent,
-    AccountInitializeDialogComponent
+    LoadingDialogComponent
   ]
 })
 export class OrganismsModule { }
