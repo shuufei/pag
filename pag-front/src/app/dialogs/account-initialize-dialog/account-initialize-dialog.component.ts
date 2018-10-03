@@ -18,9 +18,11 @@ export class AccountInitializeDialogComponent implements OnInit {
     accountError: 'accountError',
     accountSetting: 'accountSetting'
   };
+  readonly CONFIRM_CONTENTS_WIDTH = '200px';
 
   step: string;
   accountId: string;
+  account: GetAccountResponse;
 
   constructor(
     private api: ApiService
@@ -42,7 +44,7 @@ export class AccountInitializeDialogComponent implements OnInit {
   async searchAccount(): Promise<void> {
     this.step = this.STEP.accountSearching;
     try {
-      const account: GetAccountResponse = await this.api.getAccount(this.accountId);
+      this.account = await this.api.getAccount(this.accountId);
       this.step = this.STEP.accountConfirm;
     } catch (error) {
       this.step = this.STEP.accountError;
