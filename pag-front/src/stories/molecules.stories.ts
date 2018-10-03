@@ -161,7 +161,7 @@ buttonStories.add('deactive', () => ({
 buttonStories.add('custom', () => ({
   template: `
     <div style="width:200px;">
-      <pag-button [label]="label" [active]="active" [size]="size" [type]="type">
+      <pag-button [label]="label" [active]="active" [size]="size" [type]="type" [round]="round">
       </pag-button>
     </div>
   `,
@@ -169,7 +169,8 @@ buttonStories.add('custom', () => ({
     label: text('Label', 'Button'),
     active: boolean('Active', true),
     size: select('Size', { s: 's', m: 'm', l: 'l' }, 'm'),
-    type: select('Type', { block: 'block', inline: 'inline' }, 'block')
+    type: select('Type', { block: 'block', inline: 'inline' }, 'block'),
+    round: boolean('Round', false)
   }
 }));
 

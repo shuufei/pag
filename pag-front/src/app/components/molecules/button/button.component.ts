@@ -11,6 +11,7 @@ export class ButtonComponent implements OnInit, OnChanges {
   @Input() clickEvent: Function;
   @Input() size: ButtonSize;
   @Input() type: ButtonType;
+  @Input() round: boolean;
 
   styleClasses: string[];
 
@@ -33,7 +34,8 @@ export class ButtonComponent implements OnInit, OnChanges {
     if (this.active === false) { classes.push('deactive'); }
     const type: ButtonType = this.type ? this.type : this.DEFAULT_TYPE;
     const size: ButtonSize = this.size ? this.size : this.DEFAULT_SIZE;
-    this.styleClasses = [ ...classes, type, size ];
+    const round: ButtonRound = this.round ? 'round' : '';
+    this.styleClasses = [ ...classes, type, size, round ];
   }
 
   isActive(): boolean {
@@ -44,3 +46,4 @@ export class ButtonComponent implements OnInit, OnChanges {
 
 type ButtonSize = 's' | 'm' | 'l';
 type ButtonType = 'block' | 'inline';
+type ButtonRound = 'round' | '';
