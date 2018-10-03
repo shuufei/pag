@@ -54,6 +54,7 @@ export class AppComponent implements OnInit {
     this.accountsIsNotRegisted = false;
     this.onClickedAccount = this.onClickedAccount.bind(this);
     this.onClickedTag = this.onClickedTag.bind(this);
+    this.onClickedInitializeAccount = this.onClickedInitializeAccount.bind(this);
     this.setObserver();
   }
 
@@ -61,10 +62,12 @@ export class AppComponent implements OnInit {
     // this.accountsService.setInitialAccounts(); // for debug
     this.accounts$.subscribe(accounts => {
       if (!(accounts && 0 < accounts.length)) { this.accountsIsNotRegisted = true; }
-      if (!this.accountsQuery.getSnapshot().currentAccount) {
-        const currentAccount = accounts[0];
-        this.accountsService.changeCurrentAccount(currentAccount);
-      }
+      const currentAccount = accounts[0];
+      this.accountsService.changeCurrentAccount(currentAccount);
+      // if (!this.accountsQuery.getSnapshot().currentAccount) {
+      //   const currentAccount = accounts[0];
+      //   this.accountsService.changeCurrentAccount(currentAccount);
+      // }
       this.accountListCard = {
         ...this.accountListCard,
         accounts
@@ -114,6 +117,15 @@ export class AppComponent implements OnInit {
       this.tagsUtil.addSelectedTag(navTag.tag);
     } else {
       this.tagsUtil.removeSelectedTag(navTag.tag);
+    }
+  }
+
+  onClickedInitializeAccount(...args: any[]): void {
+    const ACCOUNT_INDEX = 0;
+    if (args && args[ACCOUNT_INDEX]) {
+      this.accountsService.changeCurrentAccount(args[ACCOUNT_INDEX]);
+      this.accountsService.setAccounts([args[ACCOUNT_INDEX]]);
+      this.accountsIsNotRegisted = false;
     }
   }
 

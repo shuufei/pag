@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 
 import { ApiService, GetAccountResponse } from 'src/app/shared/api.service';
+import { Account } from 'src/app/components/molecules/account-name/account-name.component';
 
 @Component({
   selector: 'pag-account-initialize-dialog',
@@ -9,7 +10,7 @@ import { ApiService, GetAccountResponse } from 'src/app/shared/api.service';
 })
 export class AccountInitializeDialogComponent implements OnInit {
   @Input() open: boolean;
-  @Input() startTestAccountEvent: Function;
+  @Input() setAccountEvent: Function;
 
   readonly STEP = {
     accountInput: 'accountInput',
@@ -28,6 +29,7 @@ export class AccountInitializeDialogComponent implements OnInit {
     private api: ApiService
   ) {
     this.step = this.STEP.accountInput;
+    this.setAccount = this.setAccount.bind(this);
   }
 
   ngOnInit() {
@@ -56,6 +58,28 @@ export class AccountInitializeDialogComponent implements OnInit {
     this.accountId = undefined;
     this.error = false;
     this.step = this.STEP.accountInput;
+  }
+
+  setTestAccount(): void {
+    const account: Account = {
+      id: 'xxxxx',
+      name: '@digitalfei',
+      imgUrl: 'https://pbs.twimg.com/profile_images/821745021753823233/L_dTDu3C_normal.jpg'
+    };
+    if (this.setAccountEvent) {
+      this.setAccountEvent(account);
+    }
+  }
+
+  setAccount(): void {
+    const account: Account = {
+      id: this.account.id,
+      name: this.account.accountId,
+      imgUrl: this.account.img
+    };
+    if (this.setAccountEvent) {
+      this.setAccountEvent(account);
+    }
   }
 
 }

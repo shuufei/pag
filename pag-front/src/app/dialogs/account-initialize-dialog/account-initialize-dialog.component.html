@@ -38,7 +38,7 @@
           text="こちら"
           size="s" weight="regular" color="primary" [options]="['inline-block']"
           style="cursor:pointer;"
-          (click)="startTestAccountEvent()"
+          (click)="setTestAccount()"
         ></pag-txt>
         <pag-txt
           text="をクリック"
@@ -87,7 +87,7 @@
         </div>
       </div>
       <div class="confirm-button-block">
-        <pag-button label="はい" [active]="true" size="s" type="block">
+        <pag-button label="はい" [active]="true" size="s" type="block" [clickEvent]="setAccount">
         </pag-button>
         <div class="confirm-no-btn">
           <pag-txt

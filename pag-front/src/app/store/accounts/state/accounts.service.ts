@@ -21,6 +21,10 @@ export class AccountsService {
     this.accountsStore.setState(state => ({ ...state, currentAccount: account }));
   }
 
+  setAccounts(accounts: Account[]): void {
+    this.accountsStore.setState(state => ({ ...state, accounts }));
+  }
+
   // for debug
   setInitialAccounts(): void {
     const accounts: Account[] = this.getAccounts();
