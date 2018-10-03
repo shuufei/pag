@@ -15,7 +15,8 @@ export const color = {
   black: 'black',
   gray01: 'gray-01',
   primaryGray: 'primary-gray',
-  white: 'white'
+  white: 'white',
+  red: 'red'
 };
 
 export const options = {

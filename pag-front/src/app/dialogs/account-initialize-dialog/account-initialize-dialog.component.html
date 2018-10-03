@@ -3,11 +3,33 @@
     <img src='assets/image/logo.svg' alt='logo' height="32px">
 
     <div class="step-content" *ngIf="step === STEP.accountInput">
-      <pag-txt
-        text="TwitterのアカウントIDを入力して、Pagをはじめよう。"
-        size="m" weight="regular" color="black"
-      ></pag-txt>
-      <div style="margin-top:2px;">
+      <ng-container *ngIf="!error; else errorBlock">
+        <pag-txt
+          text="TwitterのアカウントIDを入力して、Pagをはじめよう。"
+          size="m" weight="regular" color="black"
+        ></pag-txt>
+      </ng-container>
+      <ng-template #errorBlock>
+        <pag-txt
+          text="アカウントを見つけることができませんでした。"
+          size="m" weight="medium" color="red"
+        ></pag-txt>
+        <pag-txt
+          text="以下の点をご確認の上、再度ご入力ください。"
+          size="m" weight="medium" color="red"
+        ></pag-txt>
+        <div class="error-check-point">
+          <pag-txt
+            text="・指定したアカウントが存在すること"
+            size="s" weight="regular" color="black"
+          ></pag-txt>
+          <pag-txt
+            text="・指定したアカウントが鍵アカウントではないこと"
+            size="s" weight="regular" color="black"
+          ></pag-txt>
+        </div>
+      </ng-template>
+      <div style="margin-top:4px;">
         <pag-txt
           text="サンプル用のアカウントでPagを使ってみたい方は、"
           size="s" weight="regular" color="black" [options]="['inline-block']"
@@ -71,14 +93,10 @@
           <pag-txt
             text="いいえ、入力し直します"
             size="m" weight="medium" color="primary"
-            (click)="moveStep(STEP.accountInput)"
+            (click)="toInitialInputStep()"
           ></pag-txt>
         </div>
       </div>
-    </div>
-
-    <div class="step-content center-position" *ngIf="step === STEP.accountError">
-      Error
     </div>
 
   </div>

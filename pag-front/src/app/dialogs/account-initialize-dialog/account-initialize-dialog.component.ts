@@ -15,7 +15,6 @@ export class AccountInitializeDialogComponent implements OnInit {
     accountInput: 'accountInput',
     accountSearching: 'accounSearching',
     accountConfirm: 'accountConfirm',
-    accountError: 'accountError',
     accountSetting: 'accountSetting'
   };
   readonly CONFIRM_CONTENTS_WIDTH = '200px';
@@ -23,6 +22,7 @@ export class AccountInitializeDialogComponent implements OnInit {
   step: string;
   accountId: string;
   account: GetAccountResponse;
+  error: boolean;
 
   constructor(
     private api: ApiService
@@ -47,8 +47,15 @@ export class AccountInitializeDialogComponent implements OnInit {
       this.account = await this.api.getAccount(this.accountId);
       this.step = this.STEP.accountConfirm;
     } catch (error) {
-      this.step = this.STEP.accountError;
+      this.error = true;
+      this.step = this.STEP.accountInput;
     }
+  }
+
+  toInitialInputStep(): void {
+    this.accountId = undefined;
+    this.error = false;
+    this.step = this.STEP.accountInput;
   }
 
 }
