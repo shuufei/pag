@@ -17,9 +17,13 @@ export class ItemsService {
   add() {
   }
 
-  setMasterItems(items: Item[]): void {
-    this.itemsStore.setState(state => ({ ...state, master: items }));
+  setItems(master: Item[], filtered: Item[]): void {
+    this.itemsStore.setState(state => ({ ...state, master, filtered }));
   }
+
+  // setMasterItems(items: Item[]): void {
+  //   this.itemsStore.setState(state => ({ ...state, master: items }));
+  // }
 
   setFilteredItems(items: Item[]): void {
     this.itemsStore.setState(state => ({ ...state, filtered: items }));

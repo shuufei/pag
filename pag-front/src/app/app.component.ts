@@ -62,12 +62,6 @@ export class AppComponent implements OnInit {
     // this.accountsService.setInitialAccounts(); // for debug
     this.accounts$.subscribe(accounts => {
       if (!(accounts && 0 < accounts.length)) { this.accountsIsNotRegisted = true; }
-      const currentAccount = accounts[0];
-      this.accountsService.changeCurrentAccount(currentAccount);
-      // if (!this.accountsQuery.getSnapshot().currentAccount) {
-      //   const currentAccount = accounts[0];
-      //   this.accountsService.changeCurrentAccount(currentAccount);
-      // }
       this.accountListCard = {
         ...this.accountListCard,
         accounts
@@ -123,7 +117,6 @@ export class AppComponent implements OnInit {
   onClickedInitializeAccount(...args: any[]): void {
     const ACCOUNT_INDEX = 0;
     if (args && args[ACCOUNT_INDEX]) {
-      this.accountsService.changeCurrentAccount(args[ACCOUNT_INDEX]);
       this.accountsService.setAccounts([args[ACCOUNT_INDEX]]);
       this.accountsIsNotRegisted = false;
     }
@@ -135,6 +128,6 @@ export class AppComponent implements OnInit {
     this.tags$ = this.tagsQuery.select(state => state.navTags);
     this.selectedTags$ = this.tagsQuery.select(state => state.selectedTags);
     this.items$ = this.itemsQuery.select(state => state.filtered);
-    this.itemsUtil.setFilterObserver();
+    // this.itemsUtil.setFilterObserver();
   }
 }

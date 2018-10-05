@@ -18,16 +18,18 @@ export class ItemsUtilService {
   setItems(account: Account): void {
     if (!account) { return; }
     const items: Item[] = this.getItems();
-    this.itemsService.setMasterItems(items);
+    const filtered: Item[] = items;
+    // TODO: filter process
+    this.itemsService.setItems(items, filtered);
   }
 
-  setFilterObserver(): void {
-    this.itemsQuery.select(state => state.master)
-      .subscribe(items => {
-        // TODO: filter process
-        this.itemsService.setFilteredItems(items);
-      });
-  }
+  // setFilterObserver(): void {
+  //   this.itemsQuery.select(state => state.master)
+  //     .subscribe(items => {
+  //       // TODO: filter process
+  //       this.itemsService.setFilteredItems(items);
+  //     });
+  // }
 
   filterItemsByTags(tags: string[]): void {
     const current: Item[] = [ ...this.itemsQuery.getSnapshot().master ];

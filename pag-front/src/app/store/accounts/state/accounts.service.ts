@@ -22,13 +22,16 @@ export class AccountsService {
   }
 
   setAccounts(accounts: Account[]): void {
-    this.accountsStore.setState(state => ({ ...state, accounts }));
+    const currentAccount: Account = accounts[0];
+    this.accountsStore.setState(state => ({ ...state, accounts, currentAccount }));
   }
 
   // for debug
   setInitialAccounts(): void {
     const accounts: Account[] = this.getAccounts();
-    this.accountsStore.setState(state => ({ ...state, accounts }));
+    this.setAccounts(accounts);
+    // const currentAccount: Account = accounts[0];
+    // this.accountsStore.setState(state => ({ ...state, accounts, currentAccount }));
   }
 
   // mock
