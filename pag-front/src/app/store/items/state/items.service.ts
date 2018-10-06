@@ -29,4 +29,8 @@ export class ItemsService {
     this.itemsStore.setState(state => ({ ...state, filtered: items }));
   }
 
+  setLoading(loading: boolean): void {
+    this.itemsStore.setLoading(loading);
+  }
+
 }

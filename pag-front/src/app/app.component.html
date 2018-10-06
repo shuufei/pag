@@ -7,10 +7,20 @@
 ></pag-nav>
 <div id="root-container">
   <div class="items-wrapper">
-    <p class="items-title">{{itemsTitle}}</p>
+    <p class="items-title" *ngIf="!itemIsEmpty">{{itemsTitle}}</p>
     <pag-item-list
       [items]="items$ | async"
     ></pag-item-list>
+    <div class="item-empty" *ngIf="itemIsEmpty">
+      <pag-txt
+        text="まだItemがありません。"
+        size="l" weight="medium" color="black"
+      ></pag-txt>
+      <pag-txt
+        text="Tweetして、Itemを追加しましょう。"
+        size="l" weight="medium" color="black"
+      ></pag-txt>
+    </div>
   </div>
 </div>
 
@@ -19,6 +29,6 @@
   [setAccountEvent]="onClickedInitializeAccount"
 ></pag-account-initialize-dialog>
 <pag-loading-dialog
-  [open]="loading"
+  [open]="loading$ | async"
   [message]="loadingMessage"
 ></pag-loading-dialog>

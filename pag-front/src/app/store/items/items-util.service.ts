@@ -15,9 +15,12 @@ export class ItemsUtilService {
     private itemsService: ItemsService
   ) {}
 
-  setItems(account: Account): void {
+  async setItems(account: Account): Promise<void> {
     if (!account) { return; }
-    const items: Item[] = this.getItems();
+    this.itemsService.setLoading(true);
+    // TODO: get items by account.
+    const items: Item[] = await this.getItems();
+    this.itemsService.setLoading(false);
     const filtered: Item[] = items;
     // TODO: filter process
     this.itemsService.setItems(items, filtered);
@@ -57,8 +60,8 @@ export class ItemsUtilService {
   }
 
   // mock
-  private getItems(): Item[] {
-    return [
+  private getItems(): Promise<Item[]> {
+    const items = [
       {
         id: '1',
         title: 'Angularの状態管理設計',
@@ -207,5 +210,12 @@ export class ItemsUtilService {
         star: false
       }
     ];
+
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve(items);
+        // resolve([]);
+      }, 2000);
+    });
   }
 }

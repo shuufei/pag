@@ -27,14 +27,16 @@ export class AppComponent implements OnInit {
   items$: Observable<Item[]>;
   tags$: Observable<NavTag[]>;
   selectedTags$: Observable<string[]>;
+  loading$: Observable<boolean>;
 
   itemsTitle: string;
   accountListCard: AccountListCard;
   sortedTags: NavTag[];
   initializedNavTags: boolean;
   accountsIsNotRegisted: boolean;
-  loading: boolean;
+  loadedItems: boolean;
   loadingMessage: string;
+  itemIsEmpty: boolean;
 
   private accounts$: Observable<Account[]>;
   private currentAccount$: Observable<Account>;
@@ -54,7 +56,7 @@ export class AppComponent implements OnInit {
     this.initializedNavTags = false;
     this.itemsTitle = this.DEFAULT_TITLE;
     this.accountsIsNotRegisted = false;
-    this.loading = false;
+    this.itemIsEmpty = false;
     this.onClickedAccount = this.onClickedAccount.bind(this);
     this.onClickedTag = this.onClickedTag.bind(this);
     this.onClickedInitializeAccount = this.onClickedInitializeAccount.bind(this);
@@ -79,7 +81,10 @@ export class AppComponent implements OnInit {
       };
     });
     this.items$.subscribe(items => {
-      this.loading = false;
+      if (this.loadedItems && items && 0 === items.length) {
+        this.itemIsEmpty = true;
+        return;
+      }
       if (this.initializedNavTags) {
         const existNavTags: NavTag[] = this.appUtil.generateNavTagsFromItems(items);
         const navTags: NavTag[] = this.appUtil.mergeMasterNavTag(existNavTags);
@@ -100,6 +105,7 @@ export class AppComponent implements OnInit {
       this.itemsTitle = tags && 0 < tags.length ? tags.join(' / ') : this.DEFAULT_TITLE;
       this.itemsUtil.filterItemsByTags(tags);
     });
+    this.loading$.subscribe(loading => this.loadedItems = !loading);
   }
 
   onClickedAccount(...args: any[]): void {
@@ -121,7 +127,7 @@ export class AppComponent implements OnInit {
   async onClickedInitializeAccount(...args: any[]): Promise<void> {
     const ACCOUNT_INDEX = 0;
     if (args && args[ACCOUNT_INDEX]) {
-      this.loading = true;
+      this.itemsService.setLoading(true);
       this.loadingMessage = 'アカウントデータ取得中...';
       this.accountsIsNotRegisted = false;
       await this.appUtil.sleepByPromise(1500);
@@ -135,6 +141,7 @@ export class AppComponent implements OnInit {
     this.tags$ = this.tagsQuery.select(state => state.navTags);
     this.selectedTags$ = this.tagsQuery.select(state => state.selectedTags);
     this.items$ = this.itemsQuery.select(state => state.filtered);
+    this.loading$ = this.itemsQuery.selectLoading();
     // this.itemsUtil.setFilterObserver();
   }
 }
