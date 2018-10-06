@@ -33,6 +33,8 @@ export class AppComponent implements OnInit {
   sortedTags: NavTag[];
   initializedNavTags: boolean;
   accountsIsNotRegisted: boolean;
+  loading: boolean;
+  loadingMessage: string;
 
   private accounts$: Observable<Account[]>;
   private currentAccount$: Observable<Account>;
@@ -52,6 +54,7 @@ export class AppComponent implements OnInit {
     this.initializedNavTags = false;
     this.itemsTitle = this.DEFAULT_TITLE;
     this.accountsIsNotRegisted = false;
+    this.loading = false;
     this.onClickedAccount = this.onClickedAccount.bind(this);
     this.onClickedTag = this.onClickedTag.bind(this);
     this.onClickedInitializeAccount = this.onClickedInitializeAccount.bind(this);
@@ -76,6 +79,7 @@ export class AppComponent implements OnInit {
       };
     });
     this.items$.subscribe(items => {
+      this.loading = false;
       if (this.initializedNavTags) {
         const existNavTags: NavTag[] = this.appUtil.generateNavTagsFromItems(items);
         const navTags: NavTag[] = this.appUtil.mergeMasterNavTag(existNavTags);
@@ -114,11 +118,14 @@ export class AppComponent implements OnInit {
     }
   }
 
-  onClickedInitializeAccount(...args: any[]): void {
+  async onClickedInitializeAccount(...args: any[]): Promise<void> {
     const ACCOUNT_INDEX = 0;
     if (args && args[ACCOUNT_INDEX]) {
-      this.accountsService.setAccounts([args[ACCOUNT_INDEX]]);
+      this.loading = true;
+      this.loadingMessage = 'アカウントデータ取得中...';
       this.accountsIsNotRegisted = false;
+      await this.appUtil.sleepByPromise(1500);
+      this.accountsService.setAccounts([args[ACCOUNT_INDEX]]);
     }
   }
 
