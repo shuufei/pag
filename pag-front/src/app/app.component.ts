@@ -110,8 +110,11 @@ export class AppComponent implements OnInit {
 
   onClickedAccount(...args: any[]): void {
     const ACCOUNT_INDEX = 0;
-    const account = args[ACCOUNT_INDEX];
-    this.accountsService.changeCurrentAccount(account);
+    const account: Account = args[ACCOUNT_INDEX];
+    const current: Account = this.accountsQuery.getSnapshot().currentAccount;
+    if (account.id !== current.id) {
+      this.accountsService.changeCurrentAccount(account);
+    }
   }
 
   onClickedTag(...args: any[]): void {
