@@ -30,8 +30,6 @@ export class AccountsService {
   setInitialAccounts(): void {
     const accounts: Account[] = this.getAccounts();
     this.setAccounts(accounts);
-    // const currentAccount: Account = accounts[0];
-    // this.accountsStore.setState(state => ({ ...state, accounts, currentAccount }));
   }
 
   // mock

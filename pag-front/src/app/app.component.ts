@@ -5,9 +5,7 @@ import { Observable } from 'rxjs';
 import { AppUtilService } from './app-util.service';
 import { AccountsService, AccountsQuery } from 'src/app/store/accounts/state';
 import { TagsService, TagsQuery, TagsState } from 'src/app/store/tags/state';
-import { TagsUtliService } from 'src/app/store/tags/tags-utli.service';
 import { ItemsQuery, ItemsService } from 'src/app/store/items/state';
-import { ItemsUtilService } from 'src/app/store/items/items-util.service';
 
 // interface
 import { Account } from 'src/app/components/molecules/account-name/account-name.component'
@@ -47,10 +45,8 @@ export class AppComponent implements OnInit {
     private accountsQuery: AccountsQuery,
     private tagsService: TagsService,
     private tagsQuery: TagsQuery,
-    private tagsUtil: TagsUtliService,
     private itemsQuery: ItemsQuery,
-    private itemsService: ItemsService,
-    private itemsUtil: ItemsUtilService
+    private itemsService: ItemsService
   ) {
     this.sortedTags = [];
     this.initializedNavTags = false;
@@ -74,7 +70,7 @@ export class AppComponent implements OnInit {
     });
     this.currentAccount$.subscribe(account => {
       this.initializedNavTags = false;
-      this.itemsUtil.setItems(account);
+      this.itemsService.setItemsByAccount(account);
       this.accountListCard = {
         ...this.accountListCard,
         currentAccount: account
@@ -103,7 +99,7 @@ export class AppComponent implements OnInit {
     });
     this.selectedTags$.subscribe(tags => {
       this.itemsTitle = tags && 0 < tags.length ? tags.join(' / ') : this.DEFAULT_TITLE;
-      this.itemsUtil.filterItemsByTags(tags);
+      this.itemsService.filterItemsByTags(tags);
     });
     this.loading$.subscribe(loading => this.loadedItems = !loading);
   }
@@ -121,9 +117,9 @@ export class AppComponent implements OnInit {
     const NAV_TAG_INDEX = 0;
     const navTag: NavTag = args[NAV_TAG_INDEX];
     if (navTag.selected) {
-      this.tagsUtil.addSelectedTag(navTag.tag);
+      this.tagsService.addSelectedTag(navTag.tag);
     } else {
-      this.tagsUtil.removeSelectedTag(navTag.tag);
+      this.tagsService.removeSelectedTag(navTag.tag);
     }
   }
 
@@ -145,6 +141,5 @@ export class AppComponent implements OnInit {
     this.selectedTags$ = this.tagsQuery.select(state => state.selectedTags);
     this.items$ = this.itemsQuery.select(state => state.filtered);
     this.loading$ = this.itemsQuery.selectLoading();
-    // this.itemsUtil.setFilterObserver();
   }
 }

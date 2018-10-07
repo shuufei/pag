@@ -1,14 +1,19 @@
 import { Injectable } from '@angular/core';
-import { ID } from '@datorama/akita';
 
+import { ApiService } from 'src/app/shared/api.service';
 import { ItemsStore } from './items.store';
+import { ItemsQuery } from './items.query';
 import { Item } from 'src/app/components/organisms/item/item.component';
+import { Label } from 'src/app/components/atoms/label/label.component';
+import { Account } from 'src/app/components/molecules/account-name/account-name.component'
 
 @Injectable({ providedIn: 'root' })
 export class ItemsService {
 
   constructor(
     private itemsStore: ItemsStore,
+    private itemsQuery: ItemsQuery,
+    private api: ApiService
   ) {}
 
   get() {
@@ -17,13 +22,9 @@ export class ItemsService {
   add() {
   }
 
-  setItems(master: Item[], filtered: Item[]): void {
+  setStore(master: Item[], filtered: Item[]): void {
     this.itemsStore.setState(state => ({ ...state, master, filtered }));
   }
-
-  // setMasterItems(items: Item[]): void {
-  //   this.itemsStore.setState(state => ({ ...state, master: items }));
-  // }
 
   setFilteredItems(items: Item[]): void {
     this.itemsStore.setState(state => ({ ...state, filtered: items }));
@@ -31,6 +32,46 @@ export class ItemsService {
 
   setLoading(loading: boolean): void {
     this.itemsStore.setLoading(loading);
+  }
+
+  // setMasterItems(items: Item[]): void {
+  //   this.itemsStore.setState(state => ({ ...state, master: items }));
+  // }
+
+  async setItemsByAccount(account: Account): Promise<void> {
+    if (!account) { return; }
+    this.setLoading(true);
+    // TODO: get items by account.
+    const items: Item[] = await this.api.getItems(account);
+    this.setLoading(false);
+    const filtered: Item[] = items;
+    // TODO: filter process
+    this.setStore(items, filtered);
+  }
+
+  filterItemsByTags(tags: string[]): void {
+    const current: Item[] = [ ...this.itemsQuery.getSnapshot().master ];
+    const filtered: Item[] = [];
+    current.forEach(item => {
+      const itemTags: string[] = item.tags.map((t: Label) => t.label);
+      let match = true;
+      tags.forEach(tag => {
+        if (!itemTags.includes(tag)) {
+          match = false;
+        }
+      });
+      if (match) {
+        const matchedItem: Item = item;
+        const newTags: Label[] = [];
+        matchedItem.tags.forEach((t: Label) => {
+          const _tag: Label = { label: t.label, active: false };
+          if (tags.includes(t.label)) { _tag.active = true; }
+          newTags.push(_tag);
+        });
+        filtered.push({ ...matchedItem, tags: newTags });
+      }
+    });
+    this.setFilteredItems(filtered);
   }
 
 }
