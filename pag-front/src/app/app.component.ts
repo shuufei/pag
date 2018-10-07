@@ -60,7 +60,7 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // this.accountsService.setInitialAccounts(); // for debug
+    this.accountsService.setInitialAccounts(); // for debug
     this.accounts$.subscribe(accounts => {
       if (!(accounts && 0 < accounts.length)) { this.accountsIsNotRegisted = true; }
       this.accountListCard = {

@@ -18,7 +18,7 @@ import { trigger, state, style, animate, transition } from '@angular/animations'
         animate('0.3s ease-out')
       ]),
       transition('* => void', [
-        animate('0.2s ease-out')
+        animate('0.25s ease-out')
       ])
     ])
   ]
