@@ -39,14 +39,13 @@ export class AppUtilService {
 
   sortNavTags(navTags: NavTag[]): NavTag[] {
     const arr = [ ...navTags ];
-    const selected = arr.filter(navtag => navtag.selected);
+    const selected: NavTag[] = this.tagsQuery.getSnapshot().selectedTags.map(tag => arr.find(t => t.tag === tag));
     const notSelected = arr.filter(navtag => !navtag.selected);
     const orderByCountDesc = (navtag1: NavTag, navtag2: NavTag) => {
       if (navtag1.count > navtag2.count) { return -1; }
       if (navtag1.count < navtag2.count) { return 1; }
       return 0;
     };
-    selected.sort(orderByCountDesc);
     notSelected.sort(orderByCountDesc);
     return [ ...selected, ...notSelected ];
   }
