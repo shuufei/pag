@@ -44,7 +44,7 @@
   }
 
   &.deactive {
-    background: $primary-gray;
+    background: $primary-gray !important;
     cursor: default;
     &:hover {
       filter: none;
@@ -53,5 +53,12 @@
 
   &.round {
     border-radius: 15px;
+  }
+
+  &.info {
+    background: $primary;
+  }
+  &.danger {
+    background: $red;
   }
 }

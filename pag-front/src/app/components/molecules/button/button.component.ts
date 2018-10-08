@@ -12,11 +12,13 @@ export class ButtonComponent implements OnInit, OnChanges {
   @Input() size: ButtonSize;
   @Input() type: ButtonType;
   @Input() round: boolean;
+  @Input() role: ButtonRole;
 
   styleClasses: string[];
 
   DEFAULT_SIZE: ButtonSize = 'm';
   DEFAULT_TYPE: ButtonType = 'block';
+  DEFAULT_ROLE: ButtonRole = 'info';
 
   constructor() {
     this.styleClasses = [];
@@ -35,7 +37,8 @@ export class ButtonComponent implements OnInit, OnChanges {
     const type: ButtonType = this.type ? this.type : this.DEFAULT_TYPE;
     const size: ButtonSize = this.size ? this.size : this.DEFAULT_SIZE;
     const round: ButtonRound = this.round ? 'round' : '';
-    this.styleClasses = [ ...classes, type, size, round ];
+    const role: ButtonRole = this.role ? this.role : this.DEFAULT_ROLE;
+    this.styleClasses = [ ...classes, type, size, round, role ];
   }
 
   isActive(): boolean {
@@ -47,3 +50,4 @@ export class ButtonComponent implements OnInit, OnChanges {
 type ButtonSize = 's' | 'm' | 'l';
 type ButtonType = 'block' | 'inline';
 type ButtonRound = 'round' | '';
+type ButtonRole = 'info' | 'danger';
