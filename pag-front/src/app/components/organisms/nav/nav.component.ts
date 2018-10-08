@@ -15,11 +15,13 @@ export class NavComponent implements OnInit, OnChanges {
   @Input() navTagClickEvent: Function;
   @Input() accountClickEvent: Function;
   @Input() addAccountClickEvent: Function;
+  @Input() isShowResetBtn: boolean;
+  @Input() resetBtnClickEvent: Function;
 
   inputResetToken: string;
   filteredNavTags: NavTag[];
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit() {
     this.inputResetToken = uuidv4();
@@ -32,7 +34,7 @@ export class NavComponent implements OnInit, OnChanges {
     }
   }
 
-  onChangeInput(text: string) {
+  onChangeInput(text: string): void {
     if (typeof text === 'string' ) {
       this.filterNavTags(text);
     }

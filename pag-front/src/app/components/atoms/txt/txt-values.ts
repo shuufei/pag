@@ -2,7 +2,8 @@ export const size = {
   xl: 'xl',
   l: 'l',
   m: 'm',
-  s: 's'
+  s: 's',
+  xs: 'xs'
 };
 
 export const weight = {

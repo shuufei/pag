@@ -221,6 +221,8 @@ navStories.add('default', () => ({
       [navTagClickEvent]="navTagClickEvent"
       [accountClickEvent]="accountClickEvent"
       [addAccountClickEvent]="addAccountClickEvent"
+      [isShowResetBtn]="isShowResetBtn"
+      [resetBtnClickEvent]="resetBtnClickEvent"
     >
     </pag-nav>
   `,
@@ -241,7 +243,9 @@ navStories.add('default', () => ({
     ],
     navTagClickEvent: action('Clicked Nav Tag'),
     accountClickEvent: action('Click Account'),
-    addAccountClickEvent: action('Click Add')
+    addAccountClickEvent: action('Click Add'),
+    isShowResetBtn: boolean('Is Show ResetBtn', false),
+    resetBtnClickEvent: action('Clicked ResetBtn')
   }
 }));
 

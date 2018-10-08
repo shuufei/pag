@@ -17,7 +17,7 @@ $input-text-height: 33px;
   }
 }
 .tag-block {
-  margin-top: 96px;
+  margin-top: 104px;
 }
 .nav-contents-wrapper {
   width: 100%;
@@ -26,10 +26,21 @@ $input-text-height: 33px;
   padding-right: 24px;
 }
 .tag-list {
-  margin-top: 16px;
+  margin-top: 4px;
   overflow: scroll;
   height: calc(100vh - #{$account-list-card-height} - #{$input-text-height} - 130px);
 }
 .nav-tag {
   margin-bottom: 4px;
 }
+
+.reset-btn {
+  text-align: center;
+  margin-top: 8px;
+  opacity: 0;
+  &.show {
+    cursor: pointer;
+    opacity: 1;
+  }
+}
+

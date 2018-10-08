@@ -35,6 +35,7 @@ export class AppComponent implements OnInit {
   loadedItems: boolean;
   loadingMessage: string;
   itemIsEmpty: boolean;
+  existSelectedTags: boolean;
 
   private accounts$: Observable<Account[]>;
   private currentAccount$: Observable<Account>;
@@ -53,9 +54,11 @@ export class AppComponent implements OnInit {
     this.itemsTitle = this.DEFAULT_TITLE;
     this.accountsIsNotRegisted = false;
     this.itemIsEmpty = false;
+    this.existSelectedTags = false;
     this.onClickedAccount = this.onClickedAccount.bind(this);
     this.onClickedTag = this.onClickedTag.bind(this);
     this.onClickedInitializeAccount = this.onClickedInitializeAccount.bind(this);
+    this.onClickedReset = this.onClickedReset.bind(this);
     this.setObserver();
   }
 
@@ -98,7 +101,8 @@ export class AppComponent implements OnInit {
       this.sortedTags = this.appUtil.sortNavTags(navTags);
     });
     this.selectedTags$.subscribe(tags => {
-      this.itemsTitle = tags && 0 < tags.length ? tags.join(' / ') : this.DEFAULT_TITLE;
+      this.existSelectedTags = tags && 0 < tags.length;
+      this.itemsTitle = this.existSelectedTags ? tags.join(' / ') : this.DEFAULT_TITLE;
       this.itemsService.filterItemsByTags(tags);
     });
     this.loading$.subscribe(loading => this.loadedItems = !loading);
@@ -121,6 +125,10 @@ export class AppComponent implements OnInit {
     } else {
       this.tagsService.removeSelectedTag(navTag.tag);
     }
+  }
+
+  onClickedReset(): void {
+    this.tagsService.setSelectedTags([]);
   }
 
   async onClickedInitializeAccount(...args: any[]): Promise<void> {

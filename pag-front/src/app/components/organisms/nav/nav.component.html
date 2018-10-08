@@ -11,6 +11,16 @@
     <div class="nav-contents-wrapper">
       <pag-input-txt placeholder="tagを検索" defaultValue="" [resetToken]="inputResetToken" (input)="onChangeInput($event)"></pag-input-txt>
     </div>
+    <div
+      class="nav-contents-wrapper reset-btn"
+      [ngClass]="{show: isShowResetBtn}"
+      (click)="resetBtnClickEvent ? resetBtnClickEvent() : undefined"
+    >
+      <pag-txt
+        text="Reset"
+        size="xs" weight="medium" color="primary"
+      ></pag-txt>
+    </div>
     <div class="tag-list nav-contents-wrapper">
       <div *ngFor="let navTag of filteredNavTags" class="nav-tag">
         <pag-nav-tag
