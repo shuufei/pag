@@ -26,6 +26,21 @@ export class AccountsService {
     this.accountsStore.setState(state => ({ ...state, accounts, currentAccount }));
   }
 
+  addAccount(account: Account): void {
+    this.accountsStore.setState(state => ({ ...state, accounts: [ ...state.accounts, account ] }));
+  }
+
+  removeAccount(account: Account): void {
+    this.accountsStore.setState(state => {
+      const accounts = [ ...state.accounts ];
+      const index = accounts.findIndex(v => (v.id === account.id && v.name === v.name));
+      if (0 <= index) {
+        accounts.splice(index, 1);
+      }
+      return { ...state, accounts };
+    });
+  }
+
   // for debug
   setInitialAccounts(): void {
     const accounts: Account[] = this.getAccounts();

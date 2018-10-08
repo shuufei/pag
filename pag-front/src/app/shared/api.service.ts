@@ -13,15 +13,35 @@ export class ApiService {
   // mock
   getAccount(accountId: string): Promise<GetAccountResponse> {
     return new Promise((resolve, reject) => {
-      const account: GetAccountResponse = {
+      const account1 = {
+        id: 'yyyy',
+        accountId: accountId,
+        name: 'muza',
+        img: 'https://pbs.twimg.com/profile_images/659710386069897216/C5GLKeIW_bigger.png'
+      };
+      const account2 = {
+        id: 'vvvv',
+        accountId: accountId,
+        name: 'nyanko',
+        img: 'https://pbs.twimg.com/profile_images/956867108020744193/wbXnVRKn_bigger.jpg'
+      };
+      const account3 = {
+        id: 'wwww',
+        accountId: accountId,
+        name: 'ota',
+        img: 'https://pbs.twimg.com/profile_images/1031892122251620352/JIR_mpEY_bigger.jpg'
+      };
+      const account4: GetAccountResponse = {
         id: 'xxxxxx',
         accountId: accountId,
         name: 'fei',
         img: 'https://pbs.twimg.com/profile_images/821745021753823233/L_dTDu3C_normal.jpg'
       };
+      const accounts = [ account1, account2, account3, account4 ]
+      const n = Math.round(Math.random() * 3);
       setTimeout(() => {
         if (accountId) {
-          resolve(account);
+          resolve(accounts[n]);
         } else {
           reject();
         }

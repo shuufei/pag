@@ -62,7 +62,7 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.accountsService.setInitialAccounts(); // for debug
+    // this.accountsService.setInitialAccounts(); // for debug
     this.accounts$.subscribe(accounts => {
       if (!(accounts && 0 < accounts.length)) { this.accountsIsNotRegisted = true; }
       this.accountListCard = {
@@ -138,12 +138,12 @@ export class AppComponent implements OnInit {
     this.isOpenAccountEditDialog = false;
   }
 
-  onAddAccount(): void {
-    // this.closeAccountEditDialog();
+  onAddAccount(account: Account): void {
+    this.accountsService.addAccount(account);
   }
 
-  onRemoveAccount(): void {
-    // this.closeAccountEditDialog();
+  onRemoveAccount(account: Account): void {
+    this.accountsService.removeAccount(account);
   }
 
   async onClickedInitializeAccount(...args: any[]): Promise<void> {

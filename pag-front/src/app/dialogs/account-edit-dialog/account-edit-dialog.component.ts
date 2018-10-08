@@ -19,7 +19,7 @@ export class AccountEditDialogComponent implements OnInit {
     top: 'top',
     removeConfirm: 'removeConfirm',
     add: 'add',
-    accountSearching: 'accounSearching',
+    loading: 'loading',
     addConfirm: 'addConfirm'
   };
   readonly CONTENTS_WIDTH = '275px';
@@ -28,14 +28,16 @@ export class AccountEditDialogComponent implements OnInit {
   resultMessage: string;
   accountOfRemoveConfirm: Account;
   accountId: string;
-  newAccount: Account;
+  newAccount: GetAccountResponse;
   errorOfAddAccount: boolean;
+  loadingMessage: string;
 
   constructor(
     private api: ApiService
   ) {
     this.step = this.STEP.top;
     this.errorOfAddAccount = false;
+    this.loadingMessage = '読み込み中...';
     this.toAddStep = this.toAddStep.bind(this);
     this.addAccount = this.addAccount.bind(this);
     this.removeAccount = this.removeAccount.bind(this);
@@ -68,17 +70,33 @@ export class AccountEditDialogComponent implements OnInit {
   }
 
   addAccount(): void {
-    if (this.addAccountEvent) { this.addAccountEvent(); }
+    if (this.addAccountEvent) {
+      this.addAccountEvent({
+        id: this.newAccount.id,
+        name: this.newAccount.accountId,
+        imgUrl: this.newAccount.img
+      });
+    }
+    const accountName = this.newAccount.accountId;
     this.initialize();
-    this.resultMessage = '追加しました。';
-    this.toTopStep();
+    this.loadingMessage = 'アカウント追加中...';
+    this.step = this.STEP.loading;
+    this.resultMessage = `${accountName}を追加しました。`;
+    setTimeout(() => {
+      this.toTopStep();
+    }, 1500);
   }
 
   removeAccount(): void {
-    if (this.removeAccountEvent) { this.removeAccountEvent(); }
+    if (this.removeAccountEvent) { this.removeAccountEvent(this.accountOfRemoveConfirm); }
+    const accountName = this.accountOfRemoveConfirm.name;
     this.initialize();
-    this.resultMessage = '削除しました。';
-    this.toTopStep();
+    this.loadingMessage = 'アカウント削除中...';
+    this.step = this.STEP.loading;
+    this.resultMessage = `${accountName}を削除しました。`;
+    setTimeout(() => {
+      this.toTopStep();
+    }, 1500);
   }
 
   closeDialog(): void {
@@ -87,7 +105,8 @@ export class AccountEditDialogComponent implements OnInit {
   }
 
   async searchAccount(): Promise<void> {
-    this.step = this.STEP.accountSearching;
+    this.loadingMessage = 'Tweitterアカウントを検索中...';
+    this.step = this.STEP.loading;
     try {
       this.newAccount = await this.api.getAccount(this.accountId);
       this.step = this.STEP.addConfirm;

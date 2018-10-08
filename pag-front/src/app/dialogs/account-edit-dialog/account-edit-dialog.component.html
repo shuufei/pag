@@ -105,9 +105,9 @@
       </div>
     </div>
 
-    <div class="step-content center-position" *ngIf="step === STEP.accountSearching">
+    <div class="step-content center-position" *ngIf="step === STEP.loading">
       <pag-txt
-        text="Twitterアカウント検索中..."
+        [text]="loadingMessage"
         size="m" weight="regular" color="black"
       ></pag-txt>
       <div class="loading-wrapper">
