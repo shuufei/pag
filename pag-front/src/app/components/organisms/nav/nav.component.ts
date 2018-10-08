@@ -14,7 +14,7 @@ export class NavComponent implements OnInit, OnChanges {
   @Input() navTags: NavTag[];
   @Input() navTagClickEvent: Function;
   @Input() accountClickEvent: Function;
-  @Input() addAccountClickEvent: Function;
+  @Input() editAccountClickEvent: Function;
   @Input() isShowResetBtn: boolean;
   @Input() resetBtnClickEvent: Function;
 

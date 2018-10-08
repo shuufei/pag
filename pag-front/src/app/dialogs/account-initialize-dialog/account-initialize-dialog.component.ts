@@ -6,7 +6,7 @@ import { Account } from 'src/app/components/molecules/account-name/account-name.
 @Component({
   selector: 'pag-account-initialize-dialog',
   templateUrl: './account-initialize-dialog.component.html',
-  styleUrls: ['./account-initialize-dialog.component.scss']
+  styleUrls: ['./account-initialize-dialog.component.scss', '../dialog-styles.scss']
 })
 export class AccountInitializeDialogComponent implements OnInit {
   @Input() open: boolean;

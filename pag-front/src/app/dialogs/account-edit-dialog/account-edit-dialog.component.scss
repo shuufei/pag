@@ -1,0 +1,37 @@
+.dialog-title {
+  text-align: center;
+}
+
+.step-body {
+  width: 225px;
+  margin: 0 auto;
+}
+
+// top step styles
+.action-result-message {
+  text-align: center;
+}
+.remove-btn {
+  cursor: pointer;
+}
+.add-btn {
+  width: 100%;
+  margin-top: 24px;
+}
+
+// remove confirm step styles
+.remove-account {
+  margin-top: 24px;
+}
+
+// add step styles
+.add-cancel-btn {
+  margin-top: 24px;
+  pag-txt {
+    cursor: pointer;
+  }
+}
+.add-error-message {
+  text-align: left;
+  margin-bottom: 12px;
+}

@@ -6,6 +6,7 @@
   [navTagClickEvent]="onClickedTag"
   [isShowResetBtn]="existSelectedTags"
   [resetBtnClickEvent]="onClickedReset"
+  [editAccountClickEvent]="openAccountEditDialog"
 ></pag-nav>
 <div id="root-container">
   <div class="items-wrapper">
@@ -30,6 +31,15 @@
   [open]="accountsIsNotRegisted"
   [setAccountEvent]="onClickedInitializeAccount"
 ></pag-account-initialize-dialog>
+
+<pag-account-edit-dialog
+  [open]="isOpenAccountEditDialog"
+  [accounts]="accountListCard.accounts"
+  [removeAccountEvent]="onRemoveAccount"
+  [addAccountEvent]="onAddAccount"
+  (close)="closeAccountEditDialog()"
+></pag-account-edit-dialog>
+
 <pag-loading-dialog
   [open]="loading$ | async"
   [message]="loadingMessage"

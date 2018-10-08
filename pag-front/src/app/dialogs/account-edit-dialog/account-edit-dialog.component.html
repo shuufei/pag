@@ -1,0 +1,155 @@
+<pag-dialog [open]="open" (close)="close.emit()">
+  <div class="dialog-content center-position">
+
+    <div class="step-content" *ngIf="step === STEP.top">
+      <div class="dialog-title">
+        <pag-txt
+          text="アカウント編集"
+          size="xl" weight="medium" color="black"
+        ></pag-txt>
+      </div>
+      <div class="step-body">
+        <div class="action-result-message">
+          <pag-txt
+            [text]="resultMessage"
+            size="s" weight="regular" color="black"
+            class="remove-btn"
+          ></pag-txt>
+        </div>
+        <div class="account-list">
+          <ng-container *ngFor="let account of accounts">
+            <div class="account">
+              <pag-account-name
+                [id]="account.id" [name]="account.name" [imgUrl]="account.imgUrl"
+              >
+              </pag-account-name>
+              <pag-txt
+                text="削除"
+                size="m" weight="medium" color="red"
+                class="remove-btn"
+                (click)="toRemoveStep(account)"
+              ></pag-txt>
+            </div>
+          </ng-container>
+        </div>
+        <div class="add-btn">
+          <pag-button
+            label="追加" [active]="true" size="s" [clickEvent]="toAddStep"
+          ></pag-button>
+        </div>
+      </div>
+    </div>
+
+    <div class="step-content center-position" *ngIf="step === STEP.removeConfirm">
+      <pag-txt
+        text="こちらのアカウントを削除してもよろしいですか？"
+      ></pag-txt>
+      <div class="step-body">
+        <div class="remove-account">
+          <pag-account-name
+            [id]="accountOfRemoveConfirm.id" [name]="accountOfRemoveConfirm.name" [imgUrl]="accountOfRemoveConfirm.imgUrl"
+          >
+          </pag-account-name>
+        </div>
+        <div class="confirm-button-block">
+          <pag-button label="はい" [active]="true" size="s" type="block" role="danger" [clickEvent]="removeAccount">
+          </pag-button>
+          <div class="confirm-no-btn">
+            <pag-txt
+              text="いいえ"
+              size="m" weight="medium" color="red"
+              (click)="toInitialTopStep()"
+            ></pag-txt>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="step-content center-position" *ngIf="step === STEP.add">
+      <div class="add-error-message" *ngIf="errorOfAddAccount">
+        <pag-txt
+          text="アカウントを見つけることができませんでした。"
+          size="m" weight="medium" color="red"
+        ></pag-txt>
+        <pag-txt
+          text="以下の点をご確認の上、再度ご入力ください。"
+          size="m" weight="medium" color="red"
+        ></pag-txt>
+        <div class="error-check-point">
+          <pag-txt
+            text="・指定したアカウントが存在すること"
+            size="s" weight="regular" color="black"
+          ></pag-txt>
+          <pag-txt
+            text="・指定したアカウントが鍵アカウントではないこと"
+            size="s" weight="regular" color="black"
+          ></pag-txt>
+        </div>
+      </div>
+      <pag-txt
+        text="TwitterのアカウントIDを入力してください。"
+      ></pag-txt>
+      <div class="account-id-form">
+        <pag-input-txt
+          placeholder="@account_id"
+          (input)="onChangeAccountId($event?.target?.value)"
+        ></pag-input-txt>
+        <pag-button label="確認" size="s" type="inline" (click)="searchAccount()"></pag-button>
+      </div>
+      <div class="add-cancel-btn">
+        <pag-txt
+          text="キャンセル"
+          size="m" weight="medium" color="primary"
+          (click)="toInitialTopStep()"
+        ></pag-txt>
+      </div>
+    </div>
+
+    <div class="step-content center-position" *ngIf="step === STEP.accountSearching">
+      <pag-txt
+        text="Twitterアカウント検索中..."
+        size="m" weight="regular" color="black"
+      ></pag-txt>
+      <div class="loading-wrapper">
+        <pag-loading borderWidth="regular"></pag-loading>
+      </div>
+    </div>
+
+    <div class="step-content center-position" *ngIf="step === STEP.addConfirm">
+      <pag-txt
+        text="こちらのアカウントでお間違えないですか？"
+      ></pag-txt>
+      <div class="step-body">
+        <div class="account">
+          <div class="account-img-wrapper">
+            <pag-account-img [url]="newAccount?.img"></pag-account-img>
+          </div>
+          <div class="account-name">
+            <pag-ellipsis-txt
+              [text]="newAccount?.name"
+              size="m" weight="regular" color="gray-01"
+              [fix]="'150px'"
+            ></pag-ellipsis-txt>
+            <pag-ellipsis-txt
+              [text]="newAccount?.accountId"
+              size="l" weight="medium" color="black"
+              [fix]="'150px'"
+            ></pag-ellipsis-txt>
+          </div>
+        </div>
+        <div class="confirm-button-block">
+          <pag-button label="はい" [active]="true" size="s" type="block" [clickEvent]="addAccount">
+          </pag-button>
+          <div class="confirm-no-btn">
+            <pag-txt
+              text="いいえ、入力し直します"
+              size="m" weight="medium" color="primary"
+              (click)="toInitialAddStep()"
+            ></pag-txt>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</pag-dialog>

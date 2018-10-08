@@ -36,6 +36,7 @@ export class AppComponent implements OnInit {
   loadingMessage: string;
   itemIsEmpty: boolean;
   existSelectedTags: boolean;
+  isOpenAccountEditDialog: boolean;
 
   private accounts$: Observable<Account[]>;
   private currentAccount$: Observable<Account>;
@@ -55,10 +56,8 @@ export class AppComponent implements OnInit {
     this.accountsIsNotRegisted = false;
     this.itemIsEmpty = false;
     this.existSelectedTags = false;
-    this.onClickedAccount = this.onClickedAccount.bind(this);
-    this.onClickedTag = this.onClickedTag.bind(this);
-    this.onClickedInitializeAccount = this.onClickedInitializeAccount.bind(this);
-    this.onClickedReset = this.onClickedReset.bind(this);
+    this.isOpenAccountEditDialog = false;
+    this.setEvent();
     this.setObserver();
   }
 
@@ -131,6 +130,22 @@ export class AppComponent implements OnInit {
     this.tagsService.setSelectedTags([]);
   }
 
+  openAccountEditDialog(): void {
+    this.isOpenAccountEditDialog = true;
+  }
+
+  closeAccountEditDialog(): void {
+    this.isOpenAccountEditDialog = false;
+  }
+
+  onAddAccount(): void {
+    // this.closeAccountEditDialog();
+  }
+
+  onRemoveAccount(): void {
+    // this.closeAccountEditDialog();
+  }
+
   async onClickedInitializeAccount(...args: any[]): Promise<void> {
     const ACCOUNT_INDEX = 0;
     if (args && args[ACCOUNT_INDEX]) {
@@ -149,5 +164,15 @@ export class AppComponent implements OnInit {
     this.selectedTags$ = this.tagsQuery.select(state => state.selectedTags);
     this.items$ = this.itemsQuery.select(state => state.filtered);
     this.loading$ = this.itemsQuery.selectLoading();
+  }
+
+  private setEvent(): void {
+    this.onClickedAccount = this.onClickedAccount.bind(this);
+    this.onClickedTag = this.onClickedTag.bind(this);
+    this.onClickedInitializeAccount = this.onClickedInitializeAccount.bind(this);
+    this.onClickedReset = this.onClickedReset.bind(this);
+    this.openAccountEditDialog = this.openAccountEditDialog.bind(this);
+    this.onAddAccount = this.onAddAccount.bind(this);
+    this.onRemoveAccount = this.onRemoveAccount.bind(this);
   }
 }

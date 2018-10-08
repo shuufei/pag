@@ -1,0 +1,60 @@
+$step-width: 400px;
+
+.step-content {
+  margin: 12px auto 0;
+  width: $step-width;
+}
+
+.account-id-form {
+  display: flex;
+  margin-top: 16px;
+  width: 100%;
+  pag-input-txt {
+    flex: 1;
+    margin-right: 16px;
+  }
+}
+
+.loading-wrapper {
+  margin-top: 16px;
+  height: 50px;
+  width: 50px;
+}
+
+.center-position {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.account {
+  display: flex;
+  align-items: center;
+  margin-top: 24px;
+  .account-name {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 12px;
+  }
+}
+.account-img-wrapper {
+  width: 48px;
+  height: 48px;
+}
+
+.confirm-button-block {
+  width: 225px;
+  margin-top: 24px;
+  .confirm-no-btn {
+    margin-top: 16px;
+    text-align: center;
+    pag-txt {
+      cursor: pointer;
+    }
+  }
+}
+
+.error-check-point {
+  margin-top: 8px;
+}
