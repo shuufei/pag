@@ -1,4 +1,7 @@
 <div [@dialog] *ngIf="open" class="dialog">
+  <ng-container *ngIf="showCloseIcon !== undefined ? showCloseIcon : true">
+    <pag-icon icon="close" (click)="close.emit()"></pag-icon>
+  </ng-container>
   <ng-content></ng-content>
 </div>
 <div *ngIf="open" class="dialog-overlay"></div>

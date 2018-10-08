@@ -13,6 +13,12 @@
   border-radius: 10px;
   box-sizing: border-box;
   z-index: 100;
+  pag-icon {
+    position: absolute;
+    top: 32px;
+    right: 40px;
+    cursor: pointer;
+  }
 }
 
 .dialog-overlay {

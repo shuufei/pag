@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { trigger, state, style, animate, transition } from '@angular/animations';
 
 @Component({
@@ -25,6 +25,8 @@ import { trigger, state, style, animate, transition } from '@angular/animations'
 })
 export class DialogComponent implements OnInit {
   @Input() open: boolean;
+  @Input() showCloseIcon: boolean;
+  @Output() close: EventEmitter<boolean> = new EventEmitter();
 
   constructor() { }
 
