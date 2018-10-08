@@ -8,6 +8,15 @@
 }
 
 // top step styles
+.account-list {
+  margin-top: 8px;
+}
+.edit-account {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 16px;
+}
 .action-result-message {
   text-align: center;
   margin-top: 8px;

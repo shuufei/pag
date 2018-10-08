@@ -33,7 +33,7 @@ export class AccountsService {
   removeAccount(account: Account): void {
     this.accountsStore.setState(state => {
       const accounts = [ ...state.accounts ];
-      const index = accounts.findIndex(v => (v.id === account.id && v.name === v.name));
+      const index = accounts.findIndex(v => (v.id === account.id && v.name === account.name));
       if (0 <= index) {
         accounts.splice(index, 1);
       }
