@@ -18,6 +18,15 @@ export class TagsService {
   add() {
   }
 
+  reset(): void {
+    this.setTags([]);
+    this.setSelectedTags([]);
+  }
+
+  setStore(navTags: NavTag[], selectedTags: string[]): void {
+    this.tagsStore.setState(state => ({ navTags, selectedTags }));
+  }
+
   setTags(navTags: NavTag[]): void {
     this.tagsStore.setState(state => ({ ...state, navTags }));
   }

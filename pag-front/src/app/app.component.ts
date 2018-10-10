@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
+import { skip } from 'rxjs/operators';
 
 // service or store
 import { AppUtilService } from './app-util.service';
 import { AccountsService, AccountsQuery } from 'src/app/store/accounts/state';
-import { TagsService, TagsQuery, TagsState } from 'src/app/store/tags/state';
+import { TagsService, TagsQuery } from 'src/app/store/tags/state';
 import { ItemsQuery, ItemsService } from 'src/app/store/items/state';
 
 // interface
@@ -30,7 +31,6 @@ export class AppComponent implements OnInit {
   itemsTitle: string;
   accountListCard: AccountListCard;
   sortedTags: NavTag[];
-  initializedNavTags: boolean;
   accountsIsNotRegisted: boolean;
   loadedItems: boolean;
   loadingMessage: string;
@@ -51,7 +51,6 @@ export class AppComponent implements OnInit {
     private itemsService: ItemsService
   ) {
     this.sortedTags = [];
-    this.initializedNavTags = false;
     this.itemsTitle = this.DEFAULT_TITLE;
     this.accountsIsNotRegisted = false;
     this.itemIsEmpty = false;
@@ -61,50 +60,10 @@ export class AppComponent implements OnInit {
     this.setObserver();
   }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     // this.accountsService.setInitialAccounts(); // for debug
-    this.accounts$.subscribe(accounts => {
-      if (!(accounts && 0 < accounts.length)) { this.accountsIsNotRegisted = true; }
-      this.accountListCard = {
-        ...this.accountListCard,
-        accounts
-      };
-    });
-    this.currentAccount$.subscribe(account => {
-      this.initializedNavTags = false;
-      this.itemsService.setItemsByAccount(account);
-      this.accountListCard = {
-        ...this.accountListCard,
-        currentAccount: account
-      };
-    });
-    this.items$.subscribe(items => {
-      if (this.loadedItems && items && 0 === items.length) {
-        this.itemIsEmpty = true;
-        return;
-      }
-      if (this.initializedNavTags) {
-        const existNavTags: NavTag[] = this.appUtil.generateNavTagsFromItems(items);
-        const navTags: NavTag[] = this.appUtil.mergeMasterNavTag(existNavTags);
-        this.tagsService.setTags(navTags);
-      } else {
-        const navTags: NavTag[] = this.appUtil.generateNavTagsFromItems(items);
-        this.tagsService.setTags(navTags);
-        if (0 < items.length) { this.initializedNavTags = true; }
-      }
-    });
-    this.tags$.subscribe(async(navTags) => {
-      if (this.initializedNavTags) {
-        await this.appUtil.sleepByPromise(200);
-      }
-      this.sortedTags = this.appUtil.sortNavTags(navTags);
-    });
-    this.selectedTags$.subscribe(tags => {
-      this.existSelectedTags = tags && 0 < tags.length;
-      this.itemsTitle = this.existSelectedTags ? tags.join(' / ') : this.DEFAULT_TITLE;
-      this.itemsService.filterItemsByTags(tags);
-    });
-    this.loading$.subscribe(loading => this.loadedItems = !loading);
+    await this.setPreviousData();
+    this.setSubscription();
   }
 
   onClickedAccount(...args: any[]): void {
@@ -174,5 +133,70 @@ export class AppComponent implements OnInit {
     this.openAccountEditDialog = this.openAccountEditDialog.bind(this);
     this.onAddAccount = this.onAddAccount.bind(this);
     this.onRemoveAccount = this.onRemoveAccount.bind(this);
+  }
+
+  private async setPreviousData(): Promise<void> {
+    const { accounts, currentAccount } = this.accountsQuery.getSnapshot();
+    const { navTags, selectedTags } = this.tagsQuery.getSnapshot();
+    if (0 < accounts.length && currentAccount) {
+      this.accountListCard = { accounts, currentAccount };
+      let items: Item[];
+      let filtered: Item[];
+      this.existSelectedTags = selectedTags && 0 < selectedTags.length;
+      if (this.existSelectedTags) { // 選択ずみのtagがある場合は、filterをかける
+        items = await this.itemsService.getItemsByAccount(currentAccount);
+        filtered = this.itemsService.getFilteredItemsByMasterAndTags(items, selectedTags);
+        this.itemsTitle = selectedTags.join(' / ');
+      } else {
+        items = await this.itemsService.getItemsByAccount(currentAccount);
+        filtered = items;
+        this.itemsTitle = this.DEFAULT_TITLE;
+      }
+      this.itemsService.setStore(items, filtered);
+      const navTagsOfItems: NavTag[] = this.appUtil.generateNavTagsFromItems(filtered);
+      const mergedNavTags: NavTag[] = this.appUtil.mergeMasterNavTag(navTagsOfItems);
+      this.sortedTags = 0 < navTags.length ? this.appUtil.sortNavTags(mergedNavTags) : this.appUtil.sortNavTags(navTagsOfItems);
+      this.tagsService.setTags(this.sortedTags);
+    }
+  }
+
+  private setSubscription(): void {
+    // 初回のデータ分は処理済みなので無視
+    this.accounts$.pipe(skip(1)).subscribe(accounts => {
+      if (!(accounts && 0 < accounts.length)) { this.accountsIsNotRegisted = true; }
+      this.accountListCard = {
+        ...this.accountListCard,
+        accounts
+      };
+    });
+    this.currentAccount$.pipe(skip(1)).subscribe(async(account) => {
+      const items: Item[] = await this.itemsService.getItemsByAccount(account);
+      const navTags: NavTag[] = this.appUtil.generateNavTagsFromItems(items);
+      this.tagsService.setStore(navTags, []);
+      this.itemsService.setStore(items, items);
+      this.accountListCard = {
+        ...this.accountListCard,
+        currentAccount: account
+      };
+    });
+    this.items$.pipe(skip(1)).subscribe(items => {
+      if (this.loadedItems && items && 0 === items.length) {
+        this.itemIsEmpty = true;
+        return;
+      }
+      const existNavTags: NavTag[] = this.appUtil.generateNavTagsFromItems(items);
+      const navTags: NavTag[] = this.appUtil.mergeMasterNavTag(existNavTags);
+      this.tagsService.setTags(navTags);
+    });
+    this.tags$.pipe(skip(1)).subscribe(async(navTags) => {
+      await this.appUtil.sleepByPromise(200);
+      this.sortedTags = this.appUtil.sortNavTags(navTags);
+    });
+    this.selectedTags$.pipe(skip(1)).subscribe(tags => {
+      this.existSelectedTags = tags && 0 < tags.length;
+      this.itemsTitle = this.existSelectedTags ? tags.join(' / ') : this.DEFAULT_TITLE;
+      this.itemsService.filterItemsByTags(tags);
+    });
+    this.loading$.pipe(skip(1)).subscribe(loading => this.loadedItems = !loading);
   }
 }

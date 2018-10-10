@@ -11,7 +11,7 @@ if (environment.production) {
 }
 
 persistState({
-  include: ['accounts']
+  include: ['accounts', 'tags']
 });
 
 platformBrowserDynamic().bootstrapModule(AppModule)
