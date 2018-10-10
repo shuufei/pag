@@ -56,6 +56,7 @@ export class AppComponent implements OnInit {
     this.itemIsEmpty = false;
     this.existSelectedTags = false;
     this.isOpenAccountEditDialog = false;
+    this.accountListCard = { accounts: [], currentAccount: null };
     this.setEvent();
     this.setObserver();
   }
@@ -157,13 +158,14 @@ export class AppComponent implements OnInit {
       const mergedNavTags: NavTag[] = this.appUtil.mergeMasterNavTag(navTagsOfItems);
       this.sortedTags = 0 < navTags.length ? this.appUtil.sortNavTags(mergedNavTags) : this.appUtil.sortNavTags(navTagsOfItems);
       this.tagsService.setTags(this.sortedTags);
+    } else {
+      this.accountsIsNotRegisted = true;
     }
   }
 
   private setSubscription(): void {
     // 初回のデータ分は処理済みなので無視
     this.accounts$.pipe(skip(1)).subscribe(accounts => {
-      if (!(accounts && 0 < accounts.length)) { this.accountsIsNotRegisted = true; }
       this.accountListCard = {
         ...this.accountListCard,
         accounts
@@ -184,6 +186,7 @@ export class AppComponent implements OnInit {
         this.itemIsEmpty = true;
         return;
       }
+      this.itemIsEmpty = false;
       const existNavTags: NavTag[] = this.appUtil.generateNavTagsFromItems(items);
       const navTags: NavTag[] = this.appUtil.mergeMasterNavTag(existNavTags);
       this.tagsService.setTags(navTags);
