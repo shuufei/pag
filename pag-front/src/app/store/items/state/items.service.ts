@@ -45,45 +45,10 @@ export class ItemsService {
     return items;
   }
 
-  // async setItemsByAccount(account: Account): Promise<void> {
-  //   if (!account) { return; }
-  //   this.setLoading(true);
-  //   // TODO: get items by account.
-  //   const items: Item[] = await this.api.getItems(account);
-  //   this.setLoading(false);
-  //   const filtered: Item[] = items;
-  //   this.setStore(items, filtered);
-  // }
-
   filterItemsByTags(tags: string[]): void {
     const filtered: Item[] = this.getFilteredItemsByMasterAndTags(this.itemsQuery.getSnapshot().master, tags);
     this.setFilteredItems(filtered);
   }
-
-  // getFilteredItemsByTags(tags: string[]): Item[] {
-  //   const current: Item[] = [ ...this.itemsQuery.getSnapshot().master ];
-  //   const filtered: Item[] = [];
-  //   current.forEach(item => {
-  //     const itemTags: string[] = item.tags.map((t: Label) => t.label);
-  //     let match = true;
-  //     tags.forEach(tag => {
-  //       if (!itemTags.includes(tag)) {
-  //         match = false;
-  //       }
-  //     });
-  //     if (match) {
-  //       const matchedItem: Item = item;
-  //       const newTags: Label[] = [];
-  //       matchedItem.tags.forEach((t: Label) => {
-  //         const _tag: Label = { label: t.label, active: false };
-  //         if (tags.includes(t.label)) { _tag.active = true; }
-  //         newTags.push(_tag);
-  //       });
-  //       filtered.push({ ...matchedItem, tags: newTags });
-  //     }
-  //   });
-  //   return filtered;
-  // }
 
   getFilteredItemsByMasterAndTags(master: Item[], tags: string[]): Item[] {
     const filtered: Item[] = [];
