@@ -204,19 +204,17 @@ optionsCardStories.addDecorator(withKnobs);
 optionsCardStories.addDecorator(moduleMetadata(metadata));
 optionsCardStories.add('default', () => ({
   template: `
-    <div style="width:270px;">
-      <pag-option-card
-        [title]="title"
-        [size]="size"
-      >
-        <div style="height:100px;">
-          <pag-txt text="option card text"></pag-txt>
-        </div>
-      </pag-option-card>
-    </div>
+    <pag-option-card
+      [title]="title"
+      [size]="size"
+    >
+      <div style="height:100px;">
+        <pag-txt text="option card text"></pag-txt>
+      </div>
+    </pag-option-card>
   `,
   props: {
-    title: 'Option Card',
+    title: text('Title', 'Option Card'),
     size: select('Size', {s: 's', m: 'm'}, 's')
   }
 }));
