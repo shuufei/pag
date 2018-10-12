@@ -198,3 +198,25 @@ dialogStories.add('default', () => ({
     closeEvent: function() { this.open = false; }
   }
 }));
+
+const optionsCardStories = storiesOf(`${storyCategory}/Option Card`, module);
+optionsCardStories.addDecorator(withKnobs);
+optionsCardStories.addDecorator(moduleMetadata(metadata));
+optionsCardStories.add('default', () => ({
+  template: `
+    <div style="width:270px;">
+      <pag-option-card
+        [title]="title"
+        [size]="size"
+      >
+        <div style="height:100px;">
+          <pag-txt text="option card text"></pag-txt>
+        </div>
+      </pag-option-card>
+    </div>
+  `,
+  props: {
+    title: 'Option Card',
+    size: select('Size', {s: 's', m: 'm'}, 's')
+  }
+}));

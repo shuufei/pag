@@ -1,0 +1,18 @@
+<div
+  class="option-card"
+  [ngClass]="open ? getOpenClasses() : ''"
+  (click)="toggleOpen()"
+>
+  <div class="card-head">
+    <pag-txt
+      [text]="title"
+      size="l" weight="medium" color="black"
+    ></pag-txt>
+    <pag-icon [icon]="open ? 'minus' : 'plus'"></pag-icon>
+  </div>
+  <ng-container *ngIf="open">
+    <div class="card-content">
+      <ng-content></ng-content>
+    </div>
+  </ng-container>
+</div>

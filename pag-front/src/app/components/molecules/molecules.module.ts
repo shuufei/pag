@@ -10,6 +10,7 @@ import { InputTxtComponent } from './input-txt/input-txt.component';
 import { AccountNameComponent } from './account-name/account-name.component';
 import { ButtonComponent } from './button/button.component';
 import { DialogComponent } from './dialog/dialog.component';
+import { OptionCardComponent } from './option-card/option-card.component';
 
 @NgModule({
   imports: [
@@ -24,7 +25,8 @@ import { DialogComponent } from './dialog/dialog.component';
     InputTxtComponent,
     AccountNameComponent,
     ButtonComponent,
-    DialogComponent
+    DialogComponent,
+    OptionCardComponent
   ],
   exports: [
     NavTagComponent,
@@ -32,7 +34,8 @@ import { DialogComponent } from './dialog/dialog.component';
     InputTxtComponent,
     AccountNameComponent,
     ButtonComponent,
-    DialogComponent
+    DialogComponent,
+    OptionCardComponent
   ]
 })
 export class MoleculesModule { }
