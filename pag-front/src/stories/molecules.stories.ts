@@ -218,3 +218,35 @@ optionsCardStories.add('default', () => ({
     size: select('Size', {s: 's', m: 'm'}, 's')
   }
 }));
+
+const checkboxStories = storiesOf(`${storyCategory}/Checkbox`, module);
+checkboxStories.addDecorator(withKnobs);
+checkboxStories.addDecorator(moduleMetadata(metadata));
+checkboxStories.add('default', () => ({
+  template: `
+    <pag-checkbox>
+    </pag-checkbox>
+  `,
+  props: {}
+}));
+
+const radiobuttonStories = storiesOf(`${storyCategory}/Radiobutton`, module);
+radiobuttonStories.addDecorator(withKnobs);
+radiobuttonStories.addDecorator(moduleMetadata(metadata));
+radiobuttonStories.add('default', () => ({
+  template: `
+    <pag-radiobutton
+      [items]="items"
+      [defaultItem]="defaultItem"
+      (changeItem)="onChange($event)"
+    >
+    </pag-radiobutton>
+  `,
+  props: {
+    items: [ 'hoge', 'fuga' ],
+    defaultItem: 'hoge',
+    onChange: action('Change Item')
+  }
+}));
+
+
