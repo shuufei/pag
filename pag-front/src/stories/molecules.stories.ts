@@ -224,10 +224,18 @@ checkboxStories.addDecorator(withKnobs);
 checkboxStories.addDecorator(moduleMetadata(metadata));
 checkboxStories.add('default', () => ({
   template: `
-    <pag-checkbox>
+    <pag-checkbox
+      [item]="item"
+      [checked]="checked"
+      (changeCheck)="onChange($event)"
+    >
     </pag-checkbox>
   `,
-  props: {}
+  props: {
+    item: 'hoge',
+    defaultStatus: false,
+    onChange: action('Change check')
+  }
 }));
 
 const radiobuttonStories = storiesOf(`${storyCategory}/Radiobutton`, module);

@@ -1,3 +1,8 @@
-<p>
-  checkbox works!
-</p>
+<div class="checkbox" (click)="onChangeCheck()">
+  <pag-icon [icon]="checked ? checkedIcon : nocheckedIcon"></pag-icon>
+  <pag-txt
+    [text]="item"
+    size="m" weight="regular" color="black"
+    [options]="[ 'inline-block' ]"
+  ></pag-txt>
+</div>
