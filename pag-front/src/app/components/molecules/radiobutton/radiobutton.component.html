@@ -2,6 +2,7 @@
   <form [formGroup]="form" (change)="onChangeItem()">
     <div *ngFor="let item of radioBtnItems" class="radiobtn-item">
       <input [id]="item.id" type="radio" formControlName="item" [value]="item.text">
+      <pag-icon [icon]="item.icon"></pag-icon>
       <label [for]='item.id' class="radiobtn-label">
         <pag-txt
           [text]="item.text"

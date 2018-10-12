@@ -2,6 +2,8 @@ import { Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChange
 import { FormControl, FormGroup } from '@angular/forms';
 import * as uuidv4 from 'uuid/v4';
 
+import { iconNames } from 'src/app/components/atoms/icon/icon-values';
+
 @Component({
   selector: 'pag-radiobutton',
   templateUrl: './radiobutton.component.html',
@@ -26,9 +28,11 @@ export class RadiobuttonComponent implements OnInit, OnChanges {
     const items = changes.items.currentValue;
     if (items) {
       items.forEach(item => {
+        const icon = item === this.defaultItem ? iconNames.radiobtnActive : iconNames.radiobtnDeactive;
         this.radioBtnItems.push({
           text: item,
-          id: `item-${uuidv4()}`
+          id: `item-${uuidv4()}`,
+          icon
         });
       });
     }
@@ -41,6 +45,13 @@ export class RadiobuttonComponent implements OnInit, OnChanges {
   }
 
   onChangeItem(): void {
+    this.radioBtnItems.forEach((item, i) => {
+      if (item.text === this.form.value.item) {
+        this.radioBtnItems[i].icon = iconNames.radiobtnActive;
+      } else {
+        this.radioBtnItems[i].icon = iconNames.radiobtnDeactive;
+      }
+    });
     this.changeItem.emit(this.form.value.item);
   }
 
@@ -49,4 +60,5 @@ export class RadiobuttonComponent implements OnInit, OnChanges {
 interface ExpandItem {
   text: string;
   id: string;
+  icon: string;
 }
