@@ -14,6 +14,9 @@ import { AccountListCard } from 'src/app/components/organisms/account-list-card/
 import { NavTag } from 'src/app/components/molecules/nav-tag/nav-tag.component';
 import { Item } from 'src/app/components/organisms/item/item.component';
 
+// constant
+import { SortOption } from 'src/app/components/organisms/sort-option-card/sort-option-card.component';
+
 @Component({
   selector: 'pag-root',
   templateUrl: './app.component.html',
@@ -37,6 +40,7 @@ export class AppComponent implements OnInit {
   itemIsEmpty: boolean;
   existSelectedTags: boolean;
   isOpenAccountEditDialog: boolean;
+  latestSort: boolean;  // TODO: sortの状態もAkitaで管理
 
   private accounts$: Observable<Account[]>;
   private currentAccount$: Observable<Account>;
@@ -57,6 +61,7 @@ export class AppComponent implements OnInit {
     this.existSelectedTags = false;
     this.isOpenAccountEditDialog = false;
     this.accountListCard = { accounts: [], currentAccount: null };
+    this.latestSort = true;
     this.setEvent();
     this.setObserver();
   }
@@ -106,6 +111,24 @@ export class AppComponent implements OnInit {
     this.accountsService.removeAccount(account);
   }
 
+  onChangeSort(sort): void {
+    const currentItems = [ ...this.itemsQuery.getSnapshot().filtered ];
+    let items: Item[];
+    switch (sort) {
+      case SortOption.latest:
+        this.latestSort = true;
+        items = this.sortItemsByLatest(currentItems);
+        break;
+      case SortOption.oldest:
+        this.latestSort = false;
+        items = this.sortItemsByOldest(currentItems);
+        break;
+    }
+    if (items && 0 < items.length) {
+      this.itemsService.setFilteredItems(items);
+    }
+  }
+
   async onClickedInitializeAccount(...args: any[]): Promise<void> {
     const ACCOUNT_INDEX = 0;
     if (args && args[ACCOUNT_INDEX]) {
@@ -134,6 +157,7 @@ export class AppComponent implements OnInit {
     this.openAccountEditDialog = this.openAccountEditDialog.bind(this);
     this.onAddAccount = this.onAddAccount.bind(this);
     this.onRemoveAccount = this.onRemoveAccount.bind(this);
+    this.onChangeSort = this.onChangeSort.bind(this);
   }
 
   private async setPreviousData(): Promise<void> {
@@ -153,7 +177,7 @@ export class AppComponent implements OnInit {
         filtered = items;
         this.itemsTitle = this.DEFAULT_TITLE;
       }
-      this.itemsService.setStore(items, filtered);
+      this.itemsService.setStore(items, this.sortItemsByLatest(filtered));
       const navTagsOfItems: NavTag[] = this.appUtil.generateNavTagsFromItems(filtered);
       const mergedNavTags: NavTag[] = this.appUtil.mergeMasterNavTag(navTagsOfItems);
       this.sortedTags = 0 < navTags.length ? this.appUtil.sortNavTags(mergedNavTags) : this.appUtil.sortNavTags(navTagsOfItems);
@@ -175,7 +199,8 @@ export class AppComponent implements OnInit {
       const items: Item[] = await this.itemsService.getItemsByAccount(account);
       const navTags: NavTag[] = this.appUtil.generateNavTagsFromItems(items);
       this.tagsService.setStore(navTags, []);
-      this.itemsService.setStore(items, items);
+      const sorted: Item[] = this.latestSort ? this.sortItemsByLatest(items) : this.sortItemsByOldest(items);
+      this.itemsService.setStore(items, sorted);
       this.accountListCard = {
         ...this.accountListCard,
         currentAccount: account
@@ -201,5 +226,13 @@ export class AppComponent implements OnInit {
       this.itemsService.filterItemsByTags(tags);
     });
     this.loading$.pipe(skip(1)).subscribe(loading => this.loadedItems = !loading);
+  }
+
+  private sortItemsByLatest(items: Item[]): Item[] {
+    return this.appUtil.sortItemsByCreatedAt(items, false);
+  }
+
+  private sortItemsByOldest(items: Item[]): Item[] {
+    return this.appUtil.sortItemsByCreatedAt(items, true);
   }
 }

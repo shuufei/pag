@@ -72,7 +72,7 @@ itemStories.addDecorator(moduleMetadata(metadata));
 const itemTemplate = `
 <div style="padding:20px; background:#f0f0f0; width:700px;">
   <pag-item
-    [id]="id" [title]="title" [comment]="comment" [thumbUrl]="thumbUrl" [url]="url" [tags]="tags" [star]="star"
+    [id]="id" [title]="title" [comment]="comment" [thumbUrl]="thumbUrl" [url]="url" [tags]="tags" [star]="star" [createdAt]="createdAt"
     [clickEvent]="clickEvent" [starClickEvent]="starClickEvent"
   >
   </pag-item>
@@ -92,7 +92,8 @@ itemStories.add('default', () => ({
     ],
     star: boolean('Star', false),
     clickEvent: action('Clicked Item'),
-    starClickEvent: action('Clicked Star')
+    starClickEvent: action('Clicked Star'),
+    createdAt: new Date('2018-10-01T00:00:01.000Z')
   }
 }));
 itemStories.add('long body', () => ({
@@ -168,7 +169,8 @@ itemListStories.add('default', () => {
         { label: 'Development', active: false },
         { label: 'Angular', active: false }
       ],
-      star: boolean('Star', false)
+      star: boolean('Star', false),
+      createdAt: new Date('2018-10-01T00:00:01.000Z')
     },
     {
       id: '2',
@@ -179,7 +181,8 @@ itemListStories.add('default', () => {
       tags: [
         { label: 'Design System', active: false }
       ],
-      star: boolean('Star', false)
+      star: boolean('Star', false),
+      createdAt: new Date('2018-10-01T00:00:02.000Z')
     },
     {
       id: '3',
@@ -192,7 +195,8 @@ itemListStories.add('default', () => {
         { label: 'Design Tool', active: false },
         { label: 'Phase', active: false }
       ],
-      star: boolean('Star', false)
+      star: boolean('Star', false),
+      createdAt: new Date('2018-10-01T00:00:03.000Z')
     }
   ];
   return {

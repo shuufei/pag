@@ -51,7 +51,7 @@ export class ApiService {
 
   // mock
   getItems(account: Account): Promise<Item[]> {
-    const items = [
+    const items: Item[] = [
       {
         id: '1',
         title: 'Angularの状態管理設計',
@@ -62,7 +62,8 @@ export class ApiService {
           { label: 'Development', active: false },
           { label: 'Angular', active: false }
         ],
-        star: false
+        star: false,
+        createdAt: new Date('2018-10-01T00:00:01.000Z')
       },
       {
         id: '2',
@@ -74,7 +75,8 @@ export class ApiService {
           { label: 'Design System', active: false },
           { label: 'Design', active: false }
         ],
-        star: false
+        star: false,
+        createdAt: new Date('2018-10-01T00:00:02.000Z')
       },
       {
         id: '3',
@@ -87,7 +89,8 @@ export class ApiService {
           { label: 'Design Tool', active: false },
           { label: 'Phase', active: false }
         ],
-        star: false
+        star: false,
+        createdAt: new Date('2018-10-01T00:00:03.000Z')
       },
       {
         id: '4',
@@ -99,7 +102,8 @@ export class ApiService {
           { label: 'Design', active: false },
           { label: 'Angular', active: false }
         ],
-        star: false
+        star: false,
+        createdAt: new Date('2018-10-01T00:00:04.000Z')
       },
       {
         id: '1',
@@ -111,7 +115,8 @@ export class ApiService {
           { label: 'Development', active: false },
           { label: 'Angular', active: false }
         ],
-        star: false
+        star: false,
+        createdAt: new Date('2018-10-01T00:00:05.000Z')
       },
       {
         id: '2',
@@ -123,7 +128,8 @@ export class ApiService {
           { label: 'Design System', active: false },
           { label: 'Design', active: false }
         ],
-        star: false
+        star: false,
+        createdAt: new Date('2018-10-01T00:00:06.000Z')
       },
       {
         id: '3',
@@ -136,7 +142,8 @@ export class ApiService {
           { label: 'Design Tool', active: false },
           { label: 'Phase', active: false }
         ],
-        star: false
+        star: false,
+        createdAt: new Date('2018-10-01T00:00:07.000Z')
       },
       {
         id: '4',
@@ -148,7 +155,8 @@ export class ApiService {
           { label: 'Design', active: false },
           { label: 'Angular', active: false }
         ],
-        star: false
+        star: false,
+        createdAt: new Date('2018-10-01T00:00:08.000Z')
       },
       {
         id: '1',
@@ -160,7 +168,8 @@ export class ApiService {
           { label: 'Development', active: false },
           { label: 'Angular', active: false }
         ],
-        star: false
+        star: false,
+        createdAt: new Date('2018-10-01T00:00:09.000Z')
       },
       {
         id: '2',
@@ -172,7 +181,8 @@ export class ApiService {
           { label: 'Design System', active: false },
           { label: 'Design', active: false }
         ],
-        star: false
+        star: false,
+        createdAt: new Date('2018-10-01T00:00:10.000Z')
       },
       {
         id: '3',
@@ -185,7 +195,8 @@ export class ApiService {
           { label: 'Design Tool', active: false },
           { label: 'Phase', active: false }
         ],
-        star: false
+        star: false,
+        createdAt: new Date('2018-10-01T00:00:11.000Z')
       },
       {
         id: '4',
@@ -197,7 +208,8 @@ export class ApiService {
           { label: 'Design', active: false },
           { label: 'Angular', active: false }
         ],
-        star: false
+        star: false,
+        createdAt: new Date('2018-10-01T00:00:12.000Z')
       }
     ];
 

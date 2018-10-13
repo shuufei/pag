@@ -8,9 +8,16 @@ import { Component, OnInit, Input } from '@angular/core';
 export class SortOptionCardComponent implements OnInit {
   @Input() changeSortEvent: Function;
 
+  option = SortOption;
+
   constructor() { }
 
   ngOnInit() {
   }
 
 }
+
+export const SortOption = {
+  latest: 'Latest',
+  oldest: 'Oldest'
+};

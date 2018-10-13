@@ -7,8 +7,8 @@
     ></pag-checkbox>
     -->
     <pag-radiobutton
-      [items]="['Latest', 'Oldest']"
-      defaultItem="Latest"
+      [items]="[option.latest, option.oldest]"
+      [defaultItem]="option.latest"
       (changeItem)="changeSortEvent ? changeSortEvent($event) : undefined"
     ></pag-radiobutton>
   </div>

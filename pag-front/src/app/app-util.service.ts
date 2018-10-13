@@ -86,6 +86,16 @@ export class AppUtilService {
     return newNavTags;
   }
 
+  sortItemsByCreatedAt(items: Item[], asc: boolean): Item[] {
+    const sortedItems = [ ...items ];
+    sortedItems.sort((item1, item2) => {
+      if (item1.createdAt.valueOf() < item2.createdAt.valueOf()) { return asc ? 1 : -1; }
+      if (item1.createdAt.valueOf() > item2.createdAt.valueOf()) { return asc ? -1 : 1; }
+      return 0;
+    });
+    return sortedItems;
+  }
+
   sleepByPromise(ms: number): Promise<void> {
     return new Promise((resolve, reject) => {
       setTimeout(() => {

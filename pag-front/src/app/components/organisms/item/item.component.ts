@@ -18,6 +18,7 @@ export class ItemComponent implements OnInit {
   @Input() star: boolean;
   @Input() clickEvent: Function;
   @Input() starClickEvent: Function;
+  @Input() createdAt: Date;
 
   starIcon: string;
 
@@ -60,7 +61,8 @@ export class ItemComponent implements OnInit {
       url: this.url,
       thumbUrl: this.thumbUrl,
       tags: this.tags,
-      star: this.star
+      star: this.star,
+      createdAt: this.createdAt
     };
   }
 
@@ -74,4 +76,5 @@ export interface Item {
   thumbUrl: string;
   tags: Label[];
   star: boolean;
+  createdAt: Date;
 }
