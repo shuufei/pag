@@ -1,0 +1,15 @@
+<pag-option-card title="Sort Option" size="xs">
+  <div class="card-content">
+    <!-- ユーザー登録しないと実現できない
+    <pag-checkbox
+      item="お気に入り"
+      [checked]="false"
+    ></pag-checkbox>
+    -->
+    <pag-radiobutton
+      [items]="['Latest', 'Oldest']"
+      defaultItem="Latest"
+      (changeItem)="changeSortEvent ? changeSortEvent($event) : undefined"
+    ></pag-radiobutton>
+  </div>
+</pag-option-card>

@@ -286,3 +286,18 @@ loadingDialogStories.add('input message', () => ({
     message: text('Message', '[message指定] 読み込み中...')
   }
 }));
+
+const sortOptionCardStories = storiesOf(`${storyCategory}/Sort Option Card`, module);
+sortOptionCardStories.addDecorator(withKnobs);
+sortOptionCardStories.addDecorator(moduleMetadata(metadata));
+sortOptionCardStories.add('default', () => ({
+  template: `
+    <pag-sort-option-card
+      [changeSortEvent]="changeSortEvent"
+    >
+    </pag-sort-option-card>
+  `,
+  props: {
+    changeSortEvent: action('Chagne sort option')
+  }
+}));
