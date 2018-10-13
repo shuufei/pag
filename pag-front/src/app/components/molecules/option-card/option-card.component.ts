@@ -36,4 +36,4 @@ export class OptionCardComponent implements OnInit {
 
 }
 
-type OptionCardSize = 'xs' | 's' | 'm';
+type OptionCardSize = 'xs' | 's' | 'm' | 'l';

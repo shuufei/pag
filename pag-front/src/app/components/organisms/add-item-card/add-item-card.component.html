@@ -1,0 +1,38 @@
+<pag-option-card title="Add Item" [size]="enable === undefined || enable === true ? 'm' : 'l'">
+    <div class="card-content">
+      <ng-container *ngIf="enable !== undefined ? !enable : false">
+        <pag-txt
+          text="この機能は現在開発中です。お手数ですがTwitterから追加してください。"
+          size="xs" weight="medium" color="black"
+        ></pag-txt>
+        <div class="how-to-add">
+          <pag-txt
+            text="Twitterを使ったツイート方法"
+            size="s" weight="medium" color="primary"
+            (click)="openHowToPage()"
+          ></pag-txt>
+        </div>
+      </ng-container>
+      <div class="input-wrapper" style="margin-top:16px;">
+        <pag-input-txt
+          placeholder="urlを入力してください"
+          (input)="onChangeUrl($event?.target?.value)"
+        ></pag-input-txt>
+      </div>
+      <div class="input-wrapper">
+        <pag-input-txt
+          placeholder="tagを入力してください"
+          (input)="onChangeTag($event?.target?.value)"
+        ></pag-input-txt>
+      </div>
+      <div class="btn-wrapper">
+        <pag-button
+          label="追加"
+          [active]="url && enable ? true : false"
+          size="s"
+          role="info"
+          [clickEvent]="addItem"
+        ></pag-button>
+      </div>
+    </div>
+  </pag-option-card>

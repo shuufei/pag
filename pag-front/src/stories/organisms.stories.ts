@@ -301,3 +301,20 @@ sortOptionCardStories.add('default', () => ({
     changeSortEvent: action('Chagne sort option')
   }
 }));
+
+const addItemCardStories = storiesOf(`${storyCategory}/Add Item Card`, module);
+addItemCardStories.addDecorator(withKnobs);
+addItemCardStories.addDecorator(moduleMetadata(metadata));
+addItemCardStories.add('default', () => ({
+  template: `
+    <pag-add-item-card
+      [addItemEvent]="addItemEvent"
+      [enable]="enable"
+    >
+    </pag-add-item-card>
+  `,
+  props: {
+    addItemEvent: action('Add Item'),
+    enable: boolean('Enable', true)
+  }
+}));

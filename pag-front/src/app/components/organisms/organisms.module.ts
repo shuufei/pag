@@ -10,6 +10,7 @@ import { NavComponent } from './nav/nav.component';
 import { HeaderComponent } from './header/header.component';
 import { LoadingDialogComponent } from './loading-dialog/loading-dialog.component';
 import { SortOptionCardComponent } from './sort-option-card/sort-option-card.component';
+import { AddItemCardComponent } from './add-item-card/add-item-card.component';
 
 @NgModule({
   imports: [
@@ -24,7 +25,8 @@ import { SortOptionCardComponent } from './sort-option-card/sort-option-card.com
     NavComponent,
     HeaderComponent,
     LoadingDialogComponent,
-    SortOptionCardComponent
+    SortOptionCardComponent,
+    AddItemCardComponent
   ],
   exports: [
     AccountListCardComponent,
@@ -33,7 +35,8 @@ import { SortOptionCardComponent } from './sort-option-card/sort-option-card.com
     NavComponent,
     HeaderComponent,
     LoadingDialogComponent,
-    SortOptionCardComponent
+    SortOptionCardComponent,
+    AddItemCardComponent
   ]
 })
 export class OrganismsModule { }
