@@ -228,7 +228,9 @@ export class AppComponent implements OnInit {
     this.selectedTags$.pipe(skip(1)).subscribe(tags => {
       this.existSelectedTags = tags && 0 < tags.length;
       this.itemsTitle = this.existSelectedTags ? tags.join(' / ') : this.DEFAULT_TITLE;
-      this.itemsService.filterItemsByTags(tags);
+      const filtered: Item[] = this.itemsService.filterItemsByTags(tags);
+      const sorted: Item[] = this.latestSort ? this.sortItemsByLatest(filtered) : this.sortItemsByOldest(filtered);
+      this.itemsService.setFilteredItems(sorted);
     });
     this.loading$.pipe(skip(1)).subscribe(loading => this.loadedItems = !loading);
   }

@@ -45,9 +45,9 @@ export class ItemsService {
     return items;
   }
 
-  filterItemsByTags(tags: string[]): void {
+  filterItemsByTags(tags: string[]): Item[] {
     const filtered: Item[] = this.getFilteredItemsByMasterAndTags(this.itemsQuery.getSnapshot().master, tags);
-    this.setFilteredItems(filtered);
+    return filtered;
   }
 
   getFilteredItemsByMasterAndTags(master: Item[], tags: string[]): Item[] {
