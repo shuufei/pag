@@ -18,8 +18,9 @@ export class OptionCardComponent implements OnInit {
   ngOnInit() {
   }
 
-  toggleOpen(): void {
+  toggleOpen(event): void {
     this.open = !this.open;
+    event.stopPropagation();
   }
 
   getOpenClasses(): string[] {
@@ -29,6 +30,10 @@ export class OptionCardComponent implements OnInit {
     return classes;
   }
 
+  stopEvent(event): void {
+    event.stopPropagation();
+  }
+
 }
 
-type OptionCardSize = 's' | 'm';
+type OptionCardSize = 'xs' | 's' | 'm';

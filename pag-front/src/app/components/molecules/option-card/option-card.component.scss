@@ -11,6 +11,8 @@
   transition: all 200ms ease-out;
   overflow: hidden;
   &.open {
+    cursor: unset;
+    &.xs { height: 100px; }
     &.s { height: 135px; }
     &.m { height: 200px; }
   }
@@ -19,6 +21,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  cursor: pointer;
 }
 
 .card-content {
