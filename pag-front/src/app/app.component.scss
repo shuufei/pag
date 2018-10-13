@@ -6,6 +6,8 @@ $nav-width: 271px;
 $z-index-header: 50;
 $z-index-nav: 40;
 
+$option-card-width: 269px;
+
 #root-container {
   background: $primary-lite;
   min-height: 100vh;
@@ -13,11 +15,24 @@ $z-index-nav: 40;
   box-sizing: border-box;
   padding-top: $header-height;
   padding-left: $nav-width;
+  display: flex;
 }
 .items-wrapper { 
   padding: 28px 40px;
-  width: 100%;
+  flex: 1;
+  max-width: 800px;
   box-sizing: border-box;
+}
+.option-wrapper {
+  width: $option-card-width;
+  padding: 28px 40px 28px 8px;
+  .fixed-options {
+    position: fixed;
+  }
+  .option-card-wrapper {
+    margin-top: 16px;
+  }
+
 }
 .items-title {
   font-family: $font-family;
