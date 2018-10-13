@@ -102,6 +102,7 @@ export class AccountEditDialogComponent implements OnInit {
   closeDialog(): void {
     this.initialize();
     this.close.emit();
+    this.step = this.STEP.top;
   }
 
   async searchAccount(): Promise<void> {
