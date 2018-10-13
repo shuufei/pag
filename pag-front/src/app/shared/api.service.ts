@@ -57,7 +57,7 @@ export class ApiService {
         title: 'Angularの状態管理設計',
         comment: 'RxJSやAkitaなどの活用法',
         thumbUrl: 'https://cdn.qiita.com/assets/qiita-fb-2887e7b4aad86fd8c25cea84846f2236.png',
-        url: 'https://cdn.qiita.com/assets/qiita-fb-2887e7b4aad86fd8c25cea84846f2236.png',
+        url: 'https://qiita.com/',
         tags: [
           { label: 'Development', active: false },
           { label: 'Angular', active: false }
@@ -70,7 +70,7 @@ export class ApiService {
         title: 'Design Sysmte Management',
         comment: 'Design System管理法',
         thumbUrl: 'https://cdn-static-1.medium.com/_/fp/icons/monogram-mask.KPLCSFEZviQN0jQ7veN2RQ.svg',
-        url: 'https://cdn.qiita.com/assets/qiita-fb-2887e7b4aad86fd8c25cea84846f2236.png',
+        url: 'https://medium.com/',
         tags: [
           { label: 'Design System', active: false },
           { label: 'Design', active: false }
@@ -83,7 +83,7 @@ export class ApiService {
         title: 'Design Ecosystem In Lagos',
         comment: 'Design Ecosystem by Phase',
         thumbUrl: 'https://phase.com/wp-content/uploads/2018/08/lagos_featured-1.png',
-        url: 'https://cdn.qiita.com/assets/qiita-fb-2887e7b4aad86fd8c25cea84846f2236.png',
+        url: 'https://phase.com',
         tags: [
           { label: 'Design', active: false },
           { label: 'Design Tool', active: false },
@@ -97,7 +97,7 @@ export class ApiService {
         title: 'Atomic Design by Angular',
         comment: 'Atomic DesignをAngularで実践した例',
         thumbUrl: 'https://cdn.qiita.com/assets/qiita-fb-2887e7b4aad86fd8c25cea84846f2236.png',
-        url: 'https://cdn.qiita.com/assets/qiita-fb-2887e7b4aad86fd8c25cea84846f2236.png',
+        url: 'https://qiita.com/',
         tags: [
           { label: 'Design', active: false },
           { label: 'Angular', active: false }
@@ -110,7 +110,7 @@ export class ApiService {
         title: 'Angularの状態管理設計',
         comment: 'RxJSやAkitaなどの活用法',
         thumbUrl: 'https://cdn.qiita.com/assets/qiita-fb-2887e7b4aad86fd8c25cea84846f2236.png',
-        url: 'https://cdn.qiita.com/assets/qiita-fb-2887e7b4aad86fd8c25cea84846f2236.png',
+        url: 'https://qiita.com/',
         tags: [
           { label: 'Development', active: false },
           { label: 'Angular', active: false }
@@ -123,7 +123,7 @@ export class ApiService {
         title: 'Design Sysmte Management',
         comment: 'Design System管理法',
         thumbUrl: 'https://cdn-static-1.medium.com/_/fp/icons/monogram-mask.KPLCSFEZviQN0jQ7veN2RQ.svg',
-        url: 'https://cdn.qiita.com/assets/qiita-fb-2887e7b4aad86fd8c25cea84846f2236.png',
+        url: 'https://medium.com/',
         tags: [
           { label: 'Design System', active: false },
           { label: 'Design', active: false }
@@ -136,7 +136,7 @@ export class ApiService {
         title: 'Design Ecosystem In Lagos',
         comment: 'Design Ecosystem by Phase',
         thumbUrl: 'https://phase.com/wp-content/uploads/2018/08/lagos_featured-1.png',
-        url: 'https://cdn.qiita.com/assets/qiita-fb-2887e7b4aad86fd8c25cea84846f2236.png',
+        url: 'https://phase.com',
         tags: [
           { label: 'Design', active: false },
           { label: 'Design Tool', active: false },
@@ -150,7 +150,7 @@ export class ApiService {
         title: 'Atomic Design by Angular',
         comment: 'Atomic DesignをAngularで実践した例',
         thumbUrl: 'https://cdn.qiita.com/assets/qiita-fb-2887e7b4aad86fd8c25cea84846f2236.png',
-        url: 'https://cdn.qiita.com/assets/qiita-fb-2887e7b4aad86fd8c25cea84846f2236.png',
+        url: 'https://qiita.com/',
         tags: [
           { label: 'Design', active: false },
           { label: 'Angular', active: false }
@@ -163,7 +163,7 @@ export class ApiService {
         title: 'Angularの状態管理設計',
         comment: 'RxJSやAkitaなどの活用法',
         thumbUrl: 'https://cdn.qiita.com/assets/qiita-fb-2887e7b4aad86fd8c25cea84846f2236.png',
-        url: 'https://cdn.qiita.com/assets/qiita-fb-2887e7b4aad86fd8c25cea84846f2236.png',
+        url: 'https://qiita.com/',
         tags: [
           { label: 'Development', active: false },
           { label: 'Angular', active: false }
@@ -176,7 +176,7 @@ export class ApiService {
         title: 'Design Sysmte Management',
         comment: 'Design System管理法',
         thumbUrl: 'https://cdn-static-1.medium.com/_/fp/icons/monogram-mask.KPLCSFEZviQN0jQ7veN2RQ.svg',
-        url: 'https://cdn.qiita.com/assets/qiita-fb-2887e7b4aad86fd8c25cea84846f2236.png',
+        url: 'https://medium.com/',
         tags: [
           { label: 'Design System', active: false },
           { label: 'Design', active: false }
@@ -189,7 +189,7 @@ export class ApiService {
         title: 'Design Ecosystem In Lagos',
         comment: 'Design Ecosystem by Phase',
         thumbUrl: 'https://phase.com/wp-content/uploads/2018/08/lagos_featured-1.png',
-        url: 'https://cdn.qiita.com/assets/qiita-fb-2887e7b4aad86fd8c25cea84846f2236.png',
+        url: 'https://phase.com',
         tags: [
           { label: 'Design', active: false },
           { label: 'Design Tool', active: false },
@@ -203,7 +203,7 @@ export class ApiService {
         title: 'Atomic Design by Angular',
         comment: 'Atomic DesignをAngularで実践した例',
         thumbUrl: 'https://cdn.qiita.com/assets/qiita-fb-2887e7b4aad86fd8c25cea84846f2236.png',
-        url: 'https://cdn.qiita.com/assets/qiita-fb-2887e7b4aad86fd8c25cea84846f2236.png',
+        url: 'https://qiita.com/',
         tags: [
           { label: 'Design', active: false },
           { label: 'Angular', active: false }

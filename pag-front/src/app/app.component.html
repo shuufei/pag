@@ -13,6 +13,7 @@
     <p class="items-title" *ngIf="!itemIsEmpty">{{itemsTitle}}</p>
     <pag-item-list
       [items]="items$ | async"
+      [itemClickEvent]="onClickItem"
     ></pag-item-list>
     <div class="item-empty" *ngIf="itemIsEmpty">
       <pag-txt

@@ -129,6 +129,11 @@ export class AppComponent implements OnInit {
     }
   }
 
+  onClickItem(...args): void {
+    const ITEM_INDEX = 0;
+    window.open(args[ITEM_INDEX].url);
+  }
+
   async onClickedInitializeAccount(...args: any[]): Promise<void> {
     const ACCOUNT_INDEX = 0;
     if (args && args[ACCOUNT_INDEX]) {
