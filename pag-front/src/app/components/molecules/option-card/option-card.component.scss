@@ -5,25 +5,20 @@
   height: 70px;
   padding: 24px 32px;
   background: $white;
-  border-radius: 40px;
+  border-radius: $card-radius;
   box-shadow: $shadow-level1;
-  cursor: pointer;
   transition: all 200ms ease-out;
   overflow: hidden;
   box-sizing: border-box;
-  &.open {
-    cursor: unset;
-    &.xs { height: 148px; }
-    &.s { height: 183px; }
-    &.m { height: 228px; }
-    &.l { height: 298px; }
-  }
+  &.xs { height: 148px; }
+  &.s { height: 183px; }
+  &.m { height: 228px; }
+  &.l { height: 298px; }
 }
 .card-head {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  cursor: pointer;
 }
 
 .card-content {

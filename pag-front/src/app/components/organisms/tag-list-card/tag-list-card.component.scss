@@ -1,0 +1,63 @@
+@import 'src/styles.scss';
+
+$card-height: 60vh;
+$card-width: 295px;
+$card-top-padding: 32px;
+$card-bottom-padding: 16px;
+$card-bottom-wrapper-height: 64px;
+
+.tag-list-card {
+  width: $card-width;
+  max-height: $card-height;
+  padding: $card-top-padding 4px $card-bottom-padding;
+  box-shadow: $shadow-level1;
+  border-radius: $card-radius;
+  box-sizing: border-box;
+  background: $white;
+  overflow: hidden;
+  position: relative;
+  &:after {
+    content: '';
+    display: block;
+    width: $card-width;
+    height: $card-bottom-wrapper-height;
+    background: linear-gradient(to top, #{$white}, 90%, rgba(255,255,255,0));
+    margin-top: calc(0px - #{$card-bottom-wrapper-height});
+    position: absolute;
+    bottom: 0;
+    left: 0;
+  }
+}
+
+.tag-list-contents-wrapper {
+  width: 100%;
+  padding-left: 32px;
+  padding-right: 32px;
+  box-sizing: border-box;
+}
+.tag-list {
+  margin-top: 4px;
+  padding-bottom: calc(#{$card-bottom-wrapper-height} + 16px);
+  $title-and-inputbox-height: 73px;
+  height: calc(#{$card-height} - #{$title-and-inputbox-height} - #{$card-top-padding} - #{$card-bottom-padding});
+  overflow: auto;
+  overflow-y: scroll;
+  box-sizing: border-box;
+}
+.nav-tag {
+  margin-bottom: 4px;
+}
+
+.reset-btn {
+  text-align: center;
+  margin-top: 8px;
+  opacity: 0;
+  &.show {
+    cursor: pointer;
+    opacity: 1;
+  }
+}
+
+.search-box {
+  margin-top: 16px;
+}

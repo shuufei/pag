@@ -1,4 +1,4 @@
-<pag-option-card title="Add Item" [size]="enable === undefined || enable === true ? 'm' : 'l'">
+<pag-option-card title="追加" [size]="enable === undefined || enable === true ? 'm' : 'l'">
     <div class="card-content">
       <ng-container *ngIf="enable !== undefined ? !enable : false">
         <pag-txt
@@ -21,7 +21,7 @@
       </div>
       <div class="input-wrapper">
         <pag-input-txt
-          placeholder="tagを入力してください"
+          placeholder="タグを入力してください"
           (input)="onChangeTag($event?.target?.value)"
         ></pag-input-txt>
       </div>

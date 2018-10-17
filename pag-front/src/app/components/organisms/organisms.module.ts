@@ -11,6 +11,7 @@ import { HeaderComponent } from './header/header.component';
 import { LoadingDialogComponent } from './loading-dialog/loading-dialog.component';
 import { SortOptionCardComponent } from './sort-option-card/sort-option-card.component';
 import { AddItemCardComponent } from './add-item-card/add-item-card.component';
+import { TagListCardComponent } from './tag-list-card/tag-list-card.component';
 
 @NgModule({
   imports: [
@@ -26,7 +27,8 @@ import { AddItemCardComponent } from './add-item-card/add-item-card.component';
     HeaderComponent,
     LoadingDialogComponent,
     SortOptionCardComponent,
-    AddItemCardComponent
+    AddItemCardComponent,
+    TagListCardComponent
   ],
   exports: [
     AccountListCardComponent,
@@ -36,7 +38,8 @@ import { AddItemCardComponent } from './add-item-card/add-item-card.component';
     HeaderComponent,
     LoadingDialogComponent,
     SortOptionCardComponent,
-    AddItemCardComponent
+    AddItemCardComponent,
+    TagListCardComponent
   ]
 })
 export class OrganismsModule { }
