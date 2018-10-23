@@ -7,32 +7,38 @@ $z-index-header: 50;
 $z-index-nav: 40;
 
 $option-card-width: 269px;
+$account-tags-card-width: 295px;
+
+$side-block-padding: 28px 20px;
 
 #root-container {
   background: $primary-lite;
   min-height: 100vh;
   width: 100vw;
   box-sizing: border-box;
-  padding-top: $header-height;
-  padding-left: $nav-width;
+  padding: $header-height 20px;
+  justify-content: center;
   display: flex;
 }
 .items-wrapper { 
-  padding: 28px 40px;
+  padding: 28px 20px;
   flex: 1;
-  max-width: 800px;
+  max-width: 600px;
   box-sizing: border-box;
 }
 .option-wrapper {
   width: $option-card-width;
-  padding: 28px 40px 28px 8px;
-  .fixed-options {
-    position: fixed;
-  }
-  .option-card-wrapper {
-    margin-top: 12px;
-  }
-
+  padding: $side-block-padding;
+}
+.account-tag-card-wrapper {
+  width: $account-tags-card-width;
+  padding: $side-block-padding;
+}
+.card-wrapper {
+  margin-top: 12px;
+}
+.fixed-card {
+  position: fixed;
 }
 .items-title {
   font-family: $font-family;

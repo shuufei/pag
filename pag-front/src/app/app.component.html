@@ -1,14 +1,26 @@
 <pag-header></pag-header>
-<pag-nav
-  [accountListCard]="accountListCard"
-  [navTags]="sortedTags"
-  [accountClickEvent]="onClickedAccount"
-  [navTagClickEvent]="onClickedTag"
-  [isShowResetBtn]="existSelectedTags"
-  [resetBtnClickEvent]="onClickedReset"
-  [editAccountClickEvent]="openAccountEditDialog"
-></pag-nav>
+<!-- TODO: refactor -->
 <div id="root-container">
+  <div class="account-tag-card-wrapper">
+    <div class="fixed-card">
+      <div class="card-wrapper">
+        <pag-account-list-card
+          [accounts]="accountListCard.accounts"
+          [currentAccount]="accountListCard.currentAccount"
+          [accountClickEvent]="onClickedAccount"
+          [addClickEvent]="openAccountEditDialog"
+        ></pag-account-list-card>
+      </div>
+      <div class="card-wrapper">
+        <pag-tag-list-card
+          [navTags]="sortedTags"
+          [navTagClickEvent]="onClickedTag"
+          [isShowResetBtn]="existSelectedTags"
+          [resetBtnClickEvent]="onClickedReset"
+        ></pag-tag-list-card>
+      </div>
+    </div>
+  </div>
   <div class="items-wrapper">
     <p class="items-title" *ngIf="!itemIsEmpty">{{itemsTitle}}</p>
     <pag-item-list
@@ -27,11 +39,11 @@
     </div>
   </div>
   <div class="option-wrapper">
-    <div class="fixed-options">
-      <div class="option-card-wrapper">
+    <div class="fixed-card">
+      <div class="card-wrapper">
         <pag-sort-option-card [changeSortEvent]="onChangeSort"></pag-sort-option-card>
       </div>
-      <div class="option-card-wrapper">
+      <div class="card-wrapper">
         <pag-add-item-card [enable]="false"></pag-add-item-card>
       </div>
     </div>
