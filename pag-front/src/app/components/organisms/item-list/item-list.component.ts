@@ -10,7 +10,6 @@ import { Item } from 'src/app/components/organisms/item/item.component';
 export class ItemListComponent implements OnInit {
   @Input() items: Item[];
   @Input() itemClickEvent: Function;
-  @Input() starClickEvent: Function;
 
   constructor() { }
 

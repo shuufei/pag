@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 import { AtomsModule } from 'src/app/components/atoms/atoms.module';
 import { NavTagComponent } from 'src/app/components/molecules/nav-tag/nav-tag.component';
@@ -21,7 +21,8 @@ import { RadiobuttonComponent } from './radiobutton/radiobutton.component';
     AtomsModule,
     BrowserModule,
     BrowserAnimationsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule
   ],
   declarations: [
     NavTagComponent,

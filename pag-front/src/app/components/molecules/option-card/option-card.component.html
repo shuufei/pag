@@ -1,17 +1,15 @@
 <div
   class="option-card"
-  [ngClass]="open ? getOpenClasses() : ''"
-  (click)="open ? undefined : toggleOpen($event)"
+  [ngClass]="getClasses()"
 >
-  <div class="card-head" (click)="open ? toggleOpen($event) : undefined">
+  <div class="card-head">
     <pag-ellipsis-txt
       [text]="title"
       max="170px"
       size="l" weight="medium" color="black"
     ></pag-ellipsis-txt>
-    <pag-icon [icon]="open ? 'minus' : 'plus'"></pag-icon>
   </div>
-  <ng-container *ngIf="open">
+  <ng-container>
     <div class="card-content" (click)="stopEvent($event)">
       <ng-content></ng-content>
     </div>

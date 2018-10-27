@@ -44,7 +44,8 @@ $step-width: 400px;
 }
 
 .confirm-button-block {
-  width: 225px;
+  width: 100%;
+  max-width: 300px;
   margin-top: 24px;
   .confirm-no-btn {
     margin-top: 16px;

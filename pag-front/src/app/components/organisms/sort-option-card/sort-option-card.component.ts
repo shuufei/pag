@@ -18,6 +18,6 @@ export class SortOptionCardComponent implements OnInit {
 }
 
 export const SortOption = {
-  latest: 'Latest',
-  oldest: 'Oldest'
+  latest: '新しい順',
+  oldest: '古い順'
 };

@@ -17,19 +17,15 @@ export class ItemComponent implements OnInit {
   @Input() tags: Label[];
   @Input() star: boolean;
   @Input() clickEvent: Function;
-  @Input() starClickEvent: Function;
   @Input() createdAt: Date;
 
-  starIcon: string;
+  openLink: string = iconNames.openLink;
 
   constructor() {
-    this.starIcon = iconNames.starDeactive;
     this.onClick = this.onClick.bind(this);
-    this.onClickStar = this.onClickStar.bind(this);
   }
 
   ngOnInit() {
-    this.setStarIcon();
   }
 
   onClick() {
@@ -37,20 +33,6 @@ export class ItemComponent implements OnInit {
       const item: Item = this.getItemObj();
       this.clickEvent(item);
     }
-  }
-
-  onClickStar(event: Event) {
-    event.stopPropagation();
-    this.star = !this.star;
-    this.setStarIcon();
-    if (this.starClickEvent) {
-      const item: Item = this.getItemObj();
-      this.starClickEvent(item);
-    }
-  }
-
-  private setStarIcon(): void {
-    this.starIcon = this.star ? iconNames.starActive : iconNames.starDeactive;
   }
 
   private getItemObj(): Item {

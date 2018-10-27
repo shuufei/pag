@@ -73,7 +73,7 @@ const itemTemplate = `
 <div style="padding:20px; background:#f0f0f0; width:700px;">
   <pag-item
     [id]="id" [title]="title" [comment]="comment" [thumbUrl]="thumbUrl" [url]="url" [tags]="tags" [star]="star" [createdAt]="createdAt"
-    [clickEvent]="clickEvent" [starClickEvent]="starClickEvent"
+    [clickEvent]="clickEvent"
   >
   </pag-item>
 </div>
@@ -92,7 +92,6 @@ itemStories.add('default', () => ({
     ],
     star: boolean('Star', false),
     clickEvent: action('Clicked Item'),
-    starClickEvent: action('Clicked Star'),
     createdAt: new Date('2018-10-01T00:00:01.000Z')
   }
 }));
@@ -202,14 +201,13 @@ itemListStories.add('default', () => {
   return {
     template: `
       <div style="padding:20px; background:#f0f0f0; width:700px;">
-        <pag-item-list [items]="items" [itemClickEvent]="itemClickEvent" [starClickEvent]="starClickEvent">
+        <pag-item-list [items]="items" [itemClickEvent]="itemClickEvent">
         </pag-item-list>
       </div>
     `,
     props: {
       items,
-      itemClickEvent: action('Clicked Item'),
-      starClickEvent: action('Clicked Star')
+      itemClickEvent: action('Clicked Item')
     }
   };
 });
@@ -224,7 +222,7 @@ navStories.add('default', () => ({
       [navTags]="navTags"
       [navTagClickEvent]="navTagClickEvent"
       [accountClickEvent]="accountClickEvent"
-      [addAccountClickEvent]="addAccountClickEvent"
+      [editAccountClickEvent]="addAccountClickEvent"
       [isShowResetBtn]="isShowResetBtn"
       [resetBtnClickEvent]="resetBtnClickEvent"
     >
@@ -320,5 +318,35 @@ addItemCardStories.add('default', () => ({
   props: {
     addItemEvent: action('Add Item'),
     enable: boolean('Enable', true)
+  }
+}));
+
+const tagListCardStories = storiesOf(`${storyCategory}/Tag List Card`, module);
+tagListCardStories.addDecorator(withKnobs);
+tagListCardStories.addDecorator(moduleMetadata(metadata));
+tagListCardStories.add('default', () => ({
+  template: `
+    <pag-tag-list-card
+      [navTags]="navTags"
+      [navTagClickEvent]="navTagClickEvent"
+      [isShowResetBtn]="isShowResetBtn"
+      [resetBtnClickEvent]="resetBtnClickEvent"
+    >
+    </pag-tag-list-card>
+  `,
+  props: {
+    navTags: [
+      { tag: 'Development', count: 42 },
+      { tag: 'Design', count: 40 },
+      { tag: 'Angular', count: 28 },
+      { tag: 'UI', count: 27 },
+      { tag: 'Design System', count: 20 },
+      { tag: 'Service Worker', count: 11 },
+      { tag: 'Typogpraphy', count: 5 },
+      { tag: 'Long long to long tag name super long', count: 1 }
+    ],
+    navTagClickEvent: action('Clicked Nav Tag'),
+    isShowResetBtn: boolean('Is Show ResetBtn', false),
+    resetBtnClickEvent: action('Clicked ResetBtn')
   }
 }));

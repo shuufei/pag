@@ -224,6 +224,7 @@ export class AppComponent implements OnInit {
     this.tags$.pipe(skip(1)).subscribe(async(navTags) => {
       await this.appUtil.sleepByPromise(200);
       this.sortedTags = this.appUtil.sortNavTags(navTags);
+      this.resetTagListScroll();
     });
     this.selectedTags$.pipe(skip(1)).subscribe(tags => {
       this.existSelectedTags = tags && 0 < tags.length;
@@ -241,5 +242,9 @@ export class AppComponent implements OnInit {
 
   private sortItemsByOldest(items: Item[]): Item[] {
     return this.appUtil.sortItemsByCreatedAt(items, true);
+  }
+
+  private resetTagListScroll(): void {
+    document.querySelector('.tag-list.tag-list-contents-wrapper').scrollTop = 0; // scrollの位置をリセット
   }
 }

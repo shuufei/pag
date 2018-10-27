@@ -1,0 +1,32 @@
+<div class="tag-list-card">
+  <div class="tag-list-contents-wrapper">
+    <pag-txt
+      text="タグ一覧"
+      size="l" weight="medium" color="black"
+    ></pag-txt>
+  </div>
+  <div class="tag-list-contents-wrapper search-box">
+    <pag-input-txt placeholder="タグを検索" defaultValue="" [resetToken]="inputResetToken" (input)="onChangeInput($event)"></pag-input-txt>
+  </div>
+  <div
+    class="tag-list-contents-wrapper reset-btn"
+    [ngClass]="{show: isShowResetBtn}"
+    (click)="resetBtnClickEvent ? resetBtnClickEvent() : undefined"
+  >
+    <pag-txt
+      text="Reset"
+      size="xs" weight="medium" color="primary"
+    ></pag-txt>
+  </div>
+  <div class="tag-list tag-list-contents-wrapper">
+    <div *ngFor="let navTag of filteredNavTags" class="nav-tag">
+      <pag-nav-tag
+        [tag]="navTag.tag"
+        [count]="navTag.count"
+        [selected]="navTag.selected"
+        [disable]="navTag.disable"
+        [clickEvent]="onClickNavTag"
+      ></pag-nav-tag>
+    </div>
+  </div>
+</div>

@@ -23,9 +23,8 @@ export class OptionCardComponent implements OnInit {
     event.stopPropagation();
   }
 
-  getOpenClasses(): string[] {
+  getClasses(): string[] {
     const classes: (string | OptionCardSize)[] = [];
-    if (this.open) { classes.push('open'); }
     classes.push(this.size ? this.size : 's');
     return classes;
   }

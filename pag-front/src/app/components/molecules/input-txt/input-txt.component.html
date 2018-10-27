@@ -1,7 +1,7 @@
 <input
   type='text'
   class="input-txt"
+  [(ngModel)]="text"
   [placeholder]="placeholder ? placeholder : '入力してください'"
-  [value]="text"
   (input)="onChangeInput($event.target.value)"
 >
