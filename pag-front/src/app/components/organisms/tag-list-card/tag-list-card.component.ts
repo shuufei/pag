@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
+import * as uuidv4 from 'uuid/v4';
 
 import { NavTag } from 'src/app/components/molecules/nav-tag/nav-tag.component';
 
@@ -14,8 +15,12 @@ export class TagListCardComponent implements OnInit, OnChanges {
   @Input() resetBtnClickEvent: Function;
 
   filteredNavTags: NavTag[];
+  inputResetToken: string;
 
-  constructor() { }
+  constructor() {
+    this.inputResetToken = uuidv4();
+    this.onClickNavTag = this.onClickNavTag.bind(this);
+  }
 
   ngOnInit() {
   }
@@ -30,6 +35,11 @@ export class TagListCardComponent implements OnInit, OnChanges {
     if (typeof text === 'string' ) {
       this.filterNavTags(text);
     }
+  }
+
+  onClickNavTag(...args): void {
+    this.inputResetToken = uuidv4();
+    this.navTagClickEvent(...args);
   }
 
   private filterNavTags(key: string): void {

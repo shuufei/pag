@@ -22,6 +22,7 @@ export class InputTxtComponent implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.resetToken) {
       this.setDefaultValue();
+      this.onChangeInput(this.text);
     }
   }
 
