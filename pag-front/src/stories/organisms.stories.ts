@@ -73,7 +73,7 @@ const itemTemplate = `
 <div style="padding:20px; background:#f0f0f0; width:700px;">
   <pag-item
     [id]="id" [title]="title" [comment]="comment" [thumbUrl]="thumbUrl" [url]="url" [tags]="tags" [star]="star" [createdAt]="createdAt"
-    [clickEvent]="clickEvent" [starClickEvent]="starClickEvent"
+    [clickEvent]="clickEvent"
   >
   </pag-item>
 </div>
@@ -92,7 +92,6 @@ itemStories.add('default', () => ({
     ],
     star: boolean('Star', false),
     clickEvent: action('Clicked Item'),
-    starClickEvent: action('Clicked Star'),
     createdAt: new Date('2018-10-01T00:00:01.000Z')
   }
 }));
@@ -202,14 +201,13 @@ itemListStories.add('default', () => {
   return {
     template: `
       <div style="padding:20px; background:#f0f0f0; width:700px;">
-        <pag-item-list [items]="items" [itemClickEvent]="itemClickEvent" [starClickEvent]="starClickEvent">
+        <pag-item-list [items]="items" [itemClickEvent]="itemClickEvent">
         </pag-item-list>
       </div>
     `,
     props: {
       items,
-      itemClickEvent: action('Clicked Item'),
-      starClickEvent: action('Clicked Star')
+      itemClickEvent: action('Clicked Item')
     }
   };
 });

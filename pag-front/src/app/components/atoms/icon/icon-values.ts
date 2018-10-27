@@ -8,6 +8,7 @@ export const iconNames = {
   checkboxDeactive: 'checkboxDeactive',
   radiobtnActive: 'radiobtnActive',
   radiobtnDeactive: 'radiobtnDeactive',
+  openLink: 'openLink'
 };
 
 export const iconPath = {
@@ -19,5 +20,6 @@ export const iconPath = {
   checkboxActive: 'assets/icon/checkbox/active.svg',
   checkboxDeactive: 'assets/icon/checkbox/deactive.svg',
   radiobtnActive: 'assets/icon/radiobtn/active.svg',
-  radiobtnDeactive: 'assets/icon/radiobtn/deactive.svg'
+  radiobtnDeactive: 'assets/icon/radiobtn/deactive.svg',
+  openLink: 'assets/icon/open-link.svg'
 };
