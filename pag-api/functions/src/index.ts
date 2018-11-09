@@ -1,6 +1,8 @@
 import * as functions from 'firebase-functions';
 import * as admin from 'firebase-admin';
-admin.initializeApp();
+import * as firebaseConfig from '../firebase-config.js';
+
+admin.initializeApp(firebaseConfig);
 
 import { AccountHandler } from './handlers/account';
 
