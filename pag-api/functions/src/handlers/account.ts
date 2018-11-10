@@ -38,6 +38,10 @@ export class AccountHandler {
       const { account } = this.req.body;
       if (!account) { return this.resManager.returnErr(this.res, 400); }
       const twitterUser = await this.twitterClient.getUser(account);
+      if (!twitterUser) {
+        this.resManager.returnErr(this.res, 404);
+        return;
+      }
       const resAccount: Account = this.parseAccountResponse(twitterUser);
       await this.registAccount(resAccount);
       return this.res.status(200).send(resAccount);

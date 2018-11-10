@@ -12,7 +12,10 @@ export class TwitterClient {
     return new Promise((resolve, reject) => {
       const params = {screen_name: accountName};
       this.client.get('users/show', params, (error, user, response) => {
-        if (error) { reject(error); }
+        if (error) {
+          console.log('[debug] twitter /users/show failed: ', error);
+          resolve(null);
+        }
         resolve(user);
       });
     });
