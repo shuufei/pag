@@ -74,7 +74,7 @@ export class AccountHandler {
 }
 
 export interface Account {
-  id: string;
+  id?: string;
   accountId: string;
   name: string;
   img: string;

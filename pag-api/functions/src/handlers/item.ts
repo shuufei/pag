@@ -2,10 +2,14 @@ import { ResponseManager } from '../response-manager';
 import { TwitterClient } from '../services/twitter';
 import { Firestore } from '../services/firestore';
 
+import { Account } from './account';
+
 export class ItemHandler {
 
+  readonly PAG_TAG = 'pag';
+
   resManager;
-  twitterClient;
+  twitterClient: TwitterClient;
   firestoreClient: Firestore;
   req;
   res;
@@ -37,14 +41,23 @@ export class ItemHandler {
     try {
       const { id } = this.req.query;
       if (!id) { return this.resManager.returnErr(this.res, 400); }
-      const account = await this.firestoreClient.getAccountById(id);
-      // latestSearchTweetID以降のすべてのtweetを検索
-      // #pagのhashtagがついてるものを洗い出す
+      const account: Account = await this.firestoreClient.getAccountById(id);
+      if (!account) { return this.resManager.returnErr(this.res, 404); }
+      const tweets = await this.getPagTweets(account);
       // urlがあるツイートであれば、スクレイピングを行い、結果をfirestoreに登録
       // firestoreからitem一覧を取得し返す
-      return this.res.status(200).send(account);
+      return this.res.status(200).send(tweets);
     } catch (error) {
       throw new Error(error);
     }
+  }
+
+  async getPagTweets(account: Account) {
+    const tweets = await this.twitterClient.getAllTweets(account.accountId, account.latestSearchTweetId);
+    const pagTweets = tweets.filter(t => {
+      const pagTweet = t.entities.hashtags.find(tag => tag.text === this.PAG_TAG);
+      return pagTweet ? true : false;
+    });
+    return pagTweets;
   }
 }
