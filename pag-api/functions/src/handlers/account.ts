@@ -5,8 +5,8 @@ import { Firestore } from '../services/firestore';
 export class AccountHandler {
 
   resManager;
-  twitterClient;
-  firestoreClient;
+  twitterClient: TwitterClient;
+  firestoreClient: Firestore;
   req;
   res;
 
@@ -25,7 +25,7 @@ export class AccountHandler {
         return this.postAccount()
           .then(res => res)
           .catch(err => {
-            console.log('--- post account promise catch: ', err);
+            console.log('[debug] post account failed: ', err);
             this.resManager.returnErr(this.res, 500);
           });
       default:
@@ -35,9 +35,13 @@ export class AccountHandler {
 
   async postAccount() {
     try {
-      const { account } = this.req.body;
-      if (!account) { return this.resManager.returnErr(this.res, 400); }
-      const twitterUser = await this.twitterClient.getUser(account);
+      const { accountId } = this.req.body;
+      if (!accountId) { return this.resManager.returnErr(this.res, 400); }
+      const account = await this.firestoreClient.getAccountByAccountId(accountId); // 登録済みユーザか？
+      if (account) {
+        return this.res.status(200).send(account);
+      }
+      const twitterUser = await this.twitterClient.getUser(accountId);
       if (!twitterUser) {
         this.resManager.returnErr(this.res, 404);
         return;
@@ -56,13 +60,12 @@ export class AccountHandler {
     const accountId = twitterUser.screen_name;
     const name = twitterUser.name;
     const img = twitterUser.profile_image_url.replace(/_normal./, '.');
-    return { id, accountId, name, img };
+    const latestSearchTweetId = twitterUser.status ? twitterUser.status.id_str : null;
+    return { id, accountId, name, img, latestSearchTweetId };
   }
 
   private async registAccount(account: Account): Promise<void> {
     try {
-      const exist = await this.firestoreClient.isExistAccount(account.id);
-      if (exist) { return; }
       this.firestoreClient.addAccount(account);
     } catch (error) {
       throw new Error(error);
@@ -75,4 +78,5 @@ export interface Account {
   accountId: string;
   name: string;
   img: string;
+  latestSearchTweetId: string;
 }

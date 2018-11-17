@@ -24,14 +24,36 @@ export class Firestore {
   }
 
   async isExistAccount(id: string): Promise<boolean> {
-    let account;
+    try {
+      const account = await this.getAccountById(id);
+      return account ? true : false;
+    } catch (err) {
+      throw new Error(err);
+    }
+  }
+
+  async getAccountById(id: string): Promise<any> {
     try {
       const accountsRef = this.db.collection(ACCOUNTS_COLLECTION);
-      const snapshot = await accountsRef.where('id', '==', id).get();
+      const doc = await accountsRef.doc(id).get();
+      if (doc.exists) {
+        return doc.data();
+      } else {
+        return null;
+      }
+    } catch (err) {
+      throw new Error(err);
+    }
+  }
+
+  async getAccountByAccountId(accountId: string): Promise<any> {
+    try {
+      let account;
+      const snapshot = await this.db.collection(ACCOUNTS_COLLECTION).where('accountId', '==', accountId).get();
       snapshot.forEach(doc => {
-        account = doc.data();
+        if (doc.exists) { account = doc.data(); }
       });
-      return account ? true : false;
+      return account;
     } catch (err) {
       throw new Error(err);
     }
@@ -42,7 +64,8 @@ export class Firestore {
       await this.db.collection(ACCOUNTS_COLLECTION).doc(data.id).set({
         name: data.name,
         accountId: data.accountId,
-        img: data.img
+        img: data.img,
+        latestSearchTweetId: data.latestSearchTweetId
       });
       return;
     } catch (error) {
