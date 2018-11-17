@@ -20,6 +20,23 @@ export class TwitterClient {
       });
     });
   }
+
+  getTweets(userName: string, sinceId: string) {
+    return new Promise((resolve, reject) => {
+      const params = {
+        screen_name: userName,
+        count: 200,
+        since_id: sinceId
+      };
+      this.client.get('statuses/user_timeline', params, function(error, tweets, response) {
+        if (error) {
+          console.log('[debug] twitter /users/show failed: ', error);
+          resolve(null);
+        }
+        resolve(tweets);
+      });
+    });
+  }
 }
 
 export interface User {
