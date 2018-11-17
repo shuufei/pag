@@ -65,3 +65,4 @@ node_modules/
 .env
 
 twitter-test/
+firestore-test/
