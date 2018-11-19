@@ -60,6 +60,7 @@ export class TwitterClient {
             return resolve(tweets);
           }
         }
+        return resolve(tweets);
       } catch (error) {
         reject(error);
       }

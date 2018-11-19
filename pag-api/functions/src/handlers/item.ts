@@ -1,8 +1,10 @@
+import * as twttr from 'twitter-text';
+
 import { ResponseManager } from '../response-manager';
 import { TwitterClient } from '../services/twitter';
 import { Firestore } from '../services/firestore';
-
 import { Account } from './account';
+import { scraping } from '../services/scraper';
 
 export class ItemHandler {
 
@@ -29,7 +31,7 @@ export class ItemHandler {
         return this.getItems()
           .then(res => res)
           .catch(err => {
-            console.log('[debug] post account failed: ', err);
+            console.log('[debug] get items failed: ', err);
             this.resManager.returnErr(this.res, 500);
           });
       default:
@@ -44,9 +46,15 @@ export class ItemHandler {
       const account: Account = await this.firestoreClient.getAccountById(id);
       if (!account) { return this.resManager.returnErr(this.res, 404); }
       const tweets = await this.getPagTweets(account);
+      const promises = [];
+      tweets.forEach(tweet => {
+        promises.push(this.generateItem(tweet));
+      });
+      const items = await Promise.all(promises);
+      console.log('--- items: ', items);
       // urlがあるツイートであれば、スクレイピングを行い、結果をfirestoreに登録
       // firestoreからitem一覧を取得し返す
-      return this.res.status(200).send(tweets);
+      return this.res.status(200).send(items);
     } catch (error) {
       throw new Error(error);
     }
@@ -60,4 +68,29 @@ export class ItemHandler {
     });
     return pagTweets;
   }
+
+  async generateItem(tweet): Promise<Item> {
+    const url = tweet.entities.urls[0] ? tweet.entities.urls[0].expanded_url : null;
+    const { title, img } = url ? await scraping(url) : { title: null, img: null };
+    const tags = tweet.entities.hashtags.map(t => t.text).filter(t => t !== this.PAG_TAG);
+    const createdAt = new Date(tweet.created_at);
+    let text = tweet.text;
+    const entities = twttr.extractEntitiesWithIndices(text);
+    entities.forEach((entity) => {
+      const replaceTxt = tweet.text.substring(entity.indices[0], entity.indices[1]);
+      text = text.replace(replaceTxt, '');
+    });
+    text = text.trim();
+    const item: Item = { title, img, url, tags, createdAt, comment: text };
+    return Promise.resolve(item);
+  }
+}
+
+export interface Item {
+  title: string;
+  img: string;
+  comment: string;
+  tags: string[];
+  url: string;
+  createdAt: Date;
 }
