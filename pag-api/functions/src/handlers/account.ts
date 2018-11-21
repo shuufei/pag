@@ -35,13 +35,13 @@ export class AccountHandler {
 
   async postAccount() {
     try {
-      const { accountId } = this.req.body;
-      if (!accountId) { return this.resManager.returnErr(this.res, 400); }
-      const account = await this.firestoreClient.getAccountByAccountId(accountId); // 登録済みユーザか？
+      const { screenName } = this.req.body;
+      if (!screenName) { return this.resManager.returnErr(this.res, 400); }
+      const account = await this.firestoreClient.getAccountByAccountId(screenName); // 登録済みユーザか？
       if (account) {
         return this.res.status(200).send(account);
       }
-      const twitterUser = await this.twitterClient.getUser(accountId);
+      const twitterUser = await this.twitterClient.getUser(screenName);
       if (!twitterUser) {
         this.resManager.returnErr(this.res, 404);
         return;
@@ -57,11 +57,11 @@ export class AccountHandler {
 
   private parseAccountResponse(twitterUser): Account {
     const id = twitterUser.id_str;
-    const accountId = twitterUser.screen_name;
+    const screenName = twitterUser.screen_name;
     const name = twitterUser.name;
     const img = twitterUser.profile_image_url.replace(/_normal./, '.');
     const latestSearchTweetId = twitterUser.status ? twitterUser.status.id_str : null;
-    return { id, accountId, name, img, latestSearchTweetId };
+    return { id, screenName, name, img, latestSearchTweetId };
   }
 
   private async registAccount(account: Account): Promise<void> {
@@ -76,7 +76,7 @@ export class AccountHandler {
 
 export interface Account {
   id?: string;
-  accountId: string;
+  screenName: string;
   name: string;
   img: string;
   latestSearchTweetId: string;

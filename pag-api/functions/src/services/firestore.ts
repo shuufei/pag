@@ -48,10 +48,10 @@ export class Firestore {
     }
   }
 
-  async getAccountByAccountId(accountId: string): Promise<any> {
+  async getAccountByAccountId(screenName: string): Promise<any> {
     try {
       let account;
-      const snapshot = await this.db.collection(ACCOUNTS_COLLECTION).where('accountId', '==', accountId).get();
+      const snapshot = await this.db.collection(ACCOUNTS_COLLECTION).where('screenName', '==', screenName).get();
       snapshot.forEach(doc => {
         if (doc.exists) { account = doc.data(); }
       });
@@ -66,7 +66,7 @@ export class Firestore {
       await this.db.collection(ACCOUNTS_COLLECTION).doc(data.id).set({
         id: data.id,
         name: data.name,
-        accountId: data.accountId,
+        screenName: data.screenName,
         img: data.img,
         latestSearchTweetId: data.latestSearchTweetId
       });
