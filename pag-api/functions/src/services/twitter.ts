@@ -50,17 +50,22 @@ export class TwitterClient {
           const res = await this.getTweets(accountId, sinceId, maxId, COUNT);
           const isRemainig = (res.length === COUNT);
           if (maxId) { res.shift(); } // maxIdが指定されていれば先頭のtweetを削除
-          if (res.length === 0) { return resolve(tweets); }
+          if (res.length === 0) {
+            resolve(tweets);
+            return;
+          }
           tweets = [ ...tweets, ...res ];
           if (isRemainig) { // まだTweetが残っていればcontinue
             const latestTweets = res[res.length - 1];
             maxId = latestTweets.id_str;
             continue;
           } else {
-            return resolve(tweets);
+            resolve(tweets);
+            return;
           }
         }
-        return resolve(tweets);
+        resolve(tweets);
+        return;
       } catch (error) {
         reject(error);
       }

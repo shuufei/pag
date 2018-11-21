@@ -66,9 +66,10 @@ export class AccountHandler {
 
   private async registAccount(account: Account): Promise<void> {
     try {
-      this.firestoreClient.addAccount(account);
+      await this.firestoreClient.addAccount(account);
+      return;
     } catch (error) {
-      throw new Error(error);
+      return Promise.reject(error);
     }
   }
 }

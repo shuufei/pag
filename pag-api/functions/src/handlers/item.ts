@@ -78,7 +78,7 @@ export class ItemHandler {
     const id = tweet.id_str;
     const url = tweet.entities.urls[0] ? tweet.entities.urls[0].expanded_url : null;
     if (url === null) { return Promise.resolve(null); } // urlがない場合はnullを返す
-    const { title, img } = url ? await scraping(url) : { title: null, img: null };
+    const { title=null, img=null } = url ? await scraping(url) : { title: null, img: null };
     const tags = tweet.entities.hashtags.map(t => t.text).filter(t => t !== this.PAG_TAG);
     const createdAt = new Date(tweet.created_at);
     let text = tweet.text;
