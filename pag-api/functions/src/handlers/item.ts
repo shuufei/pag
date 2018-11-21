@@ -27,8 +27,8 @@ export class ItemHandler {
 
   invoke() {
     switch (this.req.method) {
-      case 'GET':
-        return this.getItems()
+      case 'POST':
+        return this.syncItems()
           .then(res => res)
           .catch(err => {
             console.log('[debug] get items failed: ', err);
@@ -39,29 +39,34 @@ export class ItemHandler {
     }
   }
 
-  async getItems() {
+  async syncItems() {
     try {
-      const { id } = this.req.query;
-      if (!id) { return this.resManager.returnErr(this.res, 400); }
-      const account: Account = await this.firestoreClient.getAccountById(id);
+      const { userId } = this.req.body;
+      if (!userId) { return this.resManager.returnErr(this.res, 400); }
+      const account: Account = await this.firestoreClient.getAccountById(userId);
       if (!account) { return this.resManager.returnErr(this.res, 404); }
-      const tweets = await this.getPagTweets(account);
+      const tweets = await this.twitterClient.getAllTweets(account.accountId, account.latestSearchTweetId);
+      const latestTweet = tweets ? tweets[0] : null;
+      const pagTweets = await this.getPagTweets(tweets);
       const promises = [];
-      tweets.forEach(tweet => {
+      pagTweets.forEach(tweet => {
         promises.push(this.generateItem(tweet));
       });
-      const items = await Promise.all(promises);
-      console.log('--- items: ', items);
-      // urlがあるツイートであれば、スクレイピングを行い、結果をfirestoreに登録
-      // firestoreからitem一覧を取得し返す
+      const items = await Promise.all(promises).then(v => v.filter(item => (item)));
+      console.log('[debug] new items: ', items);
+      if (items && 0 < items.length) { // itemがあれば、firestoreに追加
+        await this.firestoreClient.addItems(items);
+      }
+      if (latestTweet) { // latestTweetがあれば、latestSearchTweetIdを更新
+        await this.firestoreClient.updateLatestSearchTweet(userId, latestTweet.id_str);
+      }
       return this.res.status(200).send(items);
     } catch (error) {
       throw new Error(error);
     }
   }
 
-  async getPagTweets(account: Account) {
-    const tweets = await this.twitterClient.getAllTweets(account.accountId, account.latestSearchTweetId);
+  async getPagTweets(tweets) {
     const pagTweets = tweets.filter(t => {
       const pagTweet = t.entities.hashtags.find(tag => tag.text === this.PAG_TAG);
       return pagTweet ? true : false;
@@ -70,7 +75,9 @@ export class ItemHandler {
   }
 
   async generateItem(tweet): Promise<Item> {
+    const id = tweet.id_str;
     const url = tweet.entities.urls[0] ? tweet.entities.urls[0].expanded_url : null;
+    if (url === null) { return Promise.resolve(null); } // urlがない場合はnullを返す
     const { title, img } = url ? await scraping(url) : { title: null, img: null };
     const tags = tweet.entities.hashtags.map(t => t.text).filter(t => t !== this.PAG_TAG);
     const createdAt = new Date(tweet.created_at);
@@ -81,12 +88,13 @@ export class ItemHandler {
       text = text.replace(replaceTxt, '');
     });
     text = text.trim();
-    const item: Item = { title, img, url, tags, createdAt, comment: text };
+    const item: Item = { id, title, img, url, tags, createdAt, comment: text };
     return Promise.resolve(item);
   }
 }
 
 export interface Item {
+  id: string;
   title: string;
   img: string;
   comment: string;

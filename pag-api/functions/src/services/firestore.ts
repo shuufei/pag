@@ -1,8 +1,10 @@
 import * as firebase from 'firebase-admin';
 
 import { Account } from '../handlers/account';
+import { Item } from '../handlers/item';
 
 const ACCOUNTS_COLLECTION = 'accounts';
+const ITEMS_COLLECTION = 'items';
 
 export class Firestore {
 
@@ -28,7 +30,7 @@ export class Firestore {
       const account = await this.getAccountById(id);
       return account ? true : false;
     } catch (err) {
-      throw new Error(err);
+      return Promise.reject(err);
     }
   }
 
@@ -42,7 +44,7 @@ export class Firestore {
         return null;
       }
     } catch (err) {
-      throw new Error(err);
+      return Promise.reject(err);
     }
   }
 
@@ -55,7 +57,7 @@ export class Firestore {
       });
       return account;
     } catch (err) {
-      throw new Error(err);
+      return Promise.reject(err);
     }
   }
 
@@ -68,8 +70,30 @@ export class Firestore {
         latestSearchTweetId: data.latestSearchTweetId
       });
       return;
-    } catch (error) {
-      throw new Error(error);
+    } catch (err) {
+      return Promise.reject(err);
+    }
+  }
+
+  async updateLatestSearchTweet(id, tweetId): Promise<void> {
+    try {
+      const ref = this.db.collection(ACCOUNTS_COLLECTION).doc(id);
+      await ref.update({latestSearchTweetId: tweetId});
+      return;
+    } catch (err) {
+      return Promise.reject(err);
+    }
+  }
+
+  async addItems(items: Item[]): Promise<any> {
+    try {
+      const batch = this.db.batch();
+      items.forEach(item => {
+        batch.set(this.db.collection(ITEMS_COLLECTION).doc(item.id), item);
+      });
+      return batch.commit();
+    } catch (err) {
+      return Promise.reject(err);
     }
   }
 }
