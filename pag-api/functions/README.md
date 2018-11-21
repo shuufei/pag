@@ -7,4 +7,23 @@
     - [高度な検索を組み立てる](https://twitter.com/search-advanced)
 
 ## test
-curl -v -X POST https://us-central1-pag-front.cloudfunctions.net/accounts -d 'account=digital_shuufei'
+curl -v -X POST https://us-central1-pag-front.cloudfunctions.net/accounts -d 'screenName=digital_shuufei'
+
+curl -v -X POST https://us-central1-pag-front.cloudfunctions.net/items -d 'accountId=775003201338683393'
+
+### Local Debug
+```
+% yarn build --watch
+% yarn shell
+
+accounts.post().form({ screenName: 'digital_shuufei' })
+items.post().form({ accountId: '775003201338683393' })
+```
+
+## get items
+**TODO: 一度に全てやるとしんどいな**
+- 対象アカウントの最新tweet以降で#pagがついているツイートを全て取得
+- もっとも最新のtweetのidをdbに登録
+- 取得したツイートのurlをスクレイピング
+- スクレイピングの結果とツイートの結果を元にitemを生成し、dbに登録
+- responseとして、全てのitem情報を返す
