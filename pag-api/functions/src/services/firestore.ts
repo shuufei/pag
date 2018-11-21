@@ -64,6 +64,7 @@ export class Firestore {
   async addAccount(data: Account): Promise<void> {
     try {
       await this.db.collection(ACCOUNTS_COLLECTION).doc(data.id).set({
+        id: data.id,
         name: data.name,
         accountId: data.accountId,
         img: data.img,
