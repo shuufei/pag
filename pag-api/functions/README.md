@@ -11,6 +11,8 @@ curl -v -X POST https://us-central1-pag-front.cloudfunctions.net/accounts -d 'sc
 
 curl -v -X POST https://us-central1-pag-front.cloudfunctions.net/items -d 'accountId=775003201338683393'
 
+curl -v -X GET https://us-central1-pag-front.cloudfunctions.net/items¥?accountId=775003201338683393
+
 ### Local Debug
 ```
 % yarn build --watch
@@ -18,6 +20,7 @@ curl -v -X POST https://us-central1-pag-front.cloudfunctions.net/items -d 'accou
 
 accounts.post().form({ screenName: 'digital_shuufei' })
 items.post().form({ accountId: '775003201338683393' })
+items.get({qs:{accountId:'775003201338683393'}})
 ```
 
 ## get items

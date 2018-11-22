@@ -31,11 +31,31 @@ export class ItemHandler {
         return this.syncItems()
           .then(res => res)
           .catch(err => {
+            console.log('[debug] post items failed: ', err);
+            this.resManager.returnErr(this.res, 500);
+          });
+      case 'GET':
+        return this.getItems()
+          .then(res => res)
+          .catch(err => {
             console.log('[debug] get items failed: ', err);
             this.resManager.returnErr(this.res, 500);
           });
       default:
         return this.res.status(405).send();
+    }
+  }
+
+  async getItems() {
+    try {
+      const { accountId } = this.req.query;
+      if (!accountId) { return this.resManager.returnErr(this.res, 400); }
+      const account: Account = await this.firestoreClient.getAccountById(accountId);
+      if (!account) { return this.resManager.returnErr(this.res, 404); }
+      const items = await this.firestoreClient.getItems(accountId);
+      return this.res.status(200).send(items);
+    } catch (err) {
+      throw new Error(err);
     }
   }
 

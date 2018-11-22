@@ -61,6 +61,21 @@ export class Firestore {
     }
   }
 
+  async getItems(accountId: string): Promise<any[]> {
+    try {
+      const items = [];
+      const snapshot = await this.db.collection(ITEMS_COLLECTION).where('accountId', '==', accountId).get();
+      snapshot.forEach(doc => {
+        if (doc.exists) {
+          items.push(doc.data());
+        }
+      });
+      return items;
+    } catch (err) {
+      return Promise.reject(err);
+    }
+  }
+
   async addAccount(data: Account): Promise<void> {
     try {
       await this.db.collection(ACCOUNTS_COLLECTION).doc(data.id).set({
