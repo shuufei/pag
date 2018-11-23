@@ -67,7 +67,9 @@ export class Firestore {
       const snapshot = await this.db.collection(ITEMS_COLLECTION).where('accountId', '==', accountId).get();
       snapshot.forEach(doc => {
         if (doc.exists) {
-          items.push(doc.data());
+          const data = doc.data();
+          data.createdAt = data.createdAt.toDate();
+          items.push(data);
         }
       });
       return items;

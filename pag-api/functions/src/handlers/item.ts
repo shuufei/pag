@@ -41,6 +41,8 @@ export class ItemHandler {
             console.log('[debug] get items failed: ', err);
             this.resManager.returnErr(this.res, 500);
           });
+      case 'OPTIONS':
+        return this.res.status(200).send();
       default:
         return this.res.status(405).send();
     }
