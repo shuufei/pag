@@ -83,6 +83,21 @@ export class AppUtilService {
         });
       }
     });
+    // 新しく追加されたtagを追加する
+    existNavTags.forEach(navTag => {
+      const exist = tagsSnapshot.navTags.find(t => t.tag === navTag.tag);
+      if (!exist) {
+        let disable = false;
+        if (0 < tagsSnapshot.selectedTags.length) {
+          disable = true;
+        }
+        newNavTags.push({
+          ...navTag,
+          selected: false,
+          disable
+        });
+      }
+    });
     return newNavTags;
   }
 

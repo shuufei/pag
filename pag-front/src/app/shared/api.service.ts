@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 
-import { Account } from 'src/app/components/molecules/account-name/account-name.component'
+import { Account } from 'src/app/components/molecules/account-name/account-name.component';
 import { Item } from 'src/app/components/organisms/item/item.component';
 
 @Injectable({
@@ -8,217 +9,91 @@ import { Item } from 'src/app/components/organisms/item/item.component';
 })
 export class ApiService {
 
-  constructor() { }
+  readonly ENDPOINT = 'https://us-central1-pag-front.cloudfunctions.net';
 
-  // mock
-  getAccount(accountId: string): Promise<GetAccountResponse> {
+  constructor(
+    private http: HttpClient
+  ) { }
+
+  getAccount(screenName: string): Promise<GetAccountResponse> {
     return new Promise((resolve, reject) => {
-      const account1 = {
-        id: 'yyyy',
-        accountId: accountId,
-        name: 'muza',
-        img: 'https://pbs.twimg.com/profile_images/659710386069897216/C5GLKeIW_bigger.png'
+      const httpOptions = {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json'
+        })
       };
-      const account2 = {
-        id: 'vvvv',
-        accountId: accountId,
-        name: 'nyanko',
-        img: 'https://pbs.twimg.com/profile_images/956867108020744193/wbXnVRKn_bigger.jpg'
-      };
-      const account3 = {
-        id: 'wwww',
-        accountId: accountId,
-        name: 'ota',
-        img: 'https://pbs.twimg.com/profile_images/1031892122251620352/JIR_mpEY_bigger.jpg'
-      };
-      const account4: GetAccountResponse = {
-        id: 'xxxxxx',
-        accountId: accountId,
-        name: 'fei',
-        img: 'https://pbs.twimg.com/profile_images/821745021753823233/L_dTDu3C_normal.jpg'
-      };
-      const accounts = [ account1, account2, account3, account4 ]
-      const n = Math.round(Math.random() * 3);
-      setTimeout(() => {
-        if (accountId) {
-          resolve(accounts[n]);
-        } else {
-          reject();
-        }
-      }, 1500);
+      this.http.post(`${this.ENDPOINT}/accounts`, { screenName }, httpOptions)
+        .subscribe((data: any) => {
+          console.log('--- account: data: ', data);
+          const account: GetAccountResponse = {
+            id: data.id,
+            accountId: data.screenName,
+            name: data.name,
+            img: data.img
+          };
+          resolve(account);
+          return;
+        }, error => reject(error));
     });
   }
 
-  // mock
-  getItems(account: Account): Promise<Item[]> {
-    const items: Item[] = [
-      {
-        id: '1',
-        title: 'Angularの状態管理設計',
-        comment: 'RxJSやAkitaなどの活用法',
-        thumbUrl: 'https://cdn.qiita.com/assets/qiita-fb-2887e7b4aad86fd8c25cea84846f2236.png',
-        url: 'https://qiita.com/',
-        tags: [
-          { label: 'Development', active: false },
-          { label: 'Angular', active: false }
-        ],
-        star: false,
-        createdAt: new Date('2018-10-01T00:00:01.000Z')
-      },
-      {
-        id: '2',
-        title: 'Design Sysmte Management',
-        comment: 'Design System管理法',
-        thumbUrl: 'https://cdn-static-1.medium.com/_/fp/icons/monogram-mask.KPLCSFEZviQN0jQ7veN2RQ.svg',
-        url: 'https://medium.com/',
-        tags: [
-          { label: 'Design System', active: false },
-          { label: 'Design', active: false }
-        ],
-        star: false,
-        createdAt: new Date('2018-10-01T00:00:02.000Z')
-      },
-      {
-        id: '3',
-        title: 'Design Ecosystem In Lagos',
-        comment: 'Design Ecosystem by Phase',
-        thumbUrl: 'https://phase.com/wp-content/uploads/2018/08/lagos_featured-1.png',
-        url: 'https://phase.com',
-        tags: [
-          { label: 'Design', active: false },
-          { label: 'Design Tool', active: false },
-          { label: 'Phase', active: false }
-        ],
-        star: false,
-        createdAt: new Date('2018-10-01T00:00:03.000Z')
-      },
-      {
-        id: '4',
-        title: 'Atomic Design by Angular',
-        comment: 'Atomic DesignをAngularで実践した例',
-        thumbUrl: 'https://cdn.qiita.com/assets/qiita-fb-2887e7b4aad86fd8c25cea84846f2236.png',
-        url: 'https://qiita.com/',
-        tags: [
-          { label: 'Design', active: false },
-          { label: 'Angular', active: false }
-        ],
-        star: false,
-        createdAt: new Date('2018-10-01T00:00:04.000Z')
-      },
-      {
-        id: '1',
-        title: 'Angularの状態管理設計',
-        comment: 'RxJSやAkitaなどの活用法',
-        thumbUrl: 'https://cdn.qiita.com/assets/qiita-fb-2887e7b4aad86fd8c25cea84846f2236.png',
-        url: 'https://qiita.com/',
-        tags: [
-          { label: 'Development', active: false },
-          { label: 'Angular', active: false }
-        ],
-        star: false,
-        createdAt: new Date('2018-10-01T00:00:05.000Z')
-      },
-      {
-        id: '2',
-        title: 'Design Sysmte Management',
-        comment: 'Design System管理法',
-        thumbUrl: 'https://cdn-static-1.medium.com/_/fp/icons/monogram-mask.KPLCSFEZviQN0jQ7veN2RQ.svg',
-        url: 'https://medium.com/',
-        tags: [
-          { label: 'Design System', active: false },
-          { label: 'Design', active: false }
-        ],
-        star: false,
-        createdAt: new Date('2018-10-01T00:00:06.000Z')
-      },
-      {
-        id: '3',
-        title: 'Design Ecosystem In Lagos',
-        comment: 'Design Ecosystem by Phase',
-        thumbUrl: 'https://phase.com/wp-content/uploads/2018/08/lagos_featured-1.png',
-        url: 'https://phase.com',
-        tags: [
-          { label: 'Design', active: false },
-          { label: 'Design Tool', active: false },
-          { label: 'Phase', active: false }
-        ],
-        star: false,
-        createdAt: new Date('2018-10-01T00:00:07.000Z')
-      },
-      {
-        id: '4',
-        title: 'Atomic Design by Angular',
-        comment: 'Atomic DesignをAngularで実践した例',
-        thumbUrl: 'https://cdn.qiita.com/assets/qiita-fb-2887e7b4aad86fd8c25cea84846f2236.png',
-        url: 'https://qiita.com/',
-        tags: [
-          { label: 'Design', active: false },
-          { label: 'Angular', active: false }
-        ],
-        star: false,
-        createdAt: new Date('2018-10-01T00:00:08.000Z')
-      },
-      {
-        id: '1',
-        title: 'Angularの状態管理設計',
-        comment: 'RxJSやAkitaなどの活用法',
-        thumbUrl: 'https://cdn.qiita.com/assets/qiita-fb-2887e7b4aad86fd8c25cea84846f2236.png',
-        url: 'https://qiita.com/',
-        tags: [
-          { label: 'Development', active: false },
-          { label: 'Angular', active: false }
-        ],
-        star: false,
-        createdAt: new Date('2018-10-01T00:00:09.000Z')
-      },
-      {
-        id: '2',
-        title: 'Design Sysmte Management',
-        comment: 'Design System管理法',
-        thumbUrl: 'https://cdn-static-1.medium.com/_/fp/icons/monogram-mask.KPLCSFEZviQN0jQ7veN2RQ.svg',
-        url: 'https://medium.com/',
-        tags: [
-          { label: 'Design System', active: false },
-          { label: 'Design', active: false }
-        ],
-        star: false,
-        createdAt: new Date('2018-10-01T00:00:10.000Z')
-      },
-      {
-        id: '3',
-        title: 'Design Ecosystem In Lagos',
-        comment: 'Design Ecosystem by Phase',
-        thumbUrl: 'https://phase.com/wp-content/uploads/2018/08/lagos_featured-1.png',
-        url: 'https://phase.com',
-        tags: [
-          { label: 'Design', active: false },
-          { label: 'Design Tool', active: false },
-          { label: 'Phase', active: false }
-        ],
-        star: false,
-        createdAt: new Date('2018-10-01T00:00:11.000Z')
-      },
-      {
-        id: '4',
-        title: 'Atomic Design by Angular',
-        comment: 'Atomic DesignをAngularで実践した例',
-        thumbUrl: 'https://cdn.qiita.com/assets/qiita-fb-2887e7b4aad86fd8c25cea84846f2236.png',
-        url: 'https://qiita.com/',
-        tags: [
-          { label: 'Design', active: false },
-          { label: 'Angular', active: false }
-        ],
-        star: false,
-        createdAt: new Date('2018-10-01T00:00:12.000Z')
-      }
-    ];
-
-    return new Promise((resolve) => {
-      setTimeout(() => {
+  async getItems(account: Account): Promise<any> {
+    const httpOptions = {
+      params: new HttpParams().set('accountId', account.id)
+    };
+    return new Promise((resolve, reject) => {
+      this.http.get(`${this.ENDPOINT}/items`, httpOptions).subscribe((data: any[]) => {
+        console.log('--- data: ', data);
+        // const items: Item[] = data.map(d => {
+        //   return {
+        //     id: d.id,
+        //     title: d.title,
+        //     comment: d.comment,
+        //     thumbUrl: d.img,
+        //     url: d.url,
+        //     tags: d.tags.map(t => ({ label: t, active: false })),
+        //     star: false,
+        //     createdAt: new Date(d.createdAt)
+        //   };
+        // });
+        const items: Item[] = this.convertItems(data);
         resolve(items);
-        // resolve([]);
-      }, 2000);
+        return;
+      }, error => reject(error));
     });
+  }
+
+  async syncItems(account: Account): Promise<any> {
+    return new Promise((resolve, reject) => {
+      const httpOptions = {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json'
+        })
+      };
+      this.http.post(`${this.ENDPOINT}/items`, { accountId: account.id }, httpOptions)
+        .subscribe((data: any) => {
+          console.log('--- account: data: ', data);
+          const items: Item[] = this.convertItems(data);
+          resolve(items);
+          return;
+        }, error => reject(error));
+    });
+  }
+
+  private convertItems(data): Item[] {
+    const items: Item[] = data.map(d => {
+      return {
+        id: d.id,
+        title: d.title,
+        comment: d.comment,
+        thumbUrl: d.img,
+        url: d.url,
+        tags: d.tags.map(t => ({ label: t, active: false })),
+        star: false,
+        createdAt: new Date(d.createdAt)
+      };
+    });
+    return items;
   }
 
 }

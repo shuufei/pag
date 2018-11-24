@@ -40,10 +40,18 @@ export class ItemsService {
 
   async getItemsByAccount(account: Account): Promise<Item[]> {
     this.setLoading(true);
+    await this.api.syncItems(account);
     const items: Item[] = await this.api.getItems(account);
     this.setLoading(false);
     return items;
   }
+
+  // async syncItemsByAccount(account: Account): Promise<void> {
+  //   this.setLoading(true);
+  //   await this.api.syncItems(account);
+  //   this.setLoading(false);
+  //   return;
+  // }
 
   filterItemsByTags(tags: string[]): Item[] {
     const filtered: Item[] = this.getFilteredItemsByMasterAndTags(this.itemsQuery.getSnapshot().master, tags);
