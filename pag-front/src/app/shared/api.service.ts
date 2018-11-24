@@ -24,7 +24,6 @@ export class ApiService {
       };
       this.http.post(`${this.ENDPOINT}/accounts`, { screenName }, httpOptions)
         .subscribe((data: any) => {
-          console.log('--- account: data: ', data);
           const account: GetAccountResponse = {
             id: data.id,
             accountId: data.screenName,
@@ -43,19 +42,6 @@ export class ApiService {
     };
     return new Promise((resolve, reject) => {
       this.http.get(`${this.ENDPOINT}/items`, httpOptions).subscribe((data: any[]) => {
-        console.log('--- data: ', data);
-        // const items: Item[] = data.map(d => {
-        //   return {
-        //     id: d.id,
-        //     title: d.title,
-        //     comment: d.comment,
-        //     thumbUrl: d.img,
-        //     url: d.url,
-        //     tags: d.tags.map(t => ({ label: t, active: false })),
-        //     star: false,
-        //     createdAt: new Date(d.createdAt)
-        //   };
-        // });
         const items: Item[] = this.convertItems(data);
         resolve(items);
         return;
@@ -72,7 +58,6 @@ export class ApiService {
       };
       this.http.post(`${this.ENDPOINT}/items`, { accountId: account.id }, httpOptions)
         .subscribe((data: any) => {
-          console.log('--- account: data: ', data);
           const items: Item[] = this.convertItems(data);
           resolve(items);
           return;
@@ -97,7 +82,6 @@ export class ApiService {
   }
 
 }
-
 
 export interface GetAccountResponse {
   id: string;
