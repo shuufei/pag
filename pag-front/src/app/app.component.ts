@@ -137,10 +137,7 @@ export class AppComponent implements OnInit {
   async onClickedInitializeAccount(...args: any[]): Promise<void> {
     const ACCOUNT_INDEX = 0;
     if (args && args[ACCOUNT_INDEX]) {
-      this.itemsService.setLoading(true);
-      this.loadingMessage = 'アカウントデータ取得中...';
       this.accountsIsNotRegisted = false;
-      await this.appUtil.sleepByPromise(1500);
       this.accountsService.setAccounts([args[ACCOUNT_INDEX]]);
     }
   }

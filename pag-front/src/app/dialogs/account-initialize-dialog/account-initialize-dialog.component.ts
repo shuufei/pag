@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 
 import { ApiService, GetAccountResponse } from 'src/app/shared/api.service';
 import { Account } from 'src/app/components/molecules/account-name/account-name.component';
+import { ItemsService } from 'src/app/store/items/state';
 
 @Component({
   selector: 'pag-account-initialize-dialog',
@@ -19,6 +20,7 @@ export class AccountInitializeDialogComponent implements OnInit {
     accountSetting: 'accountSetting'
   };
   readonly CONFIRM_CONTENTS_WIDTH = '200px';
+  readonly TEST_ACCOUNT = '@hey_degital';
 
   step: string;
   accountId: string;
@@ -26,7 +28,8 @@ export class AccountInitializeDialogComponent implements OnInit {
   error: boolean;
 
   constructor(
-    private api: ApiService
+    private api: ApiService,
+    private itemsService: ItemsService
   ) {
     this.step = this.STEP.accountInput;
     this.setAccount = this.setAccount.bind(this);
@@ -60,15 +63,10 @@ export class AccountInitializeDialogComponent implements OnInit {
     this.step = this.STEP.accountInput;
   }
 
-  setTestAccount(): void {
-    const account: Account = {
-      id: 'xxxxx',
-      name: '@digitalfei',
-      imgUrl: 'https://pbs.twimg.com/profile_images/821745021753823233/L_dTDu3C_normal.jpg'
-    };
-    if (this.setAccountEvent) {
-      this.setAccountEvent(account);
-    }
+  async setTestAccount(): Promise<void> {
+    this.itemsService.setLoading(true);
+    this.account = await this.api.getAccount(this.TEST_ACCOUNT);
+    this.setAccount();
   }
 
   setAccount(): void {
