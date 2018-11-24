@@ -7,7 +7,7 @@ $z-index-header: 50;
 $z-index-nav: 40;
 
 $option-card-width: 269px;
-$account-tags-card-width: 295px;
+$account-tags-card-width: 335px;
 
 $side-block-padding: 28px 20px;
 
@@ -33,6 +33,10 @@ $side-block-padding: 28px 20px;
 .account-tag-card-wrapper {
   width: $account-tags-card-width;
   padding: $side-block-padding;
+  box-sizing: border-box;
+  &.dummy-column {
+    width: calc(#{$account-tags-card-width} - 150px);
+  }
 }
 .card-wrapper {
   margin-top: 12px;
