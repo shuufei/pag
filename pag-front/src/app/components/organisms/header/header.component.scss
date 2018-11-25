@@ -10,4 +10,7 @@
   box-shadow: $shadow-center;
   box-sizing: border-box;
   background: $white;
+  img {
+    height: 35%;
+  }
 }

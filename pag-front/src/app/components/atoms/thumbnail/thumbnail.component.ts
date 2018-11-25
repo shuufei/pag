@@ -8,7 +8,7 @@ import { Component, OnInit, Input } from '@angular/core';
 export class ThumbnailComponent implements OnInit {
   @Input() url: string;
 
-  private readonly DEFAULT = 'assets/image/thumbnail.svg';
+  private readonly DEFAULT = 'assets/image/thumb.png';
 
   constructor() { }
 

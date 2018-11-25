@@ -67,7 +67,6 @@ export class AppComponent implements OnInit {
   }
 
   async ngOnInit(): Promise<void> {
-    // this.accountsService.setInitialAccounts(); // for debug
     await this.setPreviousData();
     this.setSubscription();
   }
@@ -179,6 +178,7 @@ export class AppComponent implements OnInit {
         filtered = items;
         this.itemsTitle = this.DEFAULT_TITLE;
       }
+      if (filtered.length === 0) { this.itemIsEmpty = true; }
       this.itemsService.setStore(items, this.sortItemsByLatest(filtered));
       const navTagsOfItems: NavTag[] = this.appUtil.generateNavTagsFromItems(filtered);
       const mergedNavTags: NavTag[] = this.appUtil.mergeMasterNavTag(navTagsOfItems);
@@ -211,6 +211,7 @@ export class AppComponent implements OnInit {
     this.items$.pipe(skip(1)).subscribe(items => {
       if (this.loadedItems && items && 0 === items.length) {
         this.itemIsEmpty = true;
+        this.tagsService.setTags([]);
         return;
       }
       this.itemIsEmpty = false;
