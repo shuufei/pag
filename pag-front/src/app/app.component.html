@@ -50,10 +50,21 @@
   </div> -->
 </div>
 
-<pag-account-initialize-dialog
-  [open]="accountsIsNotRegisted"
-  [setAccountEvent]="onClickedInitializeAccount"
-></pag-account-initialize-dialog>
+
+<ng-container *ngIf="!testMode; else testModeBlock">
+  <pag-account-initialize-dialog
+    [open]="accountsIsNotRegisted"
+    [setAccountEvent]="onClickedInitializeAccount"
+    (close)="closeTestAccountInitializeDialog()"
+  ></pag-account-initialize-dialog>
+</ng-container>
+<ng-template #testModeBlock>
+  <pag-test-account-initialize-dialog
+    [open]="accountsIsNotRegisted"
+    [setAccountEvent]="onClickedInitializeAccount"
+    (close)="closeTestAccountInitializeDialog()"
+  ></pag-test-account-initialize-dialog>
+</ng-template>
 
 <pag-account-edit-dialog
   [open]="isOpenAccountEditDialog"

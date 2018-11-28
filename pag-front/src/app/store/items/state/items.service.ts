@@ -6,6 +6,7 @@ import { ItemsQuery } from './items.query';
 import { Item } from 'src/app/components/organisms/item/item.component';
 import { Label } from 'src/app/components/atoms/label/label.component';
 import { Account } from 'src/app/components/molecules/account-name/account-name.component'
+import { environment } from 'src/environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class ItemsService {
@@ -41,7 +42,9 @@ export class ItemsService {
   async getItemsByAccount(account: Account): Promise<Item[]> {
     try {
       this.setLoading(true);
-      await this.api.syncItems(account);
+      if (!environment.testMode) {
+        await this.api.syncItems(account);
+      }
       const items: Item[] = await this.api.getItems(account);
       this.setLoading(false);
       return items;

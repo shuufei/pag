@@ -17,6 +17,8 @@ import { Item } from 'src/app/components/organisms/item/item.component';
 // constant
 import { SortOption } from 'src/app/components/organisms/sort-option-card/sort-option-card.component';
 
+import { environment } from 'src/environments/environment';
+
 @Component({
   selector: 'pag-root',
   templateUrl: './app.component.html',
@@ -41,6 +43,7 @@ export class AppComponent implements OnInit {
   existSelectedTags: boolean;
   isOpenAccountEditDialog: boolean;
   latestSort: boolean;  // TODO: sortの状態もAkitaで管理
+  testMode: boolean;
 
   private accounts$: Observable<Account[]>;
   private currentAccount$: Observable<Account>;
@@ -62,6 +65,7 @@ export class AppComponent implements OnInit {
     this.isOpenAccountEditDialog = false;
     this.accountListCard = { accounts: [], currentAccount: null };
     this.latestSort = true;
+    this.testMode = environment.testMode;
     this.setEvent();
     this.setObserver();
   }
@@ -100,6 +104,10 @@ export class AppComponent implements OnInit {
 
   closeAccountEditDialog(): void {
     this.isOpenAccountEditDialog = false;
+  }
+
+  closeTestAccountInitializeDialog(): void {
+    this.accountsIsNotRegisted = false;
   }
 
   onAddAccount(account: Account): void {

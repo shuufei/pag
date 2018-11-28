@@ -5,6 +5,7 @@ import { ComponentsModule } from 'src/app/components/components.module';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { AccountInitializeDialogComponent } from 'src/app/dialogs/account-initialize-dialog/account-initialize-dialog.component';
 import { AccountEditDialogComponent } from './account-edit-dialog/account-edit-dialog.component';
+import { TestAccountInitializeDialogComponent } from './test-account-initialize-dialog/test-account-initialize-dialog.component';
 
 @NgModule({
   imports: [
@@ -14,11 +15,13 @@ import { AccountEditDialogComponent } from './account-edit-dialog/account-edit-d
   ],
   declarations: [
     AccountInitializeDialogComponent,
-    AccountEditDialogComponent
+    AccountEditDialogComponent,
+    TestAccountInitializeDialogComponent
   ],
   exports: [
     AccountInitializeDialogComponent,
-    AccountEditDialogComponent
+    AccountEditDialogComponent,
+    TestAccountInitializeDialogComponent
   ]
 })
 export class DialogsModule { }

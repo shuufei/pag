@@ -5,23 +5,16 @@ import { Account } from 'src/app/components/molecules/account-name/account-name.
 import { ItemsService } from 'src/app/store/items/state';
 
 @Component({
-  selector: 'pag-account-initialize-dialog',
-  templateUrl: './account-initialize-dialog.component.html',
-  styleUrls: ['./account-initialize-dialog.component.scss', '../dialog-styles.scss']
+  selector: 'pag-test-account-initialize-dialog',
+  templateUrl: './test-account-initialize-dialog.component.html',
+  styleUrls: ['./test-account-initialize-dialog.component.scss', '../dialog-styles.scss']
 })
-export class AccountInitializeDialogComponent implements OnInit {
+export class TestAccountInitializeDialogComponent implements OnInit {
   @Input() open: boolean;
   @Input() setAccountEvent: Function;
   @Output() close: EventEmitter<boolean> = new EventEmitter();
 
-  readonly STEP = {
-    accountInput: 'accountInput',
-    accountSearching: 'accounSearching',
-    accountConfirm: 'accountConfirm',
-    accountSetting: 'accountSetting'
-  };
-  readonly CONFIRM_CONTENTS_WIDTH = '200px';
-  readonly TEST_ACCOUNT = '@hey_degital';
+  readonly TEST_ACCOUNT = '@pag_account';
 
   step: string;
   accountId: string;
@@ -32,36 +25,10 @@ export class AccountInitializeDialogComponent implements OnInit {
     private api: ApiService,
     private itemsService: ItemsService
   ) {
-    this.step = this.STEP.accountInput;
     this.setAccount = this.setAccount.bind(this);
   }
 
   ngOnInit() {
-  }
-
-  onChangeAccountId(accountId: string): void {
-    this.accountId = accountId;
-  }
-
-  moveStep(step: string): void {
-    this.step = step;
-  }
-
-  async searchAccount(): Promise<void> {
-    this.step = this.STEP.accountSearching;
-    try {
-      this.account = await this.api.getAccount(this.accountId);
-      this.step = this.STEP.accountConfirm;
-    } catch (error) {
-      this.error = true;
-      this.step = this.STEP.accountInput;
-    }
-  }
-
-  toInitialInputStep(): void {
-    this.accountId = undefined;
-    this.error = false;
-    this.step = this.STEP.accountInput;
   }
 
   async setTestAccount(): Promise<void> {
