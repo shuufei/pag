@@ -49,7 +49,7 @@
               "vendorChunk": false,
               "buildOptimizer": true
             },
-            "prod-test": {
+            "prodtest": {
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",

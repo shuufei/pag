@@ -6,6 +6,7 @@
     "start": "ng serve",
     "start:test-mode": "ng serve --configuration=devtest",
     "build": "ng build --prod",
+    "build:test-mode": "ng build --configuration=prodtest",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
