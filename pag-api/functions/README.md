@@ -10,6 +10,7 @@
 curl -v -X POST https://us-central1-pag-front.cloudfunctions.net/accounts -d 'screenName=digital_shuufei'
 
 curl -v -X POST https://us-central1-pag-front.cloudfunctions.net/items -d 'accountId=775003201338683393'
+curl -v -X POST https://us-central1-pag-front.cloudfunctions.net/items -d 'accountId=1067438854938877953'
 
 curl -v -X GET https://us-central1-pag-front.cloudfunctions.net/items?accountId=775003201338683393
 
