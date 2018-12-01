@@ -40,14 +40,16 @@ export class AppUtilService {
   sortNavTags(navTags: NavTag[]): NavTag[] {
     const arr = [ ...navTags ];
     const selected: NavTag[] = this.tagsQuery.getSnapshot().selectedTags.map(tag => arr.find(t => t.tag === tag));
-    const notSelected = arr.filter(navtag => !navtag.selected);
+    const existTag = arr.filter(navtag => 0 < navtag.count && !navtag.selected); // 選択されていなくて、countが1以上のタグにfilter
+    const notExistTag = arr.filter(navtag => navtag.count === 0 && !navtag.selected); // 選択されていなくて、countが0のタグにfilter
     const orderByCountDesc = (navtag1: NavTag, navtag2: NavTag) => {
       if (navtag1.tag > navtag2.tag) { return 1; }
       if (navtag1.tag < navtag2.tag) { return -1; }
       return 0;
     };
-    notSelected.sort(orderByCountDesc);
-    return [ ...selected, ...notSelected ];
+    existTag.sort(orderByCountDesc);
+    notExistTag.sort(orderByCountDesc);
+    return [ ...selected, ...existTag, ...notExistTag ];
   }
 
   mergeMasterNavTag(existNavTags: NavTag[]): NavTag[] {
