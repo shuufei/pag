@@ -27,13 +27,13 @@ export class ItemHandler {
 
   invoke() {
     switch (this.req.method) {
-      case 'POST':
-        return this.syncItems()
-          .then(res => res)
-          .catch(err => {
-            console.log('[debug] post items failed: ', err);
-            this.resManager.returnErr(this.res, 500);
-          });
+      // case 'POST':
+      //   return this.syncItems()
+      //     .then(res => res)
+      //     .catch(err => {
+      //       console.log('[debug] post items failed: ', err);
+      //       this.resManager.returnErr(this.res, 500);
+      //     });
       case 'GET':
         return this.getItems()
           .then(res => res)

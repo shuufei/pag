@@ -7,27 +7,31 @@
     - [高度な検索を組み立てる](https://twitter.com/search-advanced)
 
 ## test
-curl -v -X POST https://us-central1-pag-front.cloudfunctions.net/accounts -d 'screenName=digital_shuufei'
+curl -v -X POST https://us-central1-pag-front.cloudfunctions.net/accounts -d 'screenName=pag_account'
 
-curl -v -X POST https://us-central1-pag-front.cloudfunctions.net/items -d 'accountId=775003201338683393'
+curl -v -X POST https://us-central1-pag-front.cloudfunctions.net/items -d 'accountId=1067438854938877953'
 curl -v -X POST https://us-central1-pag-front.cloudfunctions.net/items -d 'accountId=1067438854938877953'
 
-curl -v -X GET https://us-central1-pag-front.cloudfunctions.net/items?accountId=775003201338683393
+curl -v -X GET https://us-central1-pag-front.cloudfunctions.net/items?accountId=1067438854938877953
 
 ### Local Debug
 ```
 % yarn build --watch
 % yarn shell
 
-accounts.post().form({ screenName: 'digital_shuufei' })
-items.post().form({ accountId: '775003201338683393' })
-items.get({qs:{accountId:'775003201338683393'}})
+accounts.post().form({ screenName: 'pag_account' })
+items.post().form({ accountId: '1067438854938877953' })
+items.get({qs:{accountId:'1067438854938877953'}})
 ```
 
-## get items
-**TODO: 一度に全てやるとしんどいな**
-- 対象アカウントの最新tweet以降で#pagがついているツイートを全て取得
-- もっとも最新のtweetのidをdbに登録
-- 取得したツイートのurlをスクレイピング
-- スクレイピングの結果とツイートの結果を元にitemを生成し、dbに登録
-- responseとして、全てのitem情報を返す
+## Localで同期する
+cloudfunctionは今閉じているので、手動で同期せねばならない
+
+```
+% yarn build --watch
+% yarn shell
+```
+
+```
+items.post().form({ accountId: '1067438854938877953' })
+```
