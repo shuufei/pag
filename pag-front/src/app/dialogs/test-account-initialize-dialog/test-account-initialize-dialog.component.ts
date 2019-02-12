@@ -14,7 +14,7 @@ export class TestAccountInitializeDialogComponent implements OnInit {
   @Input() setAccountEvent: Function;
   @Output() close: EventEmitter<boolean> = new EventEmitter();
 
-  readonly TEST_ACCOUNT = '@pag_account';
+  readonly TEST_ACCOUNT = '@digital_fei';
 
   step: string;
   accountId: string;

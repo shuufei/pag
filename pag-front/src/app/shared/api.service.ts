@@ -20,9 +20,9 @@ export class ApiService {
       setTimeout(() => {
         return resolve({
           id: '1067438854938877953',
-          img: 'http://pbs.twimg.com/profile_images/1067441933017001984/VLuTkx6a.jpg',
-          name: 'pag',
-          accountId: 'pag_account'
+          img: 'https://pbs.twimg.com/profile_images/1095319561493041152/fx4sCj-5_bigger.jpg',
+          name: 'fei',
+          accountId: 'digital_fei'
         });
       }, 500);
     });
